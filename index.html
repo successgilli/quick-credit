@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <title>landing page</title>
+</head>
+<body>
+    <div id="backgroundAside">
+        <aside id="homeSidebar">
+            <div class="homeAsideLinks"><i class="fas fa-home"></i> &nbsp Home</div>
+            <div class="homeAsideLinks"><i class="fas fa-handshake"></i> &nbsp Terms</div>
+            <div class="homeAsideLinks"><i class="fas fa-info-circle"></i> &nbsp About</div>
+            <div class="homeAsideLinks"><i class="fas fa-id-badge"></i> &nbsp Contact</div>
+            <div class="homeAsideLinks"><i class="fas fa-sign-in-alt"></i> &nbsp Login</div>
+            <div class="homeAsideLinks"><i class="fas fa-users"></i> &nbsp SignUp</div>
+        </aside>
+
+    </div>
+    <div id="backgroundSignUser">
+        <div id="signHead">
+            <div class="signToggle" id="loginHead">LOG IN</div>
+            <div class="signToggle">SIGN UP</div>
+        </div>
+        <div id="signContent">
+            <p id="formPTag">LOG IN</p>
+            <span id="closeLogin">+</span>
+            <form action="" id="loginForm">       
+                <input type="text" id="email" required>
+                <label for="email">Email</label>
+                <input type="password" id="password" required>
+                <label for="password">Password</label>
+                <button id="signinBtn"> LOG IN</button>
+            </form>
+            <form action="" id="signupForm">       
+                <div id="tabContent">
+                    <div class="tab" id="firstTab">
+                            <p>Personal Info:</p>
+                            <input type="text" id="firstname" required>
+                            <label for="firstname">Fisrt Name</label>
+                            <input type="text" id="LastName" required>
+                            <label for="LastName">Last Name</label>
+                            <input type="text" id="address" required>
+                            <label for="address">Address</label>
+                        </div>
+                        <div class="tab">
+                            <p>Account Setup:</p>
+                            <input type="text" id="userEmail" required>
+                            <label for="userEmail">Email</label>
+                            <input type="password" id="password" required>
+                            <label for="password">Password</label>
+                            <input type="password" id="cPassword" required>
+                            <label for="cPassword">Confirm password</label>
+                        </div>
+                        <div class="tab">
+                            <p>Employment details:</p>
+                            <input type="text" id="userCompany" required>
+                            <label for="userCompany">Name of your Company</label>
+                            <input type="text" id="monthlyIncome" required>
+                            <label for="monthlyIncome">Monthly Income</label>
+                            <input type="text" id="companyAddress" required>
+                            <label for="companyAddress">Company Address</label>
+                        </div>
+                        <div class="tab" id="lastTab">
+                            <p>Bank details:</p>
+                            <input type="text" id="bankName" required>
+                            <label for="bankName">Name of your Bank</label>
+                            <input type="text" id="bvn" required>
+                            <label for="bvn">BVN</label>
+                            <input type="text" id="accountNumber" required>
+                            <label for="accountNumber">Account Number</label>
+                        </div>
+                    
+                </div>
+                <div id="navigators">
+                    <div class="navigator" id="firstNav"></div>
+                    <div class="navigator"></div>
+                    <div class="navigator"></div>
+                    <div class="navigator"></div>
+                </div>
+                <hr>
+                <div id="btns">
+                    <button class="signupBtn"> PREVIOUS</button>
+                    <button id="signupBtn" class="signupBtn"> SUBMIT</button>
+                    <button class="signupBtn"> NEXT</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <header>
+        <div id="firstHeader">
+            <div class="logo">
+                <span><i class="fab fa-quora"></i>uick</span><span class="credit">Credit</span>
+            </div>
+        </div>
+        <div id="secondHeader">
+            <div class="headLinks">Home</div>
+            <div class="headLinks">Terms</div>
+            <div class="headLinks">About</div>
+            <div class="headLinks">Contact</div>
+            <div class="headLinks">Login</div>
+            <div class="headLinks">SignUp</div>
+            <i class="fas fa-bars" id="nav"></i>
+        </div>
+    </header>
+    <main>
+        <div class="calculatorSection">
+            <div id="" class="calcInputs">
+                <form action="" id="homePageCalc">
+                    <h3>Demo Loan Calculator</h3>
+                        <p>Loan Amount:</p>
+                        <select name="" id="homeAmountDropDown">
+                            <option value="10,000.00">&#8358;10,000.00</option>
+                            <option value="20,000.00">&#8358;20,000.00</option>
+                            <option value="30,000.00">&#8358;30,000.00</option>
+                            <option value="40,000.00">&#8358;40,000.00</option>
+                            <option value="50,000.00">&#8358;50,000.00</option>
+                            <option value="60,000.00">&#8358;60,000.00</option>
+                            <option value="70,000.00">&#8358;70,000.00</option>
+                            <option value="80,000.00">&#8358;80,000.00</option>
+                            <option value="90,000.00">&#8358;90,000.00</option>
+                            <option value="100,000.00">&#8358;100,000.00</option>
+                        </select>
+                        <p>Over How Many Months?</p>
+                        <select name="" id="homeTenorDropDown">
+                                <option value="1">1 Months</option>
+                                <option value="2">2 Months</option>
+                                <option value="3">3 Months</option>
+                                <option value="4">4 Months</option>
+                                <option value="5">5 Months</option>
+                                <option value="6">6 Months</option>
+                                <option value="7">7 Months</option>
+                                <option value="8">8 Months</option>
+                                <option value="9">9 Months</option>
+                                <option value="10">10 Months</option>
+                                <option value="11">11 Months</option>
+                                <option value="12">12 Months</option>
+                            </select>
+                    </form>
+            </div>
+            <div class="CalculatedValues">
+                <div class="calculatedFromForm">
+                    <div class="calculated">
+                        <div>
+                            <h4>Loan Amount</h4>
+                            <span>&#8358; 10,000.00</span>
+                        </div>
+                        <div>
+                            <h4>Loan Duration</h4>
+                            <span>1 Month(s)</span>
+                        </div>
+                    </div>
+                    <div class="calculated">
+                        <div>
+                            <h4>Repayment Date</h4>
+                            <span>May 28, 2009</span>
+                        </div>
+                        <div>
+                            <h4>Interest</h4>
+                            <span>&#8358; 500</span>
+                        </div>
+                    </div>
+                    <div class="calculated">
+                        <div>
+                            <h4>Monthly Repayment</h4>
+                            <span>&#8358; 10,0000.00</span>
+
+                        </div>
+                        <div>
+                            <h4>Total Repayment</h4>
+                            <span>&#8358; 10,500.00</span>
+
+                        </div>
+                    </div>
+                    <button id="homeCalcApplyBtn">APPLY NOW</button>
+                </div>
+                
+
+            </div>
+             
+        </div>
+        <div id="sectionAbout">
+            <h2>How It Works?</h2>
+            <p>Our loan platform is easy to use; Just follow the steps below..</p>
+            <div id="about">
+                <div class="about">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h3>Register</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum beatae officia nemo voluptatum ut autem aperiam assumenda voluptate hic illo. Aliquam, ipsa possimus distinctio doloremque quam pariatur beatae deleniti quaerat?
+                    </p>
+                    <button id="homeRegBtn" class="homeBtns">REGISTER</button>
+    
+                </div>
+                <div class="about">
+                    <i class="fas fa-door-open"></i>
+                    <h3>Login</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum beatae officia nemo voluptatum ut autem aperiam assumenda voluptate hic illo. Aliquam, ipsa possimus distinctio doloremque quam pariatur beatae deleniti quaerat?
+                     </p>
+                     <button id="homeLoginBtn" class="homeBtns">LOGIN</button>
+                </div>
+                <div class="about">
+                    <i class="fas fa-file-signature"></i>
+                    <h3>Apply</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum beatae officia nemo voluptatum ut autem aperiam assumenda voluptate hic illo. Aliquam, ipsa possimus distinctio doloremque quam pariatur beatae deleniti quaerat?
+                    </p>
+                    <button id="homeApplyBtn" class="homeBtns">APPLY</button>
+                </div>
+                <div class="about">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <h3>Get Loan</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum beatae officia nemo voluptatum ut autem aperiam assumenda voluptate hic illo. Aliquam, ipsa possimus distinctio doloremque quam pariatur beatae deleniti quaerat?
+                    </p>
+                    <button id="HomeloanBtn" class="homeBtns">GET LOAN</button>
+                </div>
+
+            </div>
+
+        </div>
+        <section id="whoWeAre">
+            <h3 id="who">Who We Are ?</h4>
+            <p id="whoText">
+                Quick Credit is an online lending platform that provides short term soft loans to individuals. This
+                helps solve problems of financial inclusion as a way to alleviate poverty and empower low
+                income earners.
+            </p>
+            <div id="epicBucket">
+                <div id="firstEpic">
+                    <div class="epic">
+                        <h3> we'er Excelent</h3>
+                        <p>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur cum cumque quisquam dolores accusantium sit odio libero similique facilis. Eaque illum ea magni aliquid natus obcaecati dolorum optio doloremque dolore.
+        
+                        </p>
+                    </div>
+                    <div class="epic" id="epic2">
+                        <h3> we'er Passionate about you</h3>
+                        <p>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur cum cumque quisquam dolores accusantium sit odio libero similique facilis. Eaque illum ea magni aliquid natus obcaecati dolorum optio doloremque dolore.      
+                        </p>
+                    </div>
+                </div>
+                <div id="secondEpic">
+                    <div class="epic">
+                        <h3> we'er Transparent</h3>
+                        <p>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur cum cumque quisquam dolores accusantium sit odio libero similique facilis. Eaque illum ea magni aliquid natus obcaecati dolorum optio doloremque dolore.
+                                
+                        </p>
+                    </div>
+                    <div class="epic">
+                        <h3> we are here 24/7 for you</h3>
+                        <p>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur cum cumque quisquam dolores accusantium sit odio libero similique facilis. Eaque illum ea magni aliquid natus obcaecati dolorum optio doloremque dolore.
+                                
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+            <div class="logo" id="footerLogo">
+                <span><i class="fab fa-quora"></i>uick</span><span class="credit">Credit</span>
+            </div>
+            <div id="footerElements">
+                <section class="footer">
+                        <h3 id="footerh5">Author</h3>
+                        <p>
+                                Gilbert Awaji-mitop N. &nbsp &nbsp
+                                @ 2018
+                        </p>
+                    </section>
+                    <section class="footer">
+                        <h3>Contact Us</h3>
+                        <p>
+                                Phone: 09057496803; &nbsp &nbsp
+                        </p> 
+                        <p>
+                                Email: Successgilli@gmail.com
+                        </p>
+                    </section>
+                    <section class="footer">
+                        <h3>Follow Us</h3>
+                        <p  class="footerpelem">
+                            <i class="fab fa-twitter"></i> &nbsp &nbsp
+                            <i class="fab fa-facebook-f"></i>&nbsp &nbsp
+                            <i class="fab fa-linkedin-in"></i>&nbsp &nbsp
+                            <i class="fab fa-google-plus-g"></i>&nbsp &nbsp
+                        </p>
+                    </section>
+            </div>
+    </footer>
+    <script src="./js/index.js"></script>
+</body>
+</html>
