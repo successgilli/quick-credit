@@ -27,8 +27,14 @@ const signContent = document.getElementById('signContent');
 const nav = document.getElementById('nav');
 const backgroundAside = document.getElementById('backgroundAside');
 const homeSidebar = document.getElementById('homeSidebar');
+const signinBtn = document.getElementById('signinBtn');
 const homeAsideLinks = document.getElementsByClassName('homeAsideLinks');
 
+
+// add event to log in btn
+signinBtn.addEventListener('click', ()=> {
+    location = './userDashbord.html';
+})
 //add event to aside login div
 homeAsideLinks[4].addEventListener('click', ()=>{
     backgroundSignUser.style.display = 'flex';
@@ -55,7 +61,7 @@ homeAsideLinks[5].addEventListener('click', ()=> {
 
 //ensure aside closes white clicked on the background
 backgroundAside.addEventListener('click', ()=> {
-    homeSidebar.style.left = '-500px';
+    homeSidebar.style.left = '500px';
         setTimeout(()=>{
          backgroundAside.style.display = 'none';
         }, 500)  
@@ -63,12 +69,12 @@ backgroundAside.addEventListener('click', ()=> {
 //nav bar toggle aside
 nav.addEventListener('click', ()=> {
     if(window.getComputedStyle(backgroundAside).getPropertyValue('display')==='none'){
-        backgroundAside.style.display = 'block';
+        backgroundAside.style.display = 'flex';
         setTimeout(()=>{
             homeSidebar.style.left = '0px';
         })
     } else {
-        homeSidebar.style.left = '-500px';
+        homeSidebar.style.left = '500px';
         setTimeout(()=>{
          backgroundAside.style.display = 'none';
         }, 500)
