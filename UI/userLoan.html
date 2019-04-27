@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>userDashboard</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+<body>
+    <div id="userAsideBackground">
+        <div id="userAsideContent">
+            <div id="logoSpace">
+                <div class="logo">
+                    <span><i class="fab fa-quora"></i>uick</span><span class="credit">Credit</span>
+                </div>
+            </div>
+            <a href="./userDashbord.html"><div class="aside"><p ><i class="fas fa-chart-line"></i> &nbsp; Dashboard</p></div></a>
+            <a href="./userLoan.html"><div class="aside"><p id="apply"><i class="fas fa-file-signature"></i> &nbsp; Apply for Loan</p></div></a>
+            <a href="./userProfile.html"><div class="aside"><p ><i class="fas fa-user"></i> &nbsp; Profile</p></div></a>
+            <a href="./index.html"><div class="aside"><p id="logout"><i class="fas fa-sign-out-alt"></i> &nbsp; Log Out</p></div></a>
+        </div>
+    </div>
+    <main id="userMain">
+        <section id="aside">
+            <div id="logoSpace">
+                <div class="logo">
+                    <span><i class="fab fa-quora"></i>uick</span><span class="credit">Credit</span>
+                </div>
+            </div>
+            <a href="./userDashbord.html"><div class="aside"><p ><i class="fas fa-chart-line"></i> &nbsp; Dashboard</p></div></a>
+            <a href="./userLoan.html"><div class="aside"><p id="apply"><i class="fas fa-file-signature"></i> &nbsp; Apply for Loan</p></div></a>
+            <a href="./userProfile.html"><div class="aside"><p ><i class="fas fa-user"></i> &nbsp; Profile</p></div></a>
+            <a href="./index.html"><div class="aside"><p id="logout"><i class="fas fa-sign-out-alt"></i> &nbsp; Log Out</p></div></a>
+        </section>
+        <section id="userMainContainer">
+            <section id="userHead">
+                <div id = 'firstHead'>
+                    <div id="titleOfPage">
+                        <p>Apply for Loan</p>
+                    </div>
+                </div>
+                <div id="secondHead">
+                    <img src="./img/profile-placeholder.gif" alt="" id="userImage">
+                    <i class="fas fa-bars" id="navUser"></i>
+                </div>
+                
+
+            </section>
+            <section id="userLoanApply">
+                <div id="" class="calcInputs">
+                    <form action="" id="userPageCalc">
+                        <h3>Loan Calculator</h3>
+                        <p>Loan Amount:</p>
+                        <select name="" id="homeAmountDropDown">
+                            <option value="10,000.00">&#8358;10,000.00</option>
+                            <option value="20,000.00">&#8358;20,000.00</option>
+                            <option value="30,000.00">&#8358;30,000.00</option>
+                            <option value="40,000.00">&#8358;40,000.00</option>
+                            <option value="50,000.00">&#8358;50,000.00</option>
+                            <option value="60,000.00">&#8358;60,000.00</option>
+                            <option value="70,000.00">&#8358;70,000.00</option>
+                            <option value="80,000.00">&#8358;80,000.00</option>
+                            <option value="90,000.00">&#8358;90,000.00</option>
+                            <option value="100,000.00">&#8358;100,000.00</option>
+                        </select>
+                        <p>Over How Many Months?</p>
+                        <select name="" id="homeTenorDropDown">
+                            <option value="1">1 Months</option>
+                            <option value="2">2 Months</option>
+                            <option value="3">3 Months</option>
+                            <option value="4">4 Months</option>
+                            <option value="5">5 Months</option>
+                            <option value="6">6 Months</option>
+                            <option value="7">7 Months</option>
+                            <option value="8">8 Months</option>
+                            <option value="9">9 Months</option>
+                            <option value="10">10 Months</option>
+                            <option value="11">11 Months</option>
+                            <option value="12">12 Months</option>
+                        </select>
+                    </form>
+                </div>
+                <div class="CalculatedValues">
+                    <div class="calculatedFromFormUser">
+                            <h3>Your Loan</h3>
+                        <div class="calculatedUser">
+                            <div>
+                                <h4>Loan Amount</h4>
+                                <span>&#8358; 10,000.00</span>
+                            </div>
+                            <div>
+                                <h4>Loan Duration</h4>
+                                <span>1 Month(s)</span>
+                            </div>
+                        </div>
+                        <div class="calculatedUser">
+                            <div>
+                                <h4>Repayment Date</h4>
+                                <span>May 28, 2009</span>
+                            </div>
+                            <div>
+                                <h4>Interest</h4>
+                                <span>&#8358; 500</span>
+                            </div>
+                        </div>
+                        <div class="calculatedUser">
+                            <div>
+                                <h4>Monthly Repayment</h4>
+                                <span>&#8358; 10,0000.00</span>
+    
+                            </div>
+                            <div>
+                                <h4>Total Repayment</h4>
+                                <span>&#8358; 10,500.00</span>
+    
+                            </div>
+                        </div>
+                        <button id="CalcApplyBtn">APPLY FOR LOAN</button>
+                    </div>
+                </div>
+            </section>
+            <footer>
+                <div class="logo" id="footerLogo">
+                    <span><i class="fab fa-quora"></i>uick</span><span class="credit">Credit</span>
+                </div>
+                <div id="footerElements">
+                    <section class="footer">
+                        <h3 id="footerh5">Author</h3>
+                        <p>
+                                Gilbert Awaji-mitop N. &nbsp &nbsp
+                                @ 2018
+                        </p>
+                    </section>
+                    <section class="footer">
+                        <h3>Contact Us</h3>
+                        <p>
+                                Phone: 09057496803; &nbsp &nbsp
+                        </p> 
+                        <p>
+                                Email: Successgilli@gmail.com
+                        </p>
+                    </section>
+                    <section class="footer">
+                        <h3>Follow Us</h3>
+                        <p  class="footerpelem">
+                            <i class="fab fa-twitter"></i> &nbsp &nbsp
+                            <i class="fab fa-facebook-f"></i>&nbsp &nbsp
+                            <i class="fab fa-linkedin-in"></i>&nbsp &nbsp
+                            <i class="fab fa-google-plus-g"></i>&nbsp &nbsp
+                        </p>
+                    </section>
+                </div>
+            </footer>
+        </section>
+
+    </main>
+    <script src="./js/userLoan.js"></script>
+</body>
+</html>

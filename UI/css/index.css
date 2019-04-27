@@ -206,7 +206,7 @@ padding-left: 30px;
     font-size: 20px;
     color: indigo
 }
-.fa-file-signature{
+#homeSign{
     font-size: 20px;
     color: indigo
 }
@@ -730,6 +730,10 @@ footer{
         flex-direction: column;
         background-size: auto 100%;
     }
+    #userLoanApply{
+        padding-top: 80px;
+        flex-direction: column;
+    }
     .calcInputs{
         padding-top: 20px;
     }
@@ -879,6 +883,7 @@ footer{
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
 #repaymentTable{
     width: 70%;
@@ -1004,6 +1009,9 @@ footer{
     border-radius: 5px;
     box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.2);
 }
+#aside>a{
+    text-decoration: none;
+}
 .loanInfo>p{
     text-align: center;
 }
@@ -1041,9 +1049,7 @@ footer{
     color: #ECEEE8;
     box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.2);
 }
-.applyPage{
-    color: rgb(110, 109, 109);
-}
+
 #navUser{
     display: none;
 }
@@ -1213,5 +1219,366 @@ footer{
         width: 120px;
         min-height: 80px;
         
+    }
+}
+/* Loan page*/
+#userAsideContent>a{
+    text-decoration: none;
+}
+#userLoanApply{ 
+    min-height: 600px;
+    margin: 0px;
+    padding: 0px;
+    padding-top: 0px;
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+}
+#apply{
+    background-color: indigo;
+    color: #ECEEE8;
+    box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.2);
+}
+#userPageCalc{
+    box-sizing: border-box;
+    padding: 5px;
+    width: 70%;
+    margin: auto;
+    color: black;
+    min-height: 200px;
+    border: 0;
+    border-radius: 6px;
+    box-shadow: 0 6px 6px 10px rgba(0, 0, 0, 0.3);
+}
+#userPageCalc>h3{
+    margin: auto;
+    color: #C0465D;
+    width: 80%;
+    text-align: center;
+    margin-top: 10px;
+}
+#userPageCalc>select{
+    width: 70%;
+    display: block;
+    margin: auto;
+    height: 30px;
+    cursor: pointer;
+    border: 0;
+    background-color: transparent;
+    border-bottom: 2px solid indigo;
+    color: black;
+    outline: 0;
+    margin-bottom: 30px;
+    font-size: 16px;
+
+}
+#userPageCalc>select>option{
+    background-color: white;
+    position: relative;
+
+}
+#userPageCalc>select>option:hover{
+    background-color: black;
+    left: 20px;
+}
+#userPageCalc>p{
+padding-left: 30px;
+}
+.calculatedFromFormUser{
+    box-sizing: border-box;
+    padding: 5px;
+    width: 90%;
+    margin: auto;
+    min-height: 200px;
+    border: 0;
+    border-radius: 6px;
+    box-shadow: 0 6px 6px 10px rgba(0, 0, 0, 0.3);
+}
+.calculatedFromFormUser>h3{
+    text-align: center;
+    margin: auto;
+    width: 100%;
+    color: #C0465D;
+    margin-top: 20px;
+}
+.calculatedUser{
+    display: flex;
+    color: black;
+    justify-content: space-around;
+    width: 100%;
+}
+.calculatedUser>div{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.calculatedUser>div>h4{
+    text-align: start;
+    padding: 10px;
+}
+.calculatedUser>div>span{
+    width: 80%;
+    margin: auto;
+    display: block;
+    border-bottom: 2px solid rgb(147, 46, 219);
+}
+
+#CalcApplyBtn{
+    border-radius: 5px;
+    outline: 0;
+    border: 0;
+    display: block;
+    width: 160px;
+    color: white;
+    padding: 10px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    background-color: #f57921;
+    cursor: pointer;
+    transition: 0.8s ease;
+}
+#CalcApplyBtn:hover{
+    box-shadow: 0 6px 6px 5px rgba(0, 0, 0, 0.19);
+}
+@media(max-width:1000px){
+    #userLoanApply{
+        margin-top: 87px;
+    }
+}
+@media (max-width:790px){   
+    #userLoanApply{
+        flex-direction: column;
+    }
+}
+
+/* profile page*/
+#userProfile{ 
+    min-height: 600px;
+    margin: 0px;
+    padding: 0px;
+    padding-top: 0px;
+    width: 100%;
+    box-sizing: border-box;
+}
+#profile{
+    background-color: indigo;
+    color: #ECEEE8;
+    box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.2);
+}
+#updateUserDetails{
+    box-sizing: border-box;
+    min-height: 300px;
+    padding: 20px;
+}
+#userUploadInfo{
+    min-height: 200px;
+    padding: 20px;
+    box-sizing: border-box;
+    width: 100%;
+}
+#updateContent{
+    box-sizing: border-box;
+    width: 95%;
+    margin: auto;
+}
+.update{
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.updateBtn{
+    border-radius: 5px;
+    background-color: orange;
+    outline: 0;
+    border: 0;
+    width: 100px;
+    cursor: pointer;
+    color: #ECEEE8;
+    box-sizing: border-box;
+    transition: 0.5s ease;
+}
+.updateBtn:hover{
+    box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.2);
+}
+.updateForm>input{
+    display: block;
+    flex-basis: 68%;
+    height: 35px;
+    outline: 0;
+    border: 0;
+    border: 2px solid grey;
+    padding-left: 5px;
+    border-radius: 3px;
+    font-size: 18px;
+    box-sizing: border-box;
+    transition: 1s ease;
+    background-color: transparent;
+}
+.updateForm>input~button{
+    flex-basis: 30%;
+}
+.updateForm>input+label{
+    position: absolute;
+    left: 5px;
+    top: 10px;
+    transition: 1s ease;
+}
+.updateForm>input:focus{
+    border-color: indigo;
+}
+.updateForm>input:focus+label{
+    top: -9px;
+    background-color: rgb(231, 224, 231);
+}
+.updateForm>input:valid+label{
+    top: -9px;
+    color: indigo;
+    background-color: rgb(231, 224, 231);
+}
+.updateForm{
+    position: relative;
+    flex-basis: 45%;
+    display: flex;
+    justify-content: space-between;
+}
+#profilePicture{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    margin: auto;
+    border: 2px solid white;
+    margin-bottom: 10px;
+    box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.3);
+}
+#updateDetails1{
+    width: 100%;   
+}
+#updatePix{
+    display: block;
+    width: 150px;
+    height: 30px;
+    margin: auto;
+    cursor: pointer;
+    position: absolute;
+    z-index: 30;
+    cursor: pointer;
+    opacity: 0;
+    
+}
+#profileUploadDiv{
+    position: relative;
+    width: 150px;
+    height: 60px;
+    
+    margin: auto;
+}
+#updatePixBtn{
+    height: 30px;
+    width: 150px;
+    color: white;
+    border-radius: 5px;
+    outline: 0;
+    border: 0;
+    margin: auto;
+    position: absolute;
+    background-color: orange;
+    display: block;
+    z-index: 20;
+}
+#profileInfo{
+    width: 60%;
+    min-height: 100px;
+    margin: auto;
+   
+}
+#profileInfo>div{
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: space-around;
+}
+.userInfoTitle{
+    box-sizing: border-box;
+    flex-basis: 50%;
+    display: flex;
+    justify-content: flex-end;
+}
+#updateUserDetails{
+    border-bottom: 2px solid grey;
+}
+.userInfo{
+    padding-left: 5px;
+    color: #C0465D;
+    display: block;
+    box-sizing: border-box;
+   flex-basis: 50%;
+   min-height: 20px;
+    max-width: 250px;
+    word-wrap: break-word;
+}
+#updateHead{
+    width: 70%;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 30px;
+}
+@media(max-width:1000px){
+    #userProfile{
+        margin-top: 87px;
+    }
+}
+@media (max-width:790px){   
+    #userProfile{
+        flex-direction: column;
+    }
+}
+@media(max-width:767px){
+    .update{
+        flex-direction: column;
+    }
+    .updateForm{
+        margin-bottom: 20px;
+    }
+}
+@media(max-width:390px){
+    
+    .updateForm{
+        margin-bottom: 20px;
+        flex-direction: column;
+        min-height: 60px;
+    }
+    .updateBtn{
+        height: 30px;
+        margin: auto;
+        margin-top: 5px;
+
+    }
+}
+@media(max-width: 631px){
+    #profileInfo{
+        width: 100%;
+    }
+}
+@media(max-width:454px){
+    #profileInfo>div{
+        flex-direction: column;
+
+    }
+    .userInfoTitle{
+        justify-content: center;
+    }
+    .userInfo{
+        display: flex;
+        justify-content: center;
+        margin: auto;
+    }
+    #updateUserDetails{
+        padding-bottom: 0;
     }
 }
