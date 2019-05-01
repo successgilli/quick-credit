@@ -1199,6 +1199,10 @@ footer{
         width: 250px;
         height: 100%;
     }
+    #logoSpace{
+        padding-left: 10px;
+        width: 90%;
+    }
     
     
 }
