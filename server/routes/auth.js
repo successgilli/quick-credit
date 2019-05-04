@@ -1,9 +1,11 @@
 import express from 'express';
+import dataCreationValidator from '../middlewares/validators/authValidator';
+import Auth from '../controllers/auth';
 
+const { signupValidator } = dataCreationValidator;
+const { signup } = Auth;
 const route = express.Router();
 
-route.get('/', (req, res)=> {
-    res.json('correct');
-})
+route.post('/auth/signup', signupValidator, signup);
 
 export default route;
