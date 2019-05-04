@@ -28,7 +28,6 @@ describe('test sign up inputs', () => {
     chai.request(server).post('/api/v1/auth/signup').send(userData.baduserFirstName).end((err, res) => {
       res.should.be.json;
       res.body.status.should.equal(400);
-      console.log(res.body)
       done();
     });
   });
@@ -36,7 +35,6 @@ describe('test sign up inputs', () => {
     chai.request(server).post('/api/v1/auth/signup').send(userData.baduserFirstName).end((err, res) => {
       res.should.be.json;
       res.body.status.should.equal(400);
-      console.log(res.body);
       done();
     });
   });
@@ -44,7 +42,6 @@ describe('test sign up inputs', () => {
     chai.request(server).post('/api/v1/auth/signup').send(userData.baduserLastName).end((err, res) => {
       res.should.be.json;
       res.body.status.should.equal(400);
-      console.log(res.body);
       done();
     });
   });
@@ -52,7 +49,6 @@ describe('test sign up inputs', () => {
     chai.request(server).post('/api/v1/auth/signup').send(userData.baduserAddress).end((err, res) => {
       res.should.be.json;
       res.body.status.should.equal(400);
-      console.log(res.body);
       done();
     });
   });
@@ -60,7 +56,6 @@ describe('test sign up inputs', () => {
     chai.request(server).post('/api/v1/auth/signup').send(userData.baduserEmail).end((err, res) => {
       res.should.be.json;
       res.body.status.should.equal(400);
-      console.log(res.body);
       done();
     });
   });
@@ -68,7 +63,6 @@ describe('test sign up inputs', () => {
     chai.request(server).post('/api/v1/auth/signup').send(userData.baduserbvn).end((err, res) => {
       res.should.be.json;
       res.body.status.should.equal(400);
-      console.log(res.body);
       done();
     });
   });
@@ -76,7 +70,6 @@ describe('test sign up inputs', () => {
     chai.request(server).post('/api/v1/auth/signup').send(userData.baduserBankName).end((err, res) => {
       res.should.be.json;
       res.body.status.should.equal(400);
-      console.log(res.body);
       done();
     });
   });
@@ -84,7 +77,6 @@ describe('test sign up inputs', () => {
     chai.request(server).post('/api/v1/auth/signup').send(userData.usercompanyAddress).end((err, res) => {
       res.should.be.json;
       res.body.status.should.equal(400);
-      console.log(res.body);
       done();
     });
   });
@@ -92,7 +84,6 @@ describe('test sign up inputs', () => {
     chai.request(server).post('/api/v1/auth/signup').send(userData.badUserAcctNo).end((err, res) => {
       res.should.be.json;
       res.body.status.should.equal(400);
-      console.log(res.body);
       done();
     });
   });
@@ -100,8 +91,45 @@ describe('test sign up inputs', () => {
     chai.request(server).post('/api/v1/auth/signup').send(userData.badUsermonthlyIncome).end((err, res) => {
       res.should.be.json;
       res.body.status.should.equal(400);
-      console.log(res.body);
       done(); 
     });
   });
 });
+
+describe('testing signin', () => {
+  it('should respond with user not in db if user not in db', (done) => {
+    chai.request(server).post('/api/v1/auth/signin').send(userData.signinnotInDb).end((err, res) => {
+      res.body.status.should.equal(403);
+      res.body.error.should.equal('user not in database');
+      done();
+    })
+  })
+  it('should respond with invalid username/password', (done) => {
+    chai.request(server).post('/api/v1/auth/signin').send(userData.signinInDbBadPWord).end((err, res) => {
+      res.body.status.should.equal(400);
+      res.body.error.should.equal('invalid email or password');
+      done();
+    })
+  })
+  it('should respond with password cant be empty', (done) => {
+    userData.signinInDbBadPWord.password = '';// empty password field.
+    chai.request(server).post('/api/v1/auth/signin').send(userData.signinInDbBadPWord).end((err, res) => {
+      res.body.status.should.equal(400);
+      done();
+    })
+  })
+  it('should respond with email field cant be empty', (done) => {
+    userData.signinInDbBadPWord.email = '';// empty password field.
+    chai.request(server).post('/api/v1/auth/signin').send(userData.signinInDbBadPWord).end((err, res) => {
+      res.body.status.should.equal(400);
+      done();
+    })
+  })
+  it('should respond user details on seuccesful signin', (done) => {
+    chai.request(server).post('/api/v1/auth/signin').send(userData.signinValid).end((err, res) => {
+      res.body.status.should.equal(200);
+      res.body.should.have.property('data');
+      done();
+    })
+  })
+})

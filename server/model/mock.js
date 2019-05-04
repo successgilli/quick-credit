@@ -1,6 +1,18 @@
 
 
 const userData = {
+  signinnotInDb: {
+    email: 'never@gmail.com',
+    password: '1234567677',
+  },
+  signinInDbBadPWord: {
+    email: 'successgilli@gmail.com',
+    password: '1234567677',
+  },
+  signinValid: {
+    email: 'successgilli@gmail.com',
+    password: 'bearsman',
+  },
   user: {
     email: 'successgilli@gmail.com',
     firstName: 'gilbert',
