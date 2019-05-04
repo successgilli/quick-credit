@@ -11,6 +11,7 @@ class AuthHelper {
       address: user.address.trim(),
       isAdmin: user.isAdmin,
       status: user.status,
+      password: user.password,
     };
   }
 

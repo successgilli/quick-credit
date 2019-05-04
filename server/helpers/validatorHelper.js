@@ -4,7 +4,6 @@ const checkMissingKeys = (req, keys) => {
   const missing = [];
 
   keys.forEach((keyVal) => {
-    console.log(keyVal in req.body);
     if (!(keyVal in req.body)) missing.push(` ${keyVal} key is required `);
   });
   return missing;

@@ -41,8 +41,20 @@ class ImproperValuesChecker {
     if (!/(?!^[\d]+$)^[a-zA-Z0-9 ]{7,}$/.test(address.trim())) {
       impropervalues.push('address can only contain letters, numbers and space (-) not less than 7. ');
     }
-    if (!/^[a-z][a-z0-9]+@[a-z]{3,5}.[a-z]{2,3}(.[a-z]{2,3})?$/.test(email.trim())) {
+    if (!/^([a-z])([a-z0-9]+)@([a-z]{3,5})\.([a-z]{2,3})(\.[a-z]{2,3})?$/.test(email.trim())) {
       impropervalues.push('email must contain an "@" symbol and proper extensions after "."');
+    }
+    return impropervalues;
+  }
+
+  static improperSigninValues(req) {
+    const impropervalues = [];
+    const { email, password } = req.body;
+    if (email.trim().length === 0) {
+      impropervalues.push(' email field cannot be empty. ');
+    }
+    if (password.trim().length === 0) {
+      impropervalues.push(' password field cannot be empty. ');
     }
     return impropervalues;
   }
@@ -55,6 +67,14 @@ class dataCreationValidator {
       'bankName', 'bvn', 'accountNumber'];
     sendValidationInfo(
       res, req, keys, ImproperValuesChecker.improperSignupValues,
+      Next,
+    );
+  }
+
+  static signinValidator(req, res, Next) {
+    const keys = ['email', 'password'];
+    sendValidationInfo(
+      res, req, keys, ImproperValuesChecker.improperSigninValues,
       Next,
     );
   }
