@@ -133,3 +133,27 @@ describe('testing signin', () => {
     })
   })
 })
+// test verify user route.
+describe('test verify user route', () => {
+  it ('should return error for bad email parameter', (done) => {
+    chai.request(server).patch('/api/v1/users/%/verify').end((err, res) => {
+      res.body.status.should.equal(404);
+      res.body.error.should.equal('route does not exist. check the route');
+      done();
+    })
+  })
+  it ('should return user verified', (done) => {
+    chai.request(server).patch('/api/v1/users/successgilli@gmail.com/verify').end((err, res) => {
+      res.body.status.should.equal(200);
+      res.body.data.status.should.equal('verified');
+      done();
+    })
+  })
+  it ('should return error if user already verified', (done) => {
+    chai.request(server).patch('/api/v1/users/successgilli@gmail.com/verify').end((err, res) => {
+      res.body.status.should.equal(400);
+      res.body.error.should.equal('user \'successgilli@gmail.com\' already verified');
+      done();
+    })
+  })
+})
