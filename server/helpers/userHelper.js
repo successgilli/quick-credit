@@ -1,6 +1,6 @@
 import db from '../model/db';
 
-class AuthHelper {
+class UserHelper {
   static successRes(token, user) {
     return {
       token,
@@ -27,4 +27,4 @@ class AuthHelper {
   }
 }
 
-export default AuthHelper;
+export default UserHelper;

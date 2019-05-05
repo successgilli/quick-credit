@@ -1,15 +1,16 @@
+/* eslint-disable no-lonely-if */
 import 'babel-polyfill';
 import dotEnv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import db from '../model/db';
-import AuthHelper from '../helpers/authHelper';
+import UserHelper from '../helpers/userHelper';
 
 const saltRounds = 10;
-const { successRes, checkEmail } = AuthHelper;
+const { successRes, checkEmail } = UserHelper;
 dotEnv.config();
 
-class Auth {
+class User {
   static async signup(req, res) {
     const {
       firstName, lastName, address, email, password, companyName, companyAddress, monthlyIncome,
@@ -60,7 +61,7 @@ class Auth {
       res.status(403).json({
         status: 403,
         error: 'user not in database',
-      });// if email is found, now query password.   
+      });// if email is found, now query password.
     } else if (bcrypt.compareSync(password, loginUser.password)) {
       const token = jwt.sign(loginUser, process.env.jwt_secrete);
       res.status(200).json({
@@ -74,6 +75,45 @@ class Auth {
       });
     }
   }
+
+  static verify(req, res) {
+    const { userEmail } = req.params;
+    // query db if user is present.
+    let userToVerify = 'not found';
+    db.forEach((user) => {
+      if (user.user === userEmail.trim()) {
+        userToVerify = user;
+      }
+    });
+    // if user not found in db.
+    if (userToVerify === 'not found') {
+      res.status(400).json({
+        status: 400,
+        error: 'user not in database',
+      });
+    } else {
+      // if user is found, check if already verified.
+      if (userToVerify.status === 'verified') {
+        res.status(400).json({
+          status: 400,
+          error: `user '${userEmail}' already verified`,
+        });
+      } else {
+        userToVerify.status = 'verified';
+        res.status(200).json({
+          status: 200,
+          data: {
+            email: userToVerify.user,
+            firstName: userToVerify.firstName,
+            lastName: userToVerify.lastName,
+            password: userToVerify.password,
+            address: userToVerify.address,
+            status: userToVerify.status,
+          },
+        });
+      }
+    }
+  }
 }
 
-export default Auth;
+export default User;
