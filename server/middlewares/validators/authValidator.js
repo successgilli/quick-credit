@@ -1,5 +1,5 @@
 /* eslint-disable linebreak-style */
-import sendValidationInfo from '../helpers/validatorHelper';
+import sendValidationInfo from '../../helpers/validatorHelper';
 
 class ImproperValuesChecker {
   static improperSignupValues(req) {
@@ -60,7 +60,7 @@ class ImproperValuesChecker {
   }
 }
 
-class DataCreationValidator {
+class dataCreationValidator {
   static signupValidator(req, res, Next) {
     const keys = ['firstName', 'lastName', 'address', 'email', 'password',
       'companyName', 'companyAddress', 'monthlyIncome',
@@ -80,4 +80,4 @@ class DataCreationValidator {
   }
 }
 
-export default DataCreationValidator;
+export default dataCreationValidator;
