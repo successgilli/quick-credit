@@ -12,5 +12,7 @@ script:
     - npm test
 after_success:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - npm install nyc
+  - npm install coveralls
   - npm run coverage
   - npm run coveralls

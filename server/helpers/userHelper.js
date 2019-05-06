@@ -19,8 +19,10 @@ class UserHelper {
     // checking database for email.
     let present = false;
     db.forEach((x) => {
-      if (x.user === email) {
-        present = true;
+      if (x.type === 'user') {
+        if (x.user === email) {
+          present = true;
+        }
       }
     });
     return present;

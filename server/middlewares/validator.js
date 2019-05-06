@@ -58,6 +58,30 @@ class ImproperValuesChecker {
     }
     return impropervalues;
   }
+
+  static improperLaonAppValues(req) {
+    const impropervalues = [];
+    const { email, tenor, amount } = req.body;
+    if (email.trim().length === 0) {
+      impropervalues.push(' email field cannot be empty. ');
+    }
+    if (!/^([a-z])([a-z0-9]+)@([a-z]{3,5})\.([a-z]{2,3})(\.[a-z]{2,3})?$/.test(email.trim())) {
+      impropervalues.push(' email must contain an "@" symbol and proper extensions after "." ');
+    }
+    if (!/(?!^[0]+$)^[0-9]{1,2}$/.test(tenor.trim())) {
+      impropervalues.push(' tenor must be an integer between 1 and 12. e.g 12,5.');
+    }
+    if (((Number(tenor.trim())) > 12) || ((Number(tenor.trim())) < 1)) {
+      impropervalues.push(' tenor must be between 1 and 12');
+    }
+    if (!/^[0-9]{5,6}$/.test(amount.trim())) {
+      impropervalues.push(' the least amount you can borrow is 10,000 and cannot contain "," and "."');
+    }
+    if (((Number(amount.trim())) % 10000) !== 0 || (Number(amount.trim())) > 100000) {
+      impropervalues.push(' we only loan multiples of ten (10,000). and max. of 100,000');
+    }
+    return impropervalues;
+  }
 }
 
 class DataCreationValidator {
@@ -75,6 +99,14 @@ class DataCreationValidator {
     const keys = ['email', 'password'];
     sendValidationInfo(
       res, req, keys, ImproperValuesChecker.improperSigninValues,
+      Next,
+    );
+  }
+
+  static loanApplyValidator(req, res, Next) {
+    const keys = ['email', 'amount', 'tenor'];
+    sendValidationInfo(
+      res, req, keys, ImproperValuesChecker.improperLaonAppValues,
       Next,
     );
   }
