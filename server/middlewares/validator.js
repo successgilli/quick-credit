@@ -91,15 +91,6 @@ class ImproperValuesChecker {
     }
     return impropervalues;
   }
-
-  static improperRepaymentValues(req) {
-    const impropervalues = [];
-    const { amount } = req.body;
-    if (!/^[\d]+(\.[0-9]+)?$/.test(amount)) {
-      impropervalues.push('amount can only be either integer or float');
-    }
-    return impropervalues;
-  }
 }
 
 class DataCreationValidator {
@@ -133,14 +124,6 @@ class DataCreationValidator {
     const keys = ['status'];
     sendValidationInfo(
       res, req, keys, ImproperValuesChecker.improperLaonStatusValues,
-      Next,
-    );
-  }
-
-  static loanRepaymentValidator(req, res, Next) {
-    const keys = ['amount'];
-    sendValidationInfo(
-      res, req, keys, ImproperValuesChecker.improperRepaymentValues,
       Next,
     );
   }
