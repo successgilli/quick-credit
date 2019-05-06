@@ -5,7 +5,7 @@ import userData from '../server/model/mock';
 
 const should = chai.should();
 chai.use(chaiHttp);
-let loanId;
+let loanId; let loanId2;
 // test signup
 describe('test sign up inputs', () => {
   it('should enter the user into the database', (done) => {
@@ -20,6 +20,13 @@ describe('test sign up inputs', () => {
     chai.request(server).post('/api/v1/auth/signup').send(userData.user).end((err, res) => {
       res.should.be.json;
       res.body.status.should.equal(403);
+      done();
+    });
+  });
+  it('sign in another user into db', (done) => {
+    chai.request(server).post('/api/v1/auth/signup').send(userData.anodaUser).end((err, res) => {
+      res.should.be.json;
+      res.body.status.should.equal(200);
       done();
     });
   });
@@ -173,6 +180,16 @@ describe('loan application route', () => {
       done();
     });
   });
+  it('it should post another loan application to db', (done) => {
+    userData.loanAppGood.email = 'success@gmail.com';
+    chai.request(server).post('/api/v1/loans/').send(userData.loanAppGood).end((err, res) => {
+      res.body.should.have.property('data');
+      res.body.status.should.equal(201);
+      // eslint-disable-next-line prefer-destructuring
+      loanId2 = res.body.data.loanId;
+      done();
+    });
+  });
   it('it should reject application if user has outstanding loan', (done) => {
     chai.request(server).post('/api/v1/loans/').send(userData.loanAppGood).end((err, res) => {
       res.body.should.have.property('error');
@@ -225,3 +242,61 @@ describe('get specific loan route', () => {
     });
   });
 });
+// test aprove/reject loan route. 
+describe('approve/reject loan route', () => {
+  it('should respond with "not found" if loanId not found', (done) => {
+    let status = { status: 'approve' };
+    chai.request(server).patch('/api/v1/loans/100000000000').send(status).end((err, res) => {
+      res.body.status.should.equal(400);
+      res.body.error.should.equal('loan not in database');
+      done();
+    });
+  });
+  it('should respond with validate input for either approve or reject', (done) => {
+    let status = { status: '' };
+    chai.request(server).patch('/api/v1/loans/100000000000').send(status).end((err, res) => {
+      res.body.status.should.equal(400);
+      done();
+    });
+  });
+  it('should require status field', (done) => {
+    let status = { armpit: '' };
+    chai.request(server).patch('/api/v1/loans/100000000000').send(status).end((err, res) => {
+      res.body.status.should.equal(400);
+      done();
+    });
+  });
+  it('should approve loan of a verifed user', (done) => {
+    let status = { status: 'approve' };
+    chai.request(server).patch(`/api/v1/loans/${loanId}`).send(status).end((err, res) => {
+      console.log(res.body)
+      res.body.status.should.equal(201);
+      res.body.should.have.property('data');
+      done();
+    });
+  });
+  it('should not approve or reject a loan already approved or rejected', (done) => {
+    let status = { status: 'approve' };
+    chai.request(server).patch(`/api/v1/loans/${loanId}`).send(status).end((err, res) => {
+      res.body.status.should.equal(400);
+      res.body.should.have.property('error');
+      done();
+    });
+  });
+  it('should not approve the loan of a user not verified', (done) => {
+    let status = { status: 'approve' };
+    chai.request(server).patch(`/api/v1/loans/${loanId2}`).send(status).end((err, res) => {
+      res.body.status.should.equal(400);
+      res.body.error.should.equal('user is not yet verifed');
+      done();
+    });
+  });
+  it('should be able to reject loan application', (done) => {
+    let status = { status: 'reject' };
+    chai.request(server).patch(`/api/v1/loans/${loanId2}`).send(status).end((err, res) => {
+      res.body.status.should.equal(201);
+      res.body.should.have.property('data');
+      done();
+    });
+  });
+}); 

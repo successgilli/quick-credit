@@ -82,6 +82,15 @@ class ImproperValuesChecker {
     }
     return impropervalues;
   }
+
+  static improperLaonStatusValues(req) {
+    const { status } = req.body;
+    const impropervalues = [];
+    if (!(/^approve$/i.test(status.trim()) || /^reject$/i.test(status.trim()))) {
+      impropervalues.push('status field can only be either \'approve\' or \'reject\'.');
+    }
+    return impropervalues;
+  }
 }
 
 class DataCreationValidator {
@@ -107,6 +116,14 @@ class DataCreationValidator {
     const keys = ['email', 'amount', 'tenor'];
     sendValidationInfo(
       res, req, keys, ImproperValuesChecker.improperLaonAppValues,
+      Next,
+    );
+  }
+  
+  static laonStatusValidator(req, res, Next) {
+    const keys = ['status'];
+    sendValidationInfo(
+      res, req, keys, ImproperValuesChecker.improperLaonStatusValues,
       Next,
     );
   }

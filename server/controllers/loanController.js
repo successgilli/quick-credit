@@ -93,6 +93,83 @@ class Loans {
       });
     }
   }
+
+  static changeStatus(req, res) {
+    const { status } = req.body;
+    const { loanId } = req.params;
+    // query loanId in db.
+    let specificLoan = 'not found';
+    let loanIndex;
+    db.forEach((loan, index) => {
+      if (loan.type === 'loan') {
+        if (loan.id === Number(loanId)) {
+          specificLoan = loan;
+          loanIndex = index;
+        }
+      }
+    });
+    if (specificLoan === 'not found') { // if not found in db, say 'not found'.
+      res.status(400).json({
+        status: 400,
+        error: 'loan not in database',
+      });
+    } else {
+      // check loan status if pending else dont change status.
+      // eslint-disable-next-line no-lonely-if
+      if (specificLoan.status === 'pending') { 
+        if (/^reject$/i.test(status.trim())) {
+          db[loanIndex].status = 'rejected';
+          res.status(201).json({
+            status: 201,
+            data: {
+              loanId: specificLoan.id,
+              loanAmount: specificLoan.amount,
+              tenor: specificLoan.tenor,
+              status: specificLoan.status,
+              monthlyInstallment: specificLoan.paymentInstallment,
+              interest: specificLoan.interest,
+            },
+          });
+        } else {
+          const applicant = specificLoan.user; // check the status of user if verified.
+          let verified = false;
+          db.forEach((user) => {
+            if (user.type === 'user') {
+              if (user.user === applicant) {
+                if (user.status === 'verified') {
+                  verified = true;
+                }
+              }
+            }
+          });
+          if (verified) {
+            db[loanIndex].status = 'approved';
+            res.status(201).json({
+              status: 201,
+              data: {
+                loanId: specificLoan.id,
+                loanAmount: specificLoan.amount,
+                tenor: specificLoan.tenor,
+                status: specificLoan.status,
+                monthlyInstallment: specificLoan.paymentInstallment,
+                interest: specificLoan.interest,
+              },
+            });
+          } else {
+            res.status(400).json({
+              status: 400,
+              error: 'user is not yet verifed',
+            });
+          }
+        }
+      } else {
+        res.status(400).json({
+          status: 400,
+          error: `loan is already ${db[loanIndex].status}`,
+        });
+      }
+    }
+  }
 }
 
 export default Loans;
