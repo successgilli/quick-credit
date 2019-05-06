@@ -163,6 +163,16 @@ const userData = {
     isAdmin: false,
     status: 'unverified',
   },
+  loanAppNoUser: {
+    email:'notfound@gmail.com',
+    amount: '30000',
+    tenor: '8',
+  },
+  loanAppGood: {
+    email:'successgilli@gmail.com',
+    amount: '30000',
+    tenor: '8',
+  },
 };
 
 export default userData;

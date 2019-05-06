@@ -53,8 +53,10 @@ class User {
     // query email in database
     let loginUser = 'not found';
     db.forEach((user) => {
-      if (user.user === email.trim()) {
-        loginUser = user;// save the user.
+      if (user.type === 'user') {
+        if (user.user === email.trim()) {
+          loginUser = user;// save the user.
+        }
       }
     });
     if (loginUser === 'not found') {
@@ -81,8 +83,10 @@ class User {
     // query db if user is present.
     let userToVerify = 'not found';
     db.forEach((user) => {
-      if (user.user === userEmail.trim()) {
-        userToVerify = user;
+      if (user.type === 'user') {
+        if (user.user === userEmail.trim()) {
+          userToVerify = user;
+        }
       }
     });
     // if user not found in db.
