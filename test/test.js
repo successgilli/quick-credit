@@ -191,7 +191,9 @@ describe('loan application route', () => {
     });
   });
   it('it should reject application if user has outstanding loan', (done) => {
+    userData.loanAppGood.email = 'successgilli@gmail.com';
     chai.request(server).post('/api/v1/loans/').send(userData.loanAppGood).end((err, res) => {
+      console.log(res.body, 'this')
       res.body.should.have.property('error');
       res.body.status.should.equal(400);
       done();
@@ -300,3 +302,61 @@ describe('approve/reject loan route', () => {
     });
   });
 }); 
+
+// test post repayment route
+describe('post loan repayment route', () => {
+  let input = { amount: 'er' };
+  it('should validate input amount', (done) => {
+    chai.request(server).post('/api/v1/loans/12323/repayment')
+      .send(input).end((err, res) => {
+        res.body.status.should.equal(400);
+        res.body.error.should.equal('amount can only be either integer or float');
+        done();
+      })
+  })
+  it('should respond with loan not found if not found', (done) => {
+    input = { amount: '2000' };
+    chai.request(server).post('/api/v1/loans/12323000000/repayment')
+      .send(input).end((err, res) => {
+        res.body.status.should.equal(400);
+        res.body.error.should.equal('loan not found');
+        done();
+      })
+  })
+  it('should not post repayment for rejected or pending loan', (done) => {
+    input = { amount: '2000' };
+    chai.request(server).post(`/api/v1/loans/${loanId2}/repayment`)
+      .send(input).end((err, res) => {
+        res.body.status.should.equal(400);
+        res.body.error.should.equal(`you cant post repayment for the loan '${loanId2}' not yet approved`);
+        done();
+      })
+  })
+  it('should not post repayment for amount greater than loan balance', (done) => {
+    input = { amount: '70000' };
+    chai.request(server).post(`/api/v1/loans/${loanId}/repayment`)
+      .send(input).end((err, res) => {
+        res.body.status.should.equal(400);
+        res.body.error.should.equal('repayed amount cannot be greater than loan balance');
+        done();
+      })
+  })
+  it('should post loan into repayment db', (done) => {
+    input = { amount: '31500' };
+    chai.request(server).post(`/api/v1/loans/${loanId}/repayment`)
+      .send(input).end((err, res) => {
+        res.body.status.should.equal(201);
+        res.body.should.have.property('data');
+        done();
+      })
+  })
+  it('should tell if repayment already complete and not repay', (done) => {
+    input = { amount: '31500' };
+    chai.request(server).post(`/api/v1/loans/${loanId}/repayment`)
+      .send(input).end((err, res) => {
+        res.body.status.should.equal(400);
+        res.body.error.should.equal('loan already fully paid');
+        done();
+      })
+  })
+})
