@@ -207,7 +207,7 @@ class Loans {
             const repayment = {
               id: Math.floor(Math.random() * 100000),
               createdOn: Date.now(),
-              loanId,
+              loanId: Number(loanId),
               amount: Number(amount),
               type: 'repayment',
             };
@@ -242,6 +242,53 @@ class Loans {
           error: `you cant post repayment for the loan '${loanId}' not yet approved`,
         });
       }
+    }
+  }
+
+  static getRepayHistory(req, res) {
+    const { loanId } = req.params;
+    // query loanId in db.
+    let specificLoan = 'not found';
+    let loanIndex;
+    db.forEach((loan, index) => {
+      if (loan.type === 'loan') {
+        if (loan.id === Number(loanId)) {
+          specificLoan = loan;
+          loanIndex = index;
+        }
+      }
+    });
+    // if loan not found,
+    if ( specificLoan !== 'not found') {
+      // query repayments with loanId in db.
+      const repayments = []; // array to colate repayments.
+      let specificRepayment;
+      db.forEach((repayment) => {
+        if (repayment.type === 'repayment') {
+          if (repayment.loanId === Number(loanId)) {
+            specificRepayment = repayment;
+            specificRepayment.monthlyInstallment = specificLoan.paymentInstallment;
+            repayments.push(specificRepayment);
+          }
+        }
+      });
+      // check if any repayment history exists.
+      if (repayments.length !== 0) {
+        res.status(200).json({
+          status: 200,
+          data: repayments,
+        });
+      } else {
+        res.status(400).json({
+          status: 400,
+          error: `loan with id: ${loanId} has no repayment`,
+        });
+      }
+    } else {
+      res.status(400).json({
+        status: 400,
+        error: `loan with id: ${loanId} not found`,
+      });
     }
   }
 }

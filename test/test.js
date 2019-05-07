@@ -360,3 +360,27 @@ describe('post loan repayment route', () => {
       })
   })
 })
+// test view repayment history route.
+describe('Get repayment history route', () => {
+  it('should respond loan not found if loan id not in db', (done) => {
+    chai.request(server).get(`/api/v1/loans/1000000000/repayments`).end((err, res) => {
+      res.body.should.have.status(400);
+      res.body.error.should.equal('loan with id: 1000000000 not found');
+      done();
+    })
+  })
+  it('should respond with no repayment message if loan has no repayment yet', (done) => {
+    chai.request(server).get(`/api/v1/loans/${loanId2}/repayments`).end((err, res) => {
+      res.body.should.have.status(400);
+      res.body.error.should.equal(`loan with id: ${loanId2} has no repayment`);
+      done();
+    })
+  })
+  it('should respond with loan repayment if loanId found in db', (done) => {
+    chai.request(server).get(`/api/v1/loans/${loanId}/repayments`).end((err, res) => {
+      res.body.should.have.status(200);
+      res.body.data.should.be.a('array');
+      done();
+    })
+  })
+})
