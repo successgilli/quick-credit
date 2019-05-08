@@ -128,7 +128,7 @@ class DataCreationValidator {
       Next,
     );
   }
-  
+
   static laonStatusValidator(req, res, Next) {
     const keys = ['status'];
     sendValidationInfo(
@@ -146,4 +146,35 @@ class DataCreationValidator {
   }
 }
 
-export default DataCreationValidator;
+class DataQuery {
+  static checkQueryStrings(req, res, Next) {
+    const { status, repaid } = req.query;
+    if ((typeof status === 'undefined') && (typeof repaid === 'undefined')) {
+      Next();
+    } else if (((typeof status === 'undefined') && (typeof repaid !== 'undefined'))
+    || ((typeof status !== 'undefined') && (typeof repaid === 'undefined'))) {
+      res.status(400).json({
+        status: 400,
+        error: 'both status and repaid query keys are required',
+      });
+    } else {
+      const improperVals = [];
+      if (!((/^approved$/i.test(status) || /^rejected$/i.test(status)))) {
+        improperVals.push('status value must be a string of either approved or rejected');
+      }
+      if (!((/^true$/i.test(repaid)) || (/^false$/i.test(repaid)))) {
+        improperVals.push('repaid value must be a string of either true or false');
+      }
+      if (improperVals.length === 0) {
+        Next();
+      } else {
+        res.status(400).json({
+          status: 400,
+          error: improperVals.join(),
+        });
+      }
+    }
+  }
+}
+
+export { DataCreationValidator, DataQuery };
