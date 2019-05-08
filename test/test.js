@@ -384,3 +384,38 @@ describe('Get repayment history route', () => {
     })
   })
 })
+// test get loans route.
+describe('GET loans route', () => {
+  it('should return error if only one query string is given', (done) => {
+    chai.request(server).get('/api/v1/loans?status').end((err, res) => {
+      res.body.error.should.equal('both status and repaid query keys are required');
+      done();
+    })
+  })
+  it('should return error if query keys have wrong values', (done) => {
+    chai.request(server).get('/api/v1/loans?status=armpit&repaid=bearbear').end((err, res) => {
+      res.body.error.should.equal('status value must be a string of either approved or rejected,repaid value must be a string of either true or false');
+      done();
+    })
+  })
+  it('should return all loans in db if no query strings are given', (done) => {
+    chai.request(server).get('/api/v1/loans').end((err, res) => {
+      res.body.should.have.property('data')
+      done();
+    })
+  })
+  it('should return queried loans in db if query strings are given', (done) => {
+    chai.request(server).get('/api/v1/loans?status=approved&repaid=false').end((err, res) => {
+      console.log(res.body)
+      res.body.should.have.property('data')
+      done();
+    })
+  })
+  it('should return queried loans in db if query strings are given', (done) => {
+    chai.request(server).get('/api/v1/loans?status=approved&repaid=true').end((err, res) => {
+      console.log(res.body)
+      res.body.should.have.property('data')
+      done();
+    })
+  })
+})

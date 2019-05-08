@@ -291,6 +291,40 @@ class Loans {
       });
     }
   }
+
+  static getLoans(req, res) {
+    const { status, repaid } = req.query;
+    // query db for all loans.
+    const loans = []; // to colate loans.
+    db.forEach((loan) => {
+      if (loan.type === 'loan') {
+        loans.push(loan);
+      }
+    })
+    if ((typeof status === 'undefined') && (typeof repaid === 'undefined')) {
+      res.status(200).json({
+        status: 200,
+        data: loans,
+      })
+    } else {
+      const queriedLoans = []; // store loans queried.
+      let repaidBoolean;
+      if (repaid === 'true') {
+        repaidBoolean = true;
+      } else {
+        repaidBoolean = false;
+      }
+      loans.forEach((loan) => { // search based on query strings.
+        if ((loan.status === status) && ((loan.repaid) === repaidBoolean)) {
+          queriedLoans.push(loan);
+        }
+      })
+      res.status(200).json({
+        status: 200,
+        data: queriedLoans,
+      })
+    }
+  }
 }
 
 export default Loans;

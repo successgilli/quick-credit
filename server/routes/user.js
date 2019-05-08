@@ -1,5 +1,5 @@
 import express from 'express';
-import DataCreationValidator from '../middlewares/validator';
+import { DataCreationValidator } from '../middlewares/validator';
 import User from '../controllers/userController';
 
 const { signupValidator, signinValidator } = DataCreationValidator;
