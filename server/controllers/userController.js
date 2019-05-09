@@ -4,6 +4,7 @@ import dotEnv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import db from '../model/db';
+import uploads from '../helpers/imageUpload';
 import UserHelper from '../helpers/userHelper';
 
 const saltRounds = 10;
@@ -116,6 +117,40 @@ class User {
           },
         });
       }
+    }
+  }
+
+  static uploadProfilePic(req, res) {
+    const email = req.params.userEmail;
+    // query db if user is present.
+    let userToVerify = 'not found';
+    let indexUser;
+    db.forEach((user, index) => {
+      if (user.type === 'user') {
+        if (user.user === email.trim()) {
+          userToVerify = user;
+          indexUser = index;
+        }
+      }
+    });
+    if (userToVerify !== 'not found') { // if user is found save profile picture.
+      uploads.single('image') (req, res, (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          const secureUrl = req.file.secure_url;
+          db[indexUser].profilePic = secureUrl; // stor the picture to the user in db
+          res.status(201).json({
+            status: 201,
+            data: userToVerify,
+          })
+        }
+      })
+    } else {
+      res.status(400).json({
+        status: 400,
+        error: 'user not found',
+      })
     }
   }
 }

@@ -1,5 +1,6 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
+import fs from 'fs';
 import server from '../server/app';
 import userData from '../server/model/mock';
 
@@ -415,6 +416,22 @@ describe('GET loans route', () => {
     chai.request(server).get('/api/v1/loans?status=approved&repaid=true').end((err, res) => {
       console.log(res.body)
       res.body.should.have.property('data')
+      done();
+    })
+  })
+})
+
+describe('test the upload picture route', () => {
+  it ('should return no user found if email not in db', (done) => {
+    chai.request(server).patch('/api/v1/users/uploads/armpit@gmail.com').end((err, res) => {
+      res.body.error.should.equal('user not found');
+      done();
+    })
+  })
+  it ('should save profile pic in db if user is found', (done) => {
+    chai.request(server).patch('/api/v1/users/uploads/successgilli@gmail.com').attach('image', fs.readFileSync('./asset/avatar.PNG'), './asset/avatar.PNG').end((err, res) => {
+      res.body.should.have.property('data');
+      console.log(res.body)
       done();
     })
   })
