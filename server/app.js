@@ -12,8 +12,8 @@ app.use('/', (req, res) => {
     error: 'route does not exist. check the route'
   });
 })
-const port = 3000;
-const server = app.listen(port || process.env.PORT, () => {
+const port = 8080;
+const server = app.listen(process.env.PORT || port, () => {
   console.log(`listening on port ${port}`);
 });
 export default server;
