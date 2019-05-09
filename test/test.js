@@ -429,7 +429,7 @@ describe('test the upload picture route', () => {
     })
   })
   it ('should save profile pic in db if user is found', (done) => {
-    chai.request(server).patch('/api/v1/users/uploads/successgilli@gmail.com').attach('image', fs.readFileSync('./asset/avatar.png'), 'avatar.png').end((err, res) => {
+    chai.request(server).patch('/api/v1/users/uploads/successgilli@gmail.com').attach('image', fs.readFileSync('./asset/avatar.PNG'), './asset/avatar.PNG').end((err, res) => {
       res.body.should.have.property('data');
       console.log(res.body)
       done();
