@@ -1,0 +1,575 @@
+swagger: '2.0'
+info:
+  description: This is a sample loan app
+  version: 1.0.0
+  title: Quick Credit
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: successgilli@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: quickcreditgilli.herokuapp.com
+basePath: /api/v1
+tags:
+  - name: Users
+    description: Access to user routes
+  - name: Loans
+    description: Operations about loans
+    externalDocs:
+      description: Find out more about our loan app
+      url: 'https://successgilli.github.io/quick-credit/'
+schemes:
+  - https
+  - http
+paths:
+  /auth/signup:
+    post:
+      tags:
+        - Users
+      summary: Add a new user to the db
+      description: ''
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: user signup data object
+          required: true
+          schema:
+            type: object
+            properties:
+              firstName:
+                type: string
+              lastName:
+                type: string
+              address:
+                type: string
+              email:
+                type: string
+              password:
+                type: string
+              companyName:
+                type: string
+              companyAddress:
+                type: string
+              monthlyIncome:
+                type: integer
+                description: must be atleast 4 digit integer
+              bankName:
+                type: string
+              bvn:
+                type: integer
+              accountNumber:
+                type: integer
+      responses:
+        '200':
+          description: Successfully creates a user
+          schema:
+            $ref: '#/definitions/User'
+        '400':
+          description: Invalid input by the user
+        '403':
+          description: Email Already taken
+  /auth/signin:
+    post:
+      tags:
+        - Users
+      summary: user login
+      description: ''
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: user signin data object
+          required: true
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+      responses:
+        '200':
+          description: Successfully creates a user
+          schema:
+            $ref: '#/definitions/User'
+        '400':
+          description: Invalid input by the user
+          schema:
+            $ref: '#/definitions/Error'
+  '/users/{userEmail}/verify':
+    patch:
+      tags:
+        - Users
+      summary: verify a client by email
+      description: ''
+      produces:
+        - application/json
+      parameters:
+        - name: userEmail
+          in: path
+          description: user email to query db email must be of valid email type.
+          required: true
+          type: string
+          items:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              data:
+                type: object
+                properties:
+                  email:
+                    type: string
+                  firstName:
+                    type: string
+                  lastName:
+                    type: string
+                  password:
+                    type: string
+                  status:
+                    type: string
+        '400':
+          description: Invalid input by the user or user not found or route does not exist
+          schema:
+            $ref: '#/definitions/Error'
+  '/loans/{loanId}':
+    get:
+      tags:
+        - Loans
+      summary: Find loan by ID
+      description: Returns a single loan
+      produces:
+        - application/json
+      parameters:
+        - name: loanId
+          in: path
+          description: ID of loan to be returned
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Loan'
+        '400':
+          description: Invalid ID supplied
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: loan not found
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - api_key: []
+    patch:
+      tags:
+        - Loans
+      summary: Find loan by ID
+      description: Returns a single loan
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: loanId
+          in: path
+          description: ID of loan to be approved or rejected
+          required: true
+          type: integer
+        - name: status
+          in: body
+          description: either 'approve or reject'
+          required: true
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            properties:
+              status:
+                type: integer
+              data:
+                type: object
+                properties:
+                  loanId:
+                    type: integer
+                  loanAmount:
+                    type: number
+                    format: float
+                  tenor:
+                    type: number
+                    format: integer
+                  status:
+                    type: string
+                  monthlyInstallment:
+                    type: number
+                    format: float
+                  interest:
+                    type: number
+                    format: integer
+        '404':
+          description: loan not found
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - api_key: []
+  /loans:
+    get:
+      tags:
+        - Loans
+      summary: Get all loans or filtered loans based on status or repaid value
+      description: can also return loans on query of their status and repaid values
+      produces:
+        - application/json
+      parameters:
+        - name: status
+          in: query
+          description: status of loan to be returned
+          required: false
+          type: string
+        - name: repaid
+          in: query
+          description: repaid value of loan to be returned
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Loans'
+        '400':
+          description: Invalid query strings or route not found
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - api_key: []
+    post:
+      tags:
+        - Loans
+      summary: uploads a loan application to the server
+      description: ''
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          description: ID of loan to upload
+          required: true
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              tenor:
+                type: number
+                format: integer
+              amount:
+                type: number
+                format: integer
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/LoanApply'
+        '400':
+          description: Invalid inputs or user not in database
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - petstore_auth:
+            - 'write:pets'
+            - 'read:pets'
+  '/loans/{loanId}/repayments':
+    get:
+      tags:
+        - Loans
+      summary: Find repayments for loan with ID === loanId
+      description: Returns an array of repayments
+      produces:
+        - application/json
+      parameters:
+        - name: loanId
+          in: path
+          description: ID of loan to be queried
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/repayments'
+        '404':
+          description: loan not found
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - api_key: []
+  '/loans/{loanId}/repayment':
+    post:
+      tags:
+        - Loans
+      summary: create a loan repayment record
+      description: ''
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: loanId
+          in: path
+          description: Id of loan to post repayment for
+          required: true
+          type: integer
+        - name: body
+          in: body
+          description: amount paid by user
+          required: true
+          schema:
+            type: object
+            properties:
+              amount:
+                type: number
+                format: integer
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/repaymentPost'
+        '400':
+          description: Invalid inputs or loan not in database
+          schema:
+            $ref: '#/definitions/Error'
+  '/users/uploads/{userEmail}':
+    patch:
+      tags:
+      - Users
+      summary: uploads a user profile picture
+      description: ''
+      consumes:
+      - form-data
+      - multipart/form-data
+      produces:
+      - application/json
+      parameters:
+      - name: userEmail
+        in: path
+        description: user email
+        required: true
+        type: string
+      - name: image
+        in: formData
+        description: 'picture to upload'
+        required: true
+        type: file
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            $ref: '#/definitions/User'
+securityDefinitions:
+  petstore_auth:
+    type: oauth2
+    authorizationUrl: 'http://petstore.swagger.io/oauth/dialog'
+    flow: implicit
+    scopes:
+      'write:pets': modify pets in your account
+      'read:pets': read your pets
+  api_key:
+    type: apiKey
+    name: api_key
+    in: header
+definitions:
+  Error:
+    type: object
+    properties:
+      status:
+        type: integer
+      error:
+        type: string
+  User:
+    type: object
+    properties:
+      status:
+        type: integer
+      data:
+        type: object
+        properties:
+          token:
+            type: string
+          id:
+            type: integer
+          firstName:
+            type: string
+          lastName:
+            type: string
+          email:
+            type: string
+          address:
+            type: string
+          isAdmin:
+            type: boolean
+          status:
+            type: string
+          password:
+            type: string
+  Loan:
+    type: object
+    properties:
+      status:
+        type: integer
+      data:
+        type: object
+        properties:
+          id:
+            type: integer
+          user:
+            type: string
+          createdOn:
+            type: string
+            format: date-time
+          status:
+            type: string
+          repaids:
+            type: boolean
+          tenor:
+            type: integer
+          amount:
+            type: number
+            format: float
+          balance:
+            type: number
+            format: float
+          interest:
+            type: number
+            format: float
+  repayments:
+    type: object
+    properties:
+      status:
+        type: integer
+      data:
+        type: object
+        properties:
+          loanId:
+            type: integer
+          createdOn:
+            type: string
+            format: date-time
+          monthlyInstallment:
+            type: number
+            format: float
+          amount:
+            type: number
+            format: float
+  repaymentPost:
+    type: object
+    properties:
+      status:
+        type: integer
+      data:
+        type: object
+        properties:
+          id:
+            type: integer
+          loanId:
+            type: integer
+          createdOn:
+            type: string
+            format: date-time
+          amount:
+            type: number
+            format: float
+          monthlyInstallment:
+            type: number
+            format: float
+          paidAmount:
+            type: number
+            format: float
+          balance:
+            type: number
+            format: float
+  Loans:
+    type: object
+    properties:
+      status:
+        type: integer
+      data:
+        type: array
+        items:
+          properties:
+            id:
+              type: integer
+            user:
+              type: string
+            createdOn:
+              type: string
+              format: date-time
+            status:
+              type: string
+            repaids:
+              type: boolean
+            tenor:
+              type: integer
+            amount:
+              type: number
+              format: float
+            balance:
+              type: number
+              format: float
+            interest:
+              type: number
+              format: float
+  LoanApply:
+    type: object
+    properties:
+      status:
+        type: integer
+      data:
+        type: object
+        properties:
+          loanId:
+            type: integer
+          firstName:
+            type: string
+          lastName:
+            type: string
+          email:
+            type: string
+          tenor:
+            type: string
+          amount:
+            type: number
+            format: float
+          paymentInstallment:
+            type: number
+            format: float
+          status:
+            type: string
+          balance:
+            type: number
+            format: float
+          interest:
+            type: number
+            format: float
+externalDocs:
+  description: Find out more about Swagger
+  url: 'http://swagger.io'

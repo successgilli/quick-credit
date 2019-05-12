@@ -4,7 +4,7 @@
   "description": "A simple Loan App",
   "main": "app.js",
   "scripts": {
-    "test": "nyc mocha --exit --timeout 6000 --require babel-register",
+    "test": "nyc mocha --exit --timeout 40000 --require babel-register",
     "build": "babel server -d dist",
     "start": "npm run build && node ./dist/app",
     "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test",
@@ -41,7 +41,10 @@
     "mocha": "^6.1.4",
     "multer": "^1.4.1",
     "multer-storage-cloudinary": "^2.2.1",
-    "typescript": "^3.4.5"
+    "nodemailer": "^6.1.1",
+    "swagger-ui-express": "^4.0.2",
+    "typescript": "^3.4.5",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "coveralls": "^3.0.3",

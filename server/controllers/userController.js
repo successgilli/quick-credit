@@ -135,8 +135,11 @@ class User {
     });
     if (userToVerify !== 'not found') { // if user is found save profile picture.
       uploads.single('image') (req, res, (err) => {
-        if (err) {
-          console.log(err);
+        if (typeof req.file === 'undefined') {
+          res.status(400).json({
+            status: 400,
+            error: 'ensure image key is available and has an image value',
+          })
         } else {
           const secureUrl = req.file.secure_url;
           db[indexUser].profilePic = secureUrl; // stor the picture to the user in db

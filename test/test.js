@@ -7,6 +7,16 @@ import userData from '../server/model/mock';
 const should = chai.should();
 chai.use(chaiHttp);
 let loanId; let loanId2;
+// test welcome route
+describe('welcome route', () => {
+  it('should welcome users to the route', (done) => {
+    chai.request(server).get('/api/v1').end((err, res) => {
+      console.log(res.body)
+      res.body.data.should.equal('welcome to Gilberts API..for docs, add "quickcreditgilli.herokuapp.com/api-docs" to navigate other routes');
+      done();
+    })
+  })
+})
 // test signup
 describe('test sign up inputs', () => {
   it('should enter the user into the database', (done) => {
@@ -143,9 +153,16 @@ describe('testing signin', () => {
 // test verify user route.
 describe('test verify user route', () => {
   it('should return error for bad email parameter', (done) => {
-    chai.request(server).patch('/api/v1/users/%/verify').end((err, res) => {
+    chai.request(server).patch('/api/v1/users/*/verify').end((err, res) => {
       res.body.status.should.equal(404);
-      res.body.error.should.equal('route does not exist. check the route');
+      res.body.error.should.equal('route does not exist. check the route, especially if the route param is of required type.');
+      done();
+    });
+  });
+  it('should return user not found if not found', (done) => {
+    chai.request(server).patch('/api/v1/users/successgillippman@gmail.com/verify').end((err, res) => {
+      res.body.status.should.equal(400);
+      res.body.error.should.equal('user not in database');
       done();
     });
   });
