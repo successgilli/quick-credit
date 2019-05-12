@@ -143,9 +143,9 @@ describe('testing signin', () => {
 // test verify user route.
 describe('test verify user route', () => {
   it('should return error for bad email parameter', (done) => {
-    chai.request(server).patch('/api/v1/users/%/verify').end((err, res) => {
+    chai.request(server).patch('/api/v1/users/*/verify').end((err, res) => {
       res.body.status.should.equal(404);
-      res.body.error.should.equal('route does not exist. check the route');
+      res.body.error.should.equal('route does not exist. check the route, especially if the route param is of required type.');
       done();
     });
   });

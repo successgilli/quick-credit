@@ -1,4 +1,5 @@
 import db from '../model/db';
+import mailer from '../helpers/mailer';
 
 class Loans {
   static apply(req, res) {
@@ -122,16 +123,18 @@ class Loans {
       if (specificLoan.status === 'pending') {
         if (/^reject$/i.test(status.trim())) {
           db[loanIndex].status = 'rejected';
+          const data = {
+            loanId: specificLoan.id,
+            loanAmount: specificLoan.amount,
+            tenor: specificLoan.tenor,
+            status: db[loanIndex].status,
+            monthlyInstallment: specificLoan.paymentInstallment,
+            interest: specificLoan.interest,
+          };
+          mailer(specificLoan.user, 'rejected', data)
           res.status(201).json({
             status: 201,
-            data: {
-              loanId: specificLoan.id,
-              loanAmount: specificLoan.amount,
-              tenor: specificLoan.tenor,
-              status: specificLoan.status,
-              monthlyInstallment: specificLoan.paymentInstallment,
-              interest: specificLoan.interest,
-            },
+            data,
           });
         } else {
           const applicant = specificLoan.user; // check the status of user if verified.
@@ -147,16 +150,18 @@ class Loans {
           });
           if (verified) {
             db[loanIndex].status = 'approved';
+            const data = {
+              loanId: specificLoan.id,
+              loanAmount: specificLoan.amount,
+              tenor: specificLoan.tenor,
+              status: db[loanIndex].status,
+              monthlyInstallment: specificLoan.paymentInstallment,
+              interest: specificLoan.interest,
+            };
+            mailer(specificLoan.user, 'approved', data)
             res.status(201).json({
               status: 201,
-              data: {
-                loanId: specificLoan.id,
-                loanAmount: specificLoan.amount,
-                tenor: specificLoan.tenor,
-                status: specificLoan.status,
-                monthlyInstallment: specificLoan.paymentInstallment,
-                interest: specificLoan.interest,
-              },
+              data,
             });
           } else {
             res.status(400).json({
