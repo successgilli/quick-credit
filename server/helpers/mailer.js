@@ -16,11 +16,6 @@ function mailUser(email, status, loanDetails) {
     monthly payment: ${loanDetails.monthlyInstallment} has been ${status}`,
   };
   transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log(`Email sent: ${info.response}`);
-    }
   });
 }
 
