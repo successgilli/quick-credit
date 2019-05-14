@@ -513,3 +513,18 @@ footer{
         margin-top: 87px;
     }
 }
+.fa-facebook-f,.fa-google-plus-g,.fa-linkedin-in,.fa-twitter{
+    font-size: 20px;
+}
+.fa-twitter{
+    color: #00acee;
+}
+.fa-facebook-f{
+    color: rgb(25, 89, 207);
+}
+.fa-linkedin-in{
+    color: #F9F8F9;
+}
+.fa-google-plus-g{
+    color: #d44638;
+}
