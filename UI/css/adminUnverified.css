@@ -1,0 +1,438 @@
+body, html{
+    padding: 0;
+    margin: 0;
+}
+main{
+    padding-top: 60px;
+}
+/* logo*/
+.logo{
+    color: white;
+}
+.logo >span{
+    letter-spacing: 3px;
+    font-size: 20px;
+}
+.fab{
+    font-size: 30px;
+    
+}
+.logoInit{
+    color: aqua;
+}
+.credit{
+    color: orange;
+}
+footer{
+    z-index: 800;
+    box-sizing: border-box;
+    padding: 30px;
+    background-color: black;
+    color: #F9F8F9;
+
+}
+#footerLogo{
+    width: 100%;
+    margin-bottom: 20px;
+    color: white;
+    text-align: center;
+
+}
+#footerElements{
+    display: flex;
+    flex-basis: 30%;
+    justify-content: space-around;
+   
+}
+.footer>h3{
+    text-align: center;
+}
+.footerpelem{
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.fa-facebook-f,.fa-google-plus-g,.fa-linkedin-in,.fa-twitter{
+    font-size: 20px;
+}
+.fa-twitter{
+    color: #00acee;
+}
+.fa-facebook-f{
+    color: rgb(25, 89, 207);
+}
+.fa-linkedin-in{
+    color: #F9F8F9;
+}
+.fa-google-plus-g{
+    color: #d44638;
+}
+@media (max-width:790px){
+    #nav{
+        display: block;
+        font-size: 23px;
+    }
+}
+@media (max-width:700px){
+    footer{
+        flex-direction: column;
+        text-align: center;
+    }
+    #footerElements{
+        flex-direction: column;
+       
+    }
+}
+/* userPage dashboard begins*/
+#userMain{
+    padding: 0;
+    margin: 0;
+    padding-top: 0px;
+    min-height: 600px;    
+}
+#aside{
+    background-color: #ECEEE8;
+    position: fixed;
+    width: 260px;
+    height: 100%;
+    box-shadow: 2px 2px 8px 4px rgba(0, 0, 0, 0.59);
+}
+#userMainContainer{
+    box-sizing: border-box;
+    padding-left: 260px;
+    z-index: 500;
+    background-color: rgb(231, 224, 231);
+}
+
+#userHead{
+    box-sizing: border-box;
+    display: flex;
+    /*position: fixed;
+    top: 0;
+    z-index: 700; */
+    width: 100%;
+    height: 87px;
+    background-color: indigo;
+    color: #ECEEE8;
+}
+#userDashbord{ 
+    min-height: 600px;
+    padding: 50px;
+    width: 100%;
+    box-sizing: border-box;
+}
+#adminContent{ 
+    text-align: center;
+    min-height: 600px;
+    padding: 50px;
+    box-sizing: border-box;
+}
+
+#logoSpace{
+    width: 80%;
+    margin: auto;
+    padding: 30px;
+    box-sizing: border-box;
+    text-align: center;
+    border-bottom: 1px solid grey;
+    margin-bottom: 30px;
+}
+#titleOfPage{
+    width: 300px;
+    height: 100%;
+}
+#firstHead{
+    box-sizing: border-box;
+    display: flex;
+    padding-left: 20px;
+    align-items: center;
+    flex-basis: 50%;
+}
+#secondHead{
+    padding-right: 30px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-basis: 50%;
+}
+#userImage{
+    border: 2px solid white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+#aside>a{
+    text-decoration: none;
+}
+.aside{
+    box-sizing: border-box;
+    padding:10px;
+}
+.aside>p{
+    box-sizing: border-box;
+    width: 80%;
+    margin: auto;
+    padding: 15px;
+    color: rgb(110, 109, 109);
+    border-radius: 5px;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+.aside>p:hover{
+    box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.1);
+}
+#dashboard{
+    background-color: indigo;
+    color: #ECEEE8;
+    box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.2);
+}
+
+#navUser{
+    display: none;
+}
+#userAsideBackground{
+    position: fixed;
+    display: none;
+    z-index: 600;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+#userAsideContent{
+    position: relative;
+    right: -500px;
+    top: 0;
+    background-color: #ECEEE8;
+    width: 40%;
+    transition: 1s ease;
+    overflow-y: scroll;
+    box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.2);
+}
+@media(max-width: 1050px){
+    #repaymentTable{
+        width: 100%;
+    }
+}
+@media(max-width: 1000px){
+    #navUser{
+        display: block;
+        font-size: 23px;
+        cursor: pointer;
+    }
+    #userHead{
+        position: fixed;
+        top: 0;
+        z-index: 700;
+        width: 100%;
+    }
+    #loanInfo{
+        width: 100%;
+    }
+    #userDashbord{
+        padding: 20px;
+    }
+    #adminContent{
+        padding: 0px;
+    }
+    #aside{
+        left: -700px;
+    }
+    #userMainContainer{
+        padding-left: 0px;
+    }
+    #userImage{
+        display: none;
+    }
+}
+@media(max-width: 676px){
+    #userAsideContent{
+        width: 60%;
+    }
+}
+@media(max-width:431px){
+    #userAsideContent{
+        width: 80%;
+    }
+    
+    
+}
+@media(max-width:425px){
+    #firstHead{
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        flex-basis: 80%;
+    }
+    #secondHead{
+        box-sizing: border-box;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        flex-basis: 20%;
+    }
+    #titleOfPage{
+        width: 250px;
+        height: 100%;
+    }
+    #logoSpace{
+        padding-left: 10px;
+        width: 90%;
+    }
+    
+    
+}
+#userAsideContent>a{
+    text-decoration: none;
+}
+#profilePicture100{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    margin: auto;
+    border: 2px solid white;
+    margin-bottom: 10px;
+    box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.3);
+}
+#userpicture1 >hr{
+width: 80%;
+}
+.user{
+    display: inline-block;
+    width: 300px;
+    max-height: 1500px;
+    overflow: hidden;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.3);
+    transition: max-height 0.5s ease 0.2s, box-shadow 0.5s ease 0.2s;
+}
+.userDetails{
+    width: 100%;
+}
+.userDets{
+    padding: 5px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+}
+.userDets1{
+    color: #C0465D;
+    text-align: left;
+    flex-basis: 30%;
+}
+.userDets2{
+    width: 180px;
+    text-align: left;
+    justify-content: left;
+    word-wrap: break-word;
+}
+.userDets p{
+    margin: 5px;
+}
+.verify{
+    color: rgb(204, 34, 34);
+     
+}
+.verifyDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.verifyCheck{
+    display: block;
+    margin-left: 20px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+   background-color: red;
+}
+#verifyBackground{
+
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    width: 100%;
+    height: 100%;
+}
+#verifyContent{
+    width: 30%;
+    border-radius: 5px;
+    min-height: 100px;
+    background-color: white;
+}
+#verifyClient>p{
+    text-align: center;
+}
+#clientEmail{
+    color: orange;
+}
+#modalVerifyBtns{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+#vetYes{
+    width: 100px;
+    padding: 5px;
+    outline: 0;
+    border: 0;
+    background-color: green;
+    border-radius: 5px;
+    transition: 0.5s ease;
+}
+#vetYes:hover{
+    cursor: pointer;
+    box-shadow: 2px 4px 8px 3px rgba(0, 0, 0, 0.3);
+    color: white;
+}
+#vetNo:hover{
+    cursor: pointer;
+    box-shadow: 2px 4px 8px 3px rgba(0, 0, 0, 0.3);
+    color: white;
+}
+#vetNo{
+    transition: 0.5s ease;
+    width: 100px;
+    padding: 5px;
+    outline: 0;
+    border: 0;
+    background-color: red;
+    border-radius: 5px;
+}
+@media(max-width: 790px){
+    #verifyContent{
+        width: 50%;
+    }
+}
+@media(max-width: 500px){
+    #verifyContent{
+        width: 70%;
+    }
+}
+
+@media(min-width:1260px){
+    .user{
+        margin-left: 15px;
+    }
+}
+@media(max-width:1000px){
+    #adminContent{
+        margin-top: 87px;
+    }
+}
