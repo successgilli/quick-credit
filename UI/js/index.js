@@ -29,8 +29,22 @@ const backgroundAside = document.getElementById('backgroundAside');
 const homeSidebar = document.getElementById('homeSidebar');
 const signinBtn = document.getElementById('signinBtn');
 const homeAsideLinks = document.getElementsByClassName('homeAsideLinks');
+const inputFields = document.getElementsByClassName("inputFields");
+const passwordMatch = document.getElementById('passwordMatch');
+const passwordSign = document.getElementById('passwordSign');
+const passwordMatchRes = document.getElementById('passwordMatchRes');
+const homeCalcApplyBtn = document.getElementById('homeCalcApplyBtn');
+const homeBtns = document.getElementsByClassName('homeBtns');
 
-
+const patterns = {
+    email: /^([a-z])([a-z0-9]+)@([a-z]{3,5})\.([a-z]{2,3})(\.[a-z]{2,3})?$/,
+    password: /^[\w@-]{7,20}$/,
+    name: /^[a-zA-Z]{5,12}$/,
+    address: /(?!^[\d]+$)^[a-zA-Z0-9 ]{7,20}$/,
+    amount: /^[0-9]{4,10}$/,
+    bvn:/^[0-9]{11}$/,
+    accountNumber:/^[0-9]{10}$/,
+}
 // add event to log in btn
 signinBtn.addEventListener('click', ()=> {
     location = './userDashbord.html';
@@ -104,6 +118,66 @@ headLinks[5].addEventListener('click', ()=> {
     })
     
 })
+//add click event to home apply  btn to open signup modal
+homeCalcApplyBtn.addEventListener('click', ()=> {
+    backgroundSignUser.style.display = 'flex';
+    loginForm.style.display = 'none';
+    signupForm.style.display = 'block';
+    formPTag.textContent = 'SIGN UP';
+    setTimeout(()=> {
+        signHead.style.top = '20px';
+    signContent.style.top = '0px';
+    }, 10)
+    
+})
+//add click event to home register  btn to open signup modal
+homeBtns[0].addEventListener('click', ()=> {
+    backgroundSignUser.style.display = 'flex';
+    loginForm.style.display = 'none';
+    signupForm.style.display = 'block';
+    formPTag.textContent = 'SIGN UP';
+    setTimeout(()=> {
+        signHead.style.top = '20px';
+    signContent.style.top = '0px';
+    }, 10)
+    
+})
+//add click event to home login gen  btn to open signup modal
+homeBtns[1].addEventListener('click', ()=> {
+    backgroundSignUser.style.display = 'flex';
+    loginForm.style.display = 'block';
+    signupForm.style.display = 'none';
+    formPTag.textContent = 'LOG IN';
+    setTimeout(()=> {
+        signHead.style.top = '20px';
+    signContent.style.top = '0px';
+    }, 10)
+    
+})
+//add click event to home apply gen  btn to open signup modal
+homeBtns[2].addEventListener('click', ()=> {
+    backgroundSignUser.style.display = 'flex';
+    loginForm.style.display = 'none';
+    signupForm.style.display = 'block';
+    formPTag.textContent = 'SIGN UP';
+    setTimeout(()=> {
+        signHead.style.top = '20px';
+    signContent.style.top = '0px';
+    }, 10)
+    
+})
+//add click event to home get loan  btn to open signup modal
+homeBtns[3].addEventListener('click', ()=> {
+    backgroundSignUser.style.display = 'flex';
+    loginForm.style.display = 'none';
+    signupForm.style.display = 'block';
+    formPTag.textContent = 'SIGN UP';
+    setTimeout(()=> {
+        signHead.style.top = '20px';
+    signContent.style.top = '0px';
+    }, 10)
+    
+})
 //add click event to close form modal
 closeLogin.addEventListener('click', ()=> {
     backgroundSignUser.style.display = 'none';
@@ -126,17 +200,54 @@ signToggle[1].addEventListener('click', ()=> {
 //add event to nextBtn
 nextBtn.addEventListener('click', (e)=> {
     e.preventDefault();
-    checkTab();
-    for(i=0; i<tabs.length;i++){
-        let offset = Number(window.getComputedStyle(tabs[i]).getPropertyValue('left').split('px')[0]);
-        let newOffset = offset-520;
-        tabs[i].style.left = newOffset+'px';
+    nextBtn.setAttribute('disabled', true);
+    if (validateTabs()) {
+
+    } else {
+        //check if we are on page 2
+        let tabTwo = false;
+        let val = false;
+        for (i=0; i<tabs.length; i++) {
+            if (window.getComputedStyle(tabs[i]).getPropertyValue('left') === '0px') {
+                if (tabs[i].getAttribute('id') === 'secondTab') {
+                    tabTwo = true;
+                }
+            }
+        }
+        if (tabTwo) {
+            val = MatchPassword(passwordMatch);
+            if (val) {
+                checkTab();
+                for(i=0; i<tabs.length;i++){
+                    let offset = Number(window.getComputedStyle(tabs[i]).getPropertyValue('left').split('px')[0]);
+                    let newOffset = offset-520;
+                    tabs[i].style.left = newOffset+'px';
+                }
+        
+                nextNav();
+            }
+        } else {
+            checkTab();
+            for(i=0; i<tabs.length;i++){
+                let offset = Number(window.getComputedStyle(tabs[i]).getPropertyValue('left').split('px')[0]);
+                let newOffset = offset-520;
+                tabs[i].style.left = newOffset+'px';
+            }
+    
+            nextNav();
+        }
+           
     }
-    nextNav();
+    window.setTimeout(() => {
+        nextBtn.removeAttribute('disabled');
+    }, 500)
+    
 })
+
 //add event to prevBtn
 prevBtn.addEventListener('click', (e)=> {
     e.preventDefault();
+    prevBtn.setAttribute('disabled', true);
     checkTab2();
     for(i=0; i<tabs.length;i++){
         let offset = Number(window.getComputedStyle(tabs[i]).getPropertyValue('left').split('px')[0]);
@@ -144,7 +255,71 @@ prevBtn.addEventListener('click', (e)=> {
         tabs[i].style.left = newOffset+'px';
     }
     prevNav();
+    window.setTimeout(() => {
+        prevBtn.removeAttribute('disabled');
+    }, 500)
 })
+//add click event to navigator circles
+for(i=0; i<navCircles.length; i++) {
+    navCircles[i].addEventListener('click', (e) => {
+        const target = e.target;
+        let currentNavIndex = new Map ([['firstTab',0], ['secondTab',1], ['thirdTab', 2], ['lastTab', 3]]);
+        //check all tabs and get which is in front
+        let currentTab = 'none';
+        for(i=0; i<tabs.length; i++) {
+            if (window.getComputedStyle(tabs[i]).getPropertyValue('left') === '0px') {
+                currentTab = tabs[i].getAttribute('id');
+            }
+        }
+        if (target.getAttribute('id') === 'firstNav') {
+            tabs[0].style.left = '0px';
+            tabs[1].style.left = '520px';
+            tabs[2].style.left = '1040px';
+            tabs[3].style.left = '1560px';
+            navCircles[currentNavIndex.get(currentTab)].style.opacity = '0.5';
+            navCircles[0].style.opacity = '1';
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'block';
+            submitBtn.style.display = 'none';
+            
+        } 
+        if ( (target.previousElementSibling) && (target.previousElementSibling.style.backgroundColor === 'green')) {
+            if (target.getAttribute('id') === 'secondNav') {
+                tabs[0].style.left = '-520px';
+                tabs[1].style.left = '0px';
+                tabs[2].style.left = '520px';
+                tabs[3].style.left = '1040px';
+                prevBtn.style.display = 'block';
+                nextBtn.style.display = 'block';
+                submitBtn.style.display = 'none';
+                navCircles[currentNavIndex.get(currentTab)].style.opacity = '0.5';
+                navCircles[1].style.opacity = '1';
+            }
+            if (target.getAttribute('id') === 'thirdNav') {
+                tabs[0].style.left = '-1040px';
+                tabs[1].style.left = '-520px';
+                tabs[2].style.left = '0px';
+                tabs[3].style.left = '520px';
+                prevBtn.style.display = 'block';
+                nextBtn.style.display = 'block';
+                submitBtn.style.display = 'none';
+                navCircles[currentNavIndex.get(currentTab)].style.opacity = '0.5';
+                navCircles[2].style.opacity = '1';
+            }
+            if (target.getAttribute('id') === 'fourthNav') {
+                tabs[0].style.left = '-1560px';
+                tabs[1].style.left = '-1040px';
+                tabs[2].style.left = '-520px';
+                tabs[3].style.left = '0px';
+                prevBtn.style.display = 'block';
+                nextBtn.style.display = 'none';
+                submitBtn.style.display = 'block';
+                navCircles[currentNavIndex.get(currentTab)].style.opacity = '0.5';
+                navCircles[3].style.opacity = '1';
+            }
+        }
+    })
+}
 //fxn check which tab is in next so we toggle nextBtn
 const checkTab = ()=> {
     for(i=0; i<tabs.length;i++){
@@ -203,6 +378,7 @@ const prevNav = ()=> {
     }
       
 }
+//
 //add current date to repayment date div
 let currentDate = new Date();
 let newDate = new Date();
@@ -282,3 +458,66 @@ const toMoneyString = (amount) => {
         return amount;
     }
 }
+
+
+const validate = (field, regEx) => {
+    if(regEx.test(field.value)) {
+        field.style.borderColor = 'green';
+        field.nextElementSibling.nextElementSibling.className = 'valid';
+        field.nextElementSibling.style.color = 'green'
+    } else {
+        field.nextElementSibling.style.color = 'red'
+        field.nextElementSibling.nextElementSibling.className = 'invalid';
+        field.style.borderColor = 'red';
+    }
+}
+// validate login form
+    for(i=0; i<inputFields.length; i++){
+        inputFields[i].addEventListener('keyup', (e) => {
+            validate(e.target, patterns[e.target.attributes.name.value]);
+        })
+    }
+//add event to password field
+passwordSign.addEventListener('keyup', () => {
+    MatchPassword(passwordMatch);
+})
+//check password match
+passwordMatch.addEventListener('keyup', (e) => {
+    let val = MatchPassword (e.target);
+})
+// fxn to check match password;
+const MatchPassword = (field) => {
+    if (field.value === passwordSign.value) {
+        field.style.borderColor = 'green';
+        field.nextElementSibling.style.color = 'green';
+        passwordMatchRes.textContent = 'password match'
+        passwordMatchRes.style.color = 'green';
+        passwordMatchRes.style.display = 'block'
+        return true;
+    } else {
+        passwordMatchRes.style.display = 'block'
+        field.style.borderColor = 'red';
+        field.nextElementSibling.style.color = 'red';
+        passwordMatchRes.textContent = 'password not matching'
+        passwordMatchRes.style.color = 'red';
+        return false;
+    }
+}
+// fxn to validate inputs before moving to ANOTHER TAB
+const validateTabs = () => {
+    for (i=0; i<tabs.length; i++) {
+        if (window.getComputedStyle(tabs[i]).getPropertyValue('left') === '0px' ) {
+            let children = tabs[i].children;
+            for(j=0; j<children.length; j++){
+                if (children[j].hasAttribute('name')) {
+                validate(children[j], patterns[children[j].attributes.name.value]);
+                if (window.getComputedStyle(children[j].nextElementSibling.nextElementSibling)
+                .getPropertyValue('display') === 'block') {
+                    return true;
+                } 
+            }
+            }
+        }
+    }
+}
+
