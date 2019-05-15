@@ -7,7 +7,28 @@ const userAsideBackground = document.getElementById('userAsideBackground');
 const userAsideContent = document.getElementById('userAsideContent');
 const paidBtns = document.getElementsByClassName('paid');
 const postRepayment = document.getElementsByClassName('postRepayment');
+const navWide = document.getElementById('navWide');
+const aside = document.getElementById('aside');
+const userMainContainer = document.getElementById('userMainContainer');
 
+//add event to navbar on large screen
+navWide.addEventListener('click', () => {
+    if (window.getComputedStyle(aside).getPropertyValue('width') === '0px') {
+        aside.style.width = '260px';
+        userMainContainer.style.paddingLeft = '260px';
+    } else {
+        aside.style.width = '0px';
+        userMainContainer.style.paddingLeft = '0px';
+    }
+
+})
+//add event to window
+window.addEventListener('resize', () => {
+    if (window.innerWidth < 1000) {
+        aside.style.width = '0px';
+        userMainContainer.style.paddingLeft = '0px';
+    }
+})
 //add event to paidBtns
 for(i=0; i<paidBtns.length;i++){
     paidBtns[i].addEventListener('click', (e)=> {
@@ -61,19 +82,17 @@ for(i=0;i<viewRepaymentBtn.length;i++){
         let realTarget = target.parentNode.parentNode.lastElementChild;
         console.log(realTarget)
         if (window.getComputedStyle(realTarget).getPropertyValue('max-height') === '0px'){
-            console.log(window.getComputedStyle(realTarget).getPropertyValue('height'))
-            for(i=0;i<moreInfoDiv.length;i++){
-                moreInfoDiv[i].style.maxHeight = '0px';
-            }
             for(j=0; j<postRepayment.length; j++){
                 postRepayment[j].style.maxHeight = '0px';
+            }
+            for(i=0;i<moreInfoDiv.length;i++){
+                moreInfoDiv[i].style.maxHeight = '0px';
             }
             for(i=0;i<moreInfoDiv2.length;i++){
                 moreInfoDiv2[i].style.maxHeight = '0px';
             }
             realTarget.style.maxHeight = '10000px';           
         } else {
-            console.log(window.getComputedStyle(realTarget).getPropertyValue('height'))
             realTarget.style.maxHeight = '0px'; 
         }
     })

@@ -7,7 +7,7 @@ main{
 }
 /* logo*/
 .logo{
-    color: white;
+    color: indigo;
 }
 .logo >span{
     letter-spacing: 3px;
@@ -23,6 +23,9 @@ main{
 .credit{
     color: orange;
 }
+#aside a {
+    min-width: 200px;
+}
 footer{
     z-index: 800;
     box-sizing: border-box;
@@ -30,6 +33,12 @@ footer{
     background-color: black;
     color: #F9F8F9;
 
+}
+#logoSpace > a {
+    text-decoration: none;
+}
+footer>a {
+    text-decoration: none;
 }
 #footerLogo{
     width: 100%;
@@ -95,15 +104,28 @@ footer{
 #aside{
     background-color: #ECEEE8;
     position: fixed;
-    width: 260px;
+    width: 0px;
+    overflow: hidden;
+    transition: 0.2s ease;
     height: 100%;
     box-shadow: 2px 2px 8px 4px rgba(0, 0, 0, 0.59);
 }
 #userMainContainer{
     box-sizing: border-box;
-    padding-left: 260px;
+    padding-left: 0px;
     z-index: 500;
     background-color: rgb(231, 224, 231);
+}
+#navWide{
+    cursor: pointer;
+}
+#navHead {
+    flex-basis: 10%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
 }
 
 #userHead{
@@ -146,16 +168,18 @@ footer{
 #firstHead{
     box-sizing: border-box;
     display: flex;
+    text-align: center;
     padding-left: 20px;
     align-items: center;
-    flex-basis: 50%;
+    justify-content: center;
+    flex-basis: 60%;
 }
 #secondHead{
     padding-right: 30px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    flex-basis: 50%;
+    flex-basis: 30%;
 }
 #userImage{
     border: 2px solid white;
@@ -168,7 +192,7 @@ footer{
     
 }
 #repaymentTable{
-    width: 70%;
+    width: 90%;
     margin: auto;
     min-height: 200px;
     
@@ -338,6 +362,9 @@ footer{
     }
 }
 @media(max-width: 1000px){
+    #navHead {
+        display: none;
+    }
     #navUser{
         display: block;
         font-size: 23px;
@@ -359,6 +386,7 @@ footer{
         padding: 0px;
     }
     #aside{
+        width: 0px;
         left: -700px;
     }
     #userMainContainer{

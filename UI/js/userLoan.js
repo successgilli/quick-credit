@@ -9,6 +9,28 @@ const totalRepayment = document.getElementsByClassName('calculatedUser')[2].last
 const navUser = document.getElementById('navUser');
 const userAsideBackground = document.getElementById('userAsideBackground');
 const userAsideContent = document.getElementById('userAsideContent');
+const navWide = document.getElementById('navWide');
+const aside = document.getElementById('aside');
+const userMainContainer = document.getElementById('userMainContainer');
+
+//add event to navbar on large screen
+navWide.addEventListener('click', () => {
+    if (window.getComputedStyle(aside).getPropertyValue('width') === '0px') {
+        aside.style.width = '260px';
+        userMainContainer.style.paddingLeft = '260px';
+    } else {
+        aside.style.width = '0px';
+        userMainContainer.style.paddingLeft = '0px';
+    }
+
+})
+//add event to window
+window.addEventListener('resize', () => {
+    if (window.innerWidth < 1000) {
+        aside.style.width = '0px';
+        userMainContainer.style.paddingLeft = '0px';
+    }
+})
 
 //add current date to repayment date div
 let currentDate = new Date();

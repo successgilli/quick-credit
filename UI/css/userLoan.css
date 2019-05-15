@@ -7,7 +7,7 @@ main{
 }
 /* logo*/
 .logo{
-    color: white;
+    color: indigo;
 }
 .logo >span{
     letter-spacing: 3px;
@@ -68,7 +68,9 @@ footer{
     justify-content: center;
     cursor: pointer;
 }
-
+#aside a {
+    min-width: 200px;
+}
 .fa-facebook-f,.fa-google-plus-g,.fa-linkedin-in,.fa-twitter{
     font-size: 20px;
 }
@@ -121,14 +123,16 @@ footer{
 #aside{
     background-color: #ECEEE8;
     position: fixed;
-    width: 260px;
+    width: 0px;
+    overflow: hidden;
+    transition: 0.2s ease;
     height: 100%;
     box-shadow: 2px 2px 8px 4px rgba(0, 0, 0, 0.59);
 }
 #userMainContainer{
     box-sizing: border-box;
-    padding-left: 260px;
     z-index: 500;
+    padding-left: 0px;
     background-color: rgb(231, 224, 231);
 }
 
@@ -142,6 +146,17 @@ footer{
     height: 87px;
     background-color: indigo;
     color: #ECEEE8;
+}
+#navWide{
+    cursor: pointer;
+}
+#navHead {
+    flex-basis: 10%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
 }
 #userDashbord{ 
     min-height: 600px;
@@ -167,7 +182,9 @@ footer{
     display: flex;
     padding-left: 20px;
     align-items: center;
-    flex-basis: 50%;
+    text-align: center;
+    justify-content: center;
+    flex-basis: 30%;
 }
 #secondHead{
     padding-right: 30px;
@@ -239,6 +256,9 @@ footer{
         font-size: 23px;
         cursor: pointer;
     }
+    #navHead {
+        display: none;
+    }
     #userHead{
         position: fixed;
         top: 0;
@@ -250,6 +270,7 @@ footer{
     }
     #aside{
         left: -700px;
+        width: 0;
     }
     #userMainContainer{
         padding-left: 0px;
@@ -313,10 +334,16 @@ footer{
     color: #ECEEE8;
     box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.2);
 }
+#logoSpace > a {
+    text-decoration: none;
+}
+footer > a {
+    text-decoration: none;
+}
 #userPageCalc{
     box-sizing: border-box;
     padding: 5px;
-    width: 70%;
+    width: 90%;
     margin: auto;
     color: black;
     min-height: 200px;
