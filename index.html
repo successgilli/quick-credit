@@ -29,57 +29,71 @@
             <p id="formPTag">LOG IN</p>
             <span id="closeLogin">+</span>
             <form action="" id="loginForm">       
-                <input type="text" id="email" required>
+                <input type="text" class="inputFields" id="email" name="email" required>
                 <label for="email">Email</label>
-                <input type="password" id="password" required>
+                <div id="emailRes" class="errorRes">Email must be a valid address e.g success@gmail.com</div>
+                <input type="password" name="password" class="inputFields" id="password" required>
                 <label for="password">Password</label>
+                <div id="passwordRes" class="errorRes">password must be atleast 7 characters long</div>
                 <button id="signinBtn"> LOG IN</button>
             </form>
             <form action="" id="signupForm">       
                 <div id="tabContent">
                     <div class="tab" id="firstTab">
                             <p>Personal Info:</p>
-                            <input type="text" id="firstname" required>
+                            <input type="text" class="inputFields" id="firstname" name="name" required>
                             <label for="firstname">Fisrt Name</label>
-                            <input type="text" id="LastName" required>
+                            <div id="emailRes" class="errorRes">first Name cannot have space and must be characters</div>
+                            <input type="text" class="inputFields" id="LastName" name="name" required>
                             <label for="LastName">Last Name</label>
-                            <input type="text" id="address" required>
+                            <div id="emailRes" class="errorRes">last Name cannot have space and must be characters</div>
+                            <input type="text" class="inputFields" id="address" name="address" required>
                             <label for="address">Address</label>
+                            <div id="emailRes" class="errorRes">address cannot be all numbers</div>
                         </div>
-                        <div class="tab">
+                        <div class="tab" id="secondTab">
                             <p>Account Setup:</p>
-                            <input type="text" id="userEmail" required>
+                            <input type="text" class="inputFields" id="userEmail" name="email" required>
                             <label for="userEmail">Email</label>
-                            <input type="password" id="password" required>
+                            <div id="emailRes" class="errorRes">Email must be a valid address</div>
+                            <input type="password" class="inputFields" name="password" id="passwordSign" required>
                             <label for="password">Password</label>
-                            <input type="password" id="cPassword" required>
+                            <div id="passwordRes" class="errorRes">password must be atleast 7 characters long</div>
+                            <input type="password" id="passwordMatch" id="cPassword" required>
                             <label for="cPassword">Confirm password</label>
+                            <div id="passwordMatchRes">password not matchong</div>
                         </div>
-                        <div class="tab">
+                        <div class="tab" id="thirdTab">
                             <p>Employment details:</p>
-                            <input type="text" id="userCompany" required>
+                            <input class="inputFields" name="address" type="text" id="userCompany" required>
                             <label for="userCompany">Name of your Company</label>
-                            <input type="text" id="monthlyIncome" required>
+                            <div class="errorRes">company Name must ne alphanumeric and between 5-12 characters</div>
+                            <input class="inputFields" name="amount" type="text" id="monthlyIncome" required>
                             <label for="monthlyIncome">Monthly Income</label>
-                            <input type="text" id="companyAddress" required>
+                            <div class="errorRes">amount must be a number of atleast 4 characters</div>
+                            <input class="inputFields" type="text" name="address" id="companyAddress" required>
                             <label for="companyAddress">Company Address</label>
+                            <div class="errorRes">company address must be alphanumeric and between 7-20 characters</div>
                         </div>
                         <div class="tab" id="lastTab">
                             <p>Bank details:</p>
-                            <input type="text" id="bankName" required>
+                            <input class="inputFields" name="name" type="text" id="bankName" required>
                             <label for="bankName">Name of your Bank</label>
-                            <input type="text" id="bvn" required>
+                            <div class="errorRes">bank name must be alphanumeric and between 7-20 characters</div>
+                            <input class="inputFields" name="bvn" type="text" id="bvn" required>
                             <label for="bvn">BVN</label>
-                            <input type="text" id="accountNumber" required>
+                            <div class="errorRes">bvn must be an 11 digit number</div>
+                            <input class="inputFields" type="text" name="accountNumber" required>
                             <label for="accountNumber">Account Number</label>
+                            <div class="errorRes">account number must be a 10 digit number</div>
                         </div>
                     
                 </div>
                 <div id="navigators">
                     <div class="navigator" id="firstNav"></div>
-                    <div class="navigator"></div>
-                    <div class="navigator"></div>
-                    <div class="navigator"></div>
+                    <div class="navigator" id="secondNav"></div>
+                    <div class="navigator" id="thirdNav"></div>
+                    <div class="navigator" id="fourthNav"></div>
                 </div>
                 <hr>
                 <div id="btns">
@@ -92,15 +106,17 @@
     </div>
     <header>
         <div id="firstHeader">
-            <div class="logo">
-                <span><i class="fab fa-quora"></i>uick</span><span class="credit">Credit</span>
-            </div>
+            <a href="./index.html">
+                <div class="logo">
+                    <span><i class="fab fa-quora"></i>uick</span><span class="credit">Credit</span>
+                </div>
+            </a>
         </div>
         <div id="secondHeader">
             <div class="headLinks">Home</div>
             <a href="./adminDashboard.html"><div class="headLinks">Admin</div></a>
-            <div class="headLinks">About</div>
-            <div class="headLinks">Contact</div>
+            <a href="#about"><div class="headLinks">About</div></a>
+            <a href="#footerElements"><div class="headLinks">Contact</div></a>
             <div class="headLinks">Login</div>
             <div class="headLinks">SignUp</div>
             <i class="fas fa-bars" id="nav"></i>
@@ -266,9 +282,11 @@
         </section>
     </main>
     <footer>
-            <div class="logo" id="footerLogo">
-                <span><i class="fab fa-quora"></i>uick</span><span class="credit">Credit</span>
-            </div>
+            <a href="./index.html">
+                <div class="logo" id="footerLogo">
+                    <span><i class="fab fa-quora"></i>uick</span><span class="credit">Credit</span>
+                </div>
+            </a>
             <div id="footerElements">
                 <section class="footer">
                         <h3 id="footerh5">Author</h3>
