@@ -80,6 +80,12 @@ header{
     background-attachment: fixed;
     display: flex;
 }
+input {
+    background-color: transparent;
+    position: relative;
+    z-index: 100;
+}
+
 .calcInputs{
     flex-basis: 50%;
     display: flex;
@@ -409,18 +415,21 @@ footer{
 }
 #loginForm>input +label{
     position: relative;
+    z-index: 50;
     top: -45px;
     left: 55px;
     padding: 5px;
     color: grey;
 }
 #loginForm>input:valid +label{
+    z-index: 110;
     top:-70px;
     background-color: white;
 }
 
 #loginForm>input:focus +label{
     position: relative;
+    z-index: 110;
     background-color: white;
     padding: 5px;
     top: -70px;
@@ -527,6 +536,7 @@ footer{
     transition: 1s ease;
 }
 #signupForm input +label{
+    z-index: 50;
     position: relative;
     top: -40px;
     left: 55px;
@@ -536,8 +546,10 @@ footer{
 #signupForm input:valid +label{
     top:-70px;
     background-color: white;
+    z-index: 100;
 }
 #signupForm input:focus +label{
+    z-index: 100;
     position: relative;
     background-color: white;
     padding: 5px;

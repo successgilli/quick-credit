@@ -166,6 +166,10 @@ footer>a {
     font-size: 25px;
 }
 #titleOfPage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
     width: 300px;
     height: 100%;
 }
