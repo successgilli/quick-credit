@@ -12,7 +12,28 @@ const verifyClientForm = document.getElementById('verifyClient');
 const verifyBackground = document.getElementById('verifyBackground');
 const vetYesBtn = document.getElementById('vetYes');
 const vetNoBtn = document.getElementById('vetNo');
+const navWide = document.getElementById('navWide');
+const aside = document.getElementById('aside');
+const userMainContainer = document.getElementById('userMainContainer');
 
+//add event to navbar on large screen
+navWide.addEventListener('click', () => {
+    if (window.getComputedStyle(aside).getPropertyValue('width') === '0px') {
+        aside.style.width = '260px';
+        userMainContainer.style.paddingLeft = '260px';
+    } else {
+        aside.style.width = '0px';
+        userMainContainer.style.paddingLeft = '0px';
+    }
+
+})
+//add event to window
+window.addEventListener('resize', () => {
+    if (window.innerWidth < 1000) {
+        aside.style.width = '0px';
+        userMainContainer.style.paddingLeft = '0px';
+    }
+})
 //add event to background check form content
 verifyClientForm.addEventListener('submit', (e)=>{
     e.preventDefault()
@@ -34,7 +55,7 @@ vetYes.addEventListener('click', ()=>{
         }
         setTimeout(()=>{
             user.style.display = 'none'
-        },2500)
+        },800)
     }
 })
 //add event to background check form no button
