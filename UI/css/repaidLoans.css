@@ -92,7 +92,7 @@ footer>a {
 }
 @media(max-width:1000px){
     #userDashbord{
-        margin-top: 87px;
+        margin-top: 60px;
     }
 }
 #userMain{
@@ -136,7 +136,7 @@ footer>a {
     z-index: 700; */
     width: 100%;
     justify-content: space-around;
-    height: 87px;
+    height: 60px;
     background-color: indigo;
     color: #ECEEE8;
 }
@@ -172,7 +172,7 @@ footer>a {
 }
 #navHead {
     box-sizing: border-box;
-    flex-basis: 20%;
+    flex-basis: 10%;
     text-align: center;
     display: flex;
     justify-content: flex-start;
@@ -205,8 +205,8 @@ footer>a {
     text-align: center;
     padding-left: 20px;
     align-items: center;
-    justify-content: space-around;
-    flex-basis: 50%;
+    justify-content: flex-end;
+    flex-basis: 75%;
 }
 #secondHead{
     padding-right: 30px;
@@ -214,7 +214,7 @@ footer>a {
     box-sizing: border-box;
     justify-content: flex-end;
     align-items: center;
-    flex-basis: 20%;
+    flex-basis: 10%;
 }
 #userImage{
     border: 2px solid white;
@@ -395,25 +395,14 @@ footer>a {
     #repaymentTable{
         width: 100%;
     }
-    #navHead {
-        padding-left: 20px;
-        flex-basis: 25%;
-    }
-    #firstHead{
-        flex-basis: 50%;
-    }
-    #secondHead{
-        padding-right: 20px;
-        flex-basis: 25%;
-    }
 }
 @media(max-width: 1000px){
     #firstHead{
-        flex-basis: 50%;
+        flex-basis: 90%;
     }
     #secondHead{
         padding-right: 20px;
-        flex-basis: 50%;
+        flex-basis: 10%;
     }
     #navHead {
         display: none;

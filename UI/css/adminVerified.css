@@ -125,7 +125,7 @@ footer{
     z-index: 700; */
     width: 100%;
     justify-content: space-around;
-    height: 87px;
+    height: 60px;
     background-color: indigo;
     color: #ECEEE8;
 }
@@ -172,7 +172,7 @@ footer{
 }
 #navHead {
     box-sizing: border-box;
-    flex-basis: 20%;
+    flex-basis: 10%;
     text-align: center;
     display: flex;
     justify-content: flex-start;
@@ -205,8 +205,8 @@ footer{
     padding-left: 20px;
     text-align: center;
     align-items: center;
-    justify-content: space-around;
-    flex-basis: 60%;
+    justify-content: flex-end;
+    flex-basis: 75%;
 }
 #secondHead{
     padding-right: 30px;
@@ -214,7 +214,7 @@ footer{
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    flex-basis: 20%;
+    flex-basis: 10%;
 }
 #userImage{
     border: 2px solid white;
@@ -279,24 +279,17 @@ footer{
         padding-left: 20px;
         flex-basis: 25%;
     }
-    #firstHead{
-        flex-basis: 50%;
-    }
-    #secondHead{
-        padding-right: 20px;
-        flex-basis: 25%;
-    }
 }
 @media(max-width: 1000px){
     #navHead {
         display: none;
     }
     #firstHead{
-        flex-basis: 50%;
+        flex-basis: 90%;
     }
     #secondHead{
         padding-right: 20px;
-        flex-basis: 50%;
+        flex-basis: 10%;
     }
     #navUser{
         display: block;
@@ -435,7 +428,7 @@ width: 80%;
 }
 @media(max-width:1000px){
     #adminContent{
-        margin-top: 87px;
+        margin-top: 60px;
     }
 }
 /* verified page */
