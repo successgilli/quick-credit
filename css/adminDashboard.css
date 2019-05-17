@@ -57,17 +57,11 @@ footer>a {
 #navWide{
     cursor: pointer;
 }
-#navHead {
-    flex-basis: 10%;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 25px;
-}
+
 #userHead{
     box-sizing: border-box;
     display: flex;
+    justify-content: space-around;
     /*position: fixed;
     top: 0;
     z-index: 700; */
@@ -99,22 +93,49 @@ footer>a {
     width: 300px;
     height: 100%;
 }
+#navHead {
+    box-sizing: border-box;
+    flex-basis: 20%;
+    text-align: center;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 25px;
+}
+#firstHead>a{
+    height: 50%;
+}
+.headbtns {
+    background-color: transparent;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+    font-size: 14px;
+    width: 200px;
+    text-align: center;
+    font-weight: bold;
+    color: rgb(155, 151, 151);
+    height: 100%;
+    transition: 0.3s ease;
+}
+.headbtns:hover {
+    color: #ECEEE8;
+    box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.3);
+}
 #firstHead{
     box-sizing: border-box;
     display: flex;
     text-align: center;
-    justify-content: center;
-    flex-basis: 60%;
-    padding-left: 20px;
+    justify-content: space-around;
     align-items: center;
     flex-basis: 50%;
 }
 #secondHead{
-    padding-right: 30px;
     display: flex;
+    box-sizing: border-box;
     justify-content: flex-end;
     align-items: center;
-    flex-basis: 30%;
+    flex-basis: 20%;
 }
 #userImage{
     border: 2px solid white;
@@ -289,8 +310,26 @@ footer>a {
     #repaymentTable{
         width: 100%;
     }
+    #navHead {
+        padding-left: 20px;
+        flex-basis: 25%;
+    }
+    #firstHead{
+        flex-basis: 50%;
+    }
+    #secondHead{
+        padding-right: 20px;
+        flex-basis: 25%;
+    }
 }
 @media(max-width: 1000px){
+    #firstHead{
+        flex-basis: 50%;
+    }
+    #secondHead{
+        padding-right: 20px;
+        flex-basis: 50%;
+    }
     #navHead {
         display: none;
     }
@@ -323,6 +362,9 @@ footer>a {
     }
 }
 @media(max-width: 676px){
+    .headbtns {
+        display: none;
+    }
     #userAsideContent{
         width: 60%;
     }
