@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>adminPostRepayment</title>
+    <link rel="stylesheet" href="./css/adminPostRepayment.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+<body>
+    <div id="userAsideBackground">
+        <div id="userAsideContent">
+            <div id="logoSpace">
+                <a href="./adminDashboard.html">
+                    <div class="logo">
+                        <span><i class="fab fa-quora"></i>uick</span><span class="credit">Credit</span>
+                    </div>
+                </a>
+            </div>
+            <a href="./adminDashboard.html"><div class="aside"><p ><i class="fas fa-chart-line"></i> &nbsp; Dashboard</p></div></a>
+            <a href="./adminUnverified.html"><div class="aside"><p ><i class="fas fa-user-ninja"></i></i></i> &nbsp; Unverified clients</p></div></a>
+            <a href="./adminVerified.html"><div class="aside"><p ><i class="fas fa-user-check"></i> &nbsp; Verified</p></div></a>
+            <a href="./adminPostRepayment.html"><div class="aside"><p id="dashboard" ><i class="fas fa-lock-open"></i> &nbsp; Current Loans</p></div></a>
+            <a href="./repaidLoans.html"><div class="aside"><p><i class="fas fa-lock"></i> &nbsp; repaid Loans</p></div></a>
+            <a href="./index.html"><div class="aside"><p><i class="fas fa-sign-out-alt"></i> &nbsp; Log Out</p></div></a>
+        </div>
+    </div>
+    <main id="userMain">
+        <section id="aside">
+            <div id="logoSpace">
+            <a href="./adminDashboard.html">
+                <div class="logo">
+                    <span><i class="fab fa-quora"></i>uick</span><span class="credit">Credit</span>
+                </div>
+            </a>
+            </div>
+            <a href="./adminDashboard.html"><div class="aside"><p><i class="fas fa-chart-line"></i> &nbsp; Dashboard</p></div></a>
+            <a href="./adminUnverified.html"><div class="aside"><p ><i class="fas fa-user-ninja"></i></i></i> &nbsp; Unverified clients</p></div></a>
+            <a href="./adminVerified.html"><div class="aside"><p ><i class="fas fa-user-check"></i> &nbsp; Verified</p></div></a>
+            <a href="./adminPostRepayment.html"><div class="aside"><p id="dashboard"><i class="fas fa-lock-open"></i> &nbsp; Current Loans</p></div></a>
+            <a href="./repaidLoans.html"><div class="aside"><p><i class="fas fa-lock"></i> &nbsp; repaid Loans</p></div></a>
+            <a href="./index.html"><div class="aside"><p><i class="fas fa-sign-out-alt"></i> &nbsp; Log Out</p></div></a>
+        </section>
+        <section id="userMainContainer">
+            <section id="userHead">
+                    <div id="navHead">
+                        <i id="navWide" class="fas fa-bars"></i>
+                    </div>
+                    <div id = 'firstHead'>
+                        <a href="./adminPostRepayment.html">
+                            <button class="headbtns">
+                                <i class="fas fa-upload"></i> &nbsp Post Repayment
+                            </button>
+                        </a>
+                        <a href="./adminUnverified.html">
+                            <button class="headbtns">
+                                <i class="fas fa-user-check"></i> &nbsp Verify Users
+                            </button>
+                        </a>
+                        <a href="./index.html">
+                            <button class="headbtns">
+                                <i class="fas fa-sign-out-alt"></i> &nbsp Log Out
+                            </button>
+                        </a>
+                    </div>
+                <div id="secondHead">
+                    <img src="./img/profile-placeholder.gif" alt="" id="userImage">
+                    <i class="fas fa-bars" id="navUser"></i>
+                </div>
+                
+
+            </section>
+            <section id="userDashbord">
+                <div id="infoDiv">
+                    <p>click on the 'cash-In' button to post repayment</p>
+                </div>
+                <div class="unpaidLoans">
+                        <div class="repaymentTableHead">
+                            <div class="tableHeads"><p class="tableHeads1">Date Applied</p><p class="tableHeads2">22nd May 2019</p></div>
+                            <div class="tableHeads"><p class="tableHeads1">Loan Amount</p><p class="tableHeads2">&#8358; 20,000.00</p></div>
+                            <div class="tableHeads"><p class="tableHeads1">Monthly installments</p><p class="tableHeads2">&#8358; 5,000.00</p></div>
+                            <div class="tableHeads"><p class="tableHeads1">Repayment Deadline</p><p class="tableHeads2">22nd june 2020</p></div>
+                            <div class="tableHeads"><p class="tableHeads1">Status</p><p class="tableHeads2">Pending</p></div>
+                        </div>
+                        <hr>
+                        <div class="acceptRejectBtn"><button class="paid">Cash-In</button><button class="adminRepayment">Repayment History</button></div>
+                        <hr>
+                        <div class="loanDetailsBtns">
+                            <button class="viewLoanDetails">view loan details</button>
+                        </div>
+                        <div class="moreInfoLoan">
+                            <p>Loan details</p>
+                            <div id="userpicture1">
+                                <img src="./img/profile-placeholder.gif" alt="" id="profilePicture100"><hr>
+                            </div>
+                            <div class="loanDetails">
+                                <div class="repayHeads"><p class="repayHeads1">user</p><p class="repayHeads2">akani@gmail.shitdfswewhguwgyyu</p></div>
+                                <div class="repayHeads"><p class="repayHeads1">Loan Id</p><p class="repayHeads2">4421</p></div>
+                                <div class="repayHeads"><p class="repayHeads1">balance</p><p class="repayHeads2">&#8358; 5,000.00</p></div>
+                                <div class="repayHeads"><p class="repayHeads1">interest</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                            </div>
+                        </div>
+                        <div class="postRepayment"> 
+                            <p>Insert amount repaid by client</p>
+                            <div class="postRepayment1">
+                                <form action="" class="postRepaymentForm">
+                                    <input type="text" class="repaidAmount"><label for="repaidAmount">&#8358;</label>
+                                    <button class="repayLoanBtn">Post Repayment</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="moreInfo">
+                                <p>Repayment History for This Loan</p>
+                                <div class="repayDetails">
+                                    <div class="repayHeads"><p class="repayHeads1">Date paid</p><p class="repayHeads2">22nd May 2019</p></div>
+                                    <div class="repayHeads"><p class="repayHeads1">Amount paid</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                    <div class="repayHeads"><p class="repayHeads1">Monthly installments</p><p class="repayHeads2">&#8358; 5,000.00</p></div>
+                                    <div class="repayHeads"><p class="repayHeads1">loan amount</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                    <div class="repayHeads"><p class="repayHeads1">balance</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                </div>
+                                <div class="repayDetails">
+                                    <div class="repayHeads"><p class="repayHeads1">Date paid</p><p class="repayHeads2">22nd May 2019</p></div>
+                                    <div class="repayHeads"><p class="repayHeads1">Amount paid</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                    <div class="repayHeads"><p class="repayHeads1">Monthly installments</p><p class="repayHeads2">&#8358; 5,000.00</p></div>
+                                    <div class="repayHeads"><p class="repayHeads1">loan amount</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                    <div class="repayHeads"><p class="repayHeads1">balance</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                </div>
+                                <div class="repayDetails">
+                                    <div class="repayHeads"><p class="repayHeads1">Date paid</p><p class="repayHeads2">22nd May 2019</p></div>
+                                    <div class="repayHeads"><p class="repayHeads1">Amount paid</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                    <div class="repayHeads"><p class="repayHeads1">Monthly installments</p><p class="repayHeads2">&#8358; 5,000.00</p></div>
+                                    <div class="repayHeads"><p class="repayHeads1">loan amount</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                    <div class="repayHeads"><p class="repayHeads1">balance</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="unpaidLoans">
+                            <div class="repaymentTableHead">
+                                <div class="tableHeads"><p class="tableHeads1">Date Applied</p><p class="tableHeads2">22nd May 2019</p></div>
+                                <div class="tableHeads"><p class="tableHeads1">Loan Amount</p><p class="tableHeads2">&#8358; 20,000.00</p></div>
+                                <div class="tableHeads"><p class="tableHeads1">Monthly installments</p><p class="tableHeads2">&#8358; 5,000.00</p></div>
+                                <div class="tableHeads"><p class="tableHeads1">Repayment Deadline</p><p class="tableHeads2">22nd june 2020</p></div>
+                                <div class="tableHeads"><p class="tableHeads1">Status</p><p class="tableHeads2">Pending</p></div>
+                            </div>
+                            <hr>
+                            <div class="acceptRejectBtn"><button class="paid">Cash-In</button><button class="adminRepayment">Repayment History</button></div>
+                            <hr>
+                            <div class="loanDetailsBtns">
+                                <button class="viewLoanDetails">view loan details</button>
+                            </div>
+                            <div class="moreInfoLoan">
+                                <p>Loan details</p>
+                                <div id="userpicture1">
+                                    <img src="./img/profile-placeholder.gif" alt="" id="profilePicture100"><hr>
+                                </div>
+                                <div class="loanDetails">
+                                    <div class="repayHeads"><p class="repayHeads1">user</p><p class="repayHeads2">akani@gmail.shitdfswewhguwgyyu</p></div>
+                                    <div class="repayHeads"><p class="repayHeads1">Loan Id</p><p class="repayHeads2">4421</p></div>
+                                    <div class="repayHeads"><p class="repayHeads1">balance</p><p class="repayHeads2">&#8358; 5,000.00</p></div>
+                                    <div class="repayHeads"><p class="repayHeads1">interest</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                </div>
+                            </div>
+                            <div class="postRepayment"> 
+                                <p>Insert amount repaid by client</p>
+                                <div class="postRepayment1">
+                                    <form action="" class="postRepaymentForm">
+                                        <input type="text" class="repaidAmount"><label for="repaidAmount">&#8358;</label>
+                                        <button class="repayLoanBtn">Post Repayment</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="moreInfo">
+                                    <p>Repayment History for This Loan</p>
+                                    <div class="repayDetails">
+                                        <div class="repayHeads"><p class="repayHeads1">Date paid</p><p class="repayHeads2">22nd May 2019</p></div>
+                                        <div class="repayHeads"><p class="repayHeads1">Amount paid</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                        <div class="repayHeads"><p class="repayHeads1">Monthly installments</p><p class="repayHeads2">&#8358; 5,000.00</p></div>
+                                        <div class="repayHeads"><p class="repayHeads1">loan amount</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                        <div class="repayHeads"><p class="repayHeads1">balance</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                    </div>
+                                    <div class="repayDetails">
+                                        <div class="repayHeads"><p class="repayHeads1">Date paid</p><p class="repayHeads2">22nd May 2019</p></div>
+                                        <div class="repayHeads"><p class="repayHeads1">Amount paid</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                        <div class="repayHeads"><p class="repayHeads1">Monthly installments</p><p class="repayHeads2">&#8358; 5,000.00</p></div>
+                                        <div class="repayHeads"><p class="repayHeads1">loan amount</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                        <div class="repayHeads"><p class="repayHeads1">balance</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                    </div>
+                                    <div class="repayDetails">
+                                        <div class="repayHeads"><p class="repayHeads1">Date paid</p><p class="repayHeads2">22nd May 2019</p></div>
+                                        <div class="repayHeads"><p class="repayHeads1">Amount paid</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                        <div class="repayHeads"><p class="repayHeads1">Monthly installments</p><p class="repayHeads2">&#8358; 5,000.00</p></div>
+                                        <div class="repayHeads"><p class="repayHeads1">loan amount</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                        <div class="repayHeads"><p class="repayHeads1">balance</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="unpaidLoans">
+                                <div class="repaymentTableHead">
+                                    <div class="tableHeads"><p class="tableHeads1">Date Applied</p><p class="tableHeads2">22nd May 2019</p></div>
+                                    <div class="tableHeads"><p class="tableHeads1">Loan Amount</p><p class="tableHeads2">&#8358; 20,000.00</p></div>
+                                    <div class="tableHeads"><p class="tableHeads1">Monthly installments</p><p class="tableHeads2">&#8358; 5,000.00</p></div>
+                                    <div class="tableHeads"><p class="tableHeads1">Repayment Deadline</p><p class="tableHeads2">22nd june 2020</p></div>
+                                    <div class="tableHeads"><p class="tableHeads1">Status</p><p class="tableHeads2">Pending</p></div>
+                                </div>
+                                <hr>
+                                <div class="acceptRejectBtn"><button class="paid">Cash-In</button><button class="adminRepayment">Repayment History</button></div>
+                                <hr>
+                                <div class="loanDetailsBtns">
+                                    <button class="viewLoanDetails">view loan details</button>
+                                </div>
+                                <div class="moreInfoLoan">
+                                    <p>Loan details</p>
+                                    <div id="userpicture1">
+                                        <img src="./img/profile-placeholder.gif" alt="" id="profilePicture100"><hr>
+                                    </div>
+                                    <div class="loanDetails">
+                                        <div class="repayHeads"><p class="repayHeads1">user</p><p class="repayHeads2">akani@gmail.shitdfswewhguwgyyu</p></div>
+                                        <div class="repayHeads"><p class="repayHeads1">Loan Id</p><p class="repayHeads2">4421</p></div>
+                                        <div class="repayHeads"><p class="repayHeads1">balance</p><p class="repayHeads2">&#8358; 5,000.00</p></div>
+                                        <div class="repayHeads"><p class="repayHeads1">interest</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                    </div>
+                                </div>
+                                <div class="postRepayment"> 
+                                    <p>Insert amount repaid by client</p>
+                                    <div class="postRepayment1">
+                                        <form action="" class="postRepaymentForm">
+                                            <input type="text" class="repaidAmount"><label for="repaidAmount">&#8358;</label>
+                                            <button class="repayLoanBtn">Post Repayment</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="moreInfo">
+                                        <p>Repayment History for This Loan</p>
+                                        <div class="repayDetails">
+                                            <div class="repayHeads"><p class="repayHeads1">Date paid</p><p class="repayHeads2">22nd May 2019</p></div>
+                                            <div class="repayHeads"><p class="repayHeads1">Amount paid</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                            <div class="repayHeads"><p class="repayHeads1">Monthly installments</p><p class="repayHeads2">&#8358; 5,000.00</p></div>
+                                            <div class="repayHeads"><p class="repayHeads1">loan amount</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                            <div class="repayHeads"><p class="repayHeads1">balance</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                        </div>
+                                        <div class="repayDetails">
+                                            <div class="repayHeads"><p class="repayHeads1">Date paid</p><p class="repayHeads2">22nd May 2019</p></div>
+                                            <div class="repayHeads"><p class="repayHeads1">Amount paid</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                            <div class="repayHeads"><p class="repayHeads1">Monthly installments</p><p class="repayHeads2">&#8358; 5,000.00</p></div>
+                                            <div class="repayHeads"><p class="repayHeads1">loan amount</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                            <div class="repayHeads"><p class="repayHeads1">balance</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                        </div>
+                                        <div class="repayDetails">
+                                            <div class="repayHeads"><p class="repayHeads1">Date paid</p><p class="repayHeads2">22nd May 2019</p></div>
+                                            <div class="repayHeads"><p class="repayHeads1">Amount paid</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                            <div class="repayHeads"><p class="repayHeads1">Monthly installments</p><p class="repayHeads2">&#8358; 5,000.00</p></div>
+                                            <div class="repayHeads"><p class="repayHeads1">loan amount</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                            <div class="repayHeads"><p class="repayHeads1">balance</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                        </div>
+                                    </div>
+                            </div>
+                    
+            </section>
+            <footer>
+                <a href="./adminDashboard.html">
+                    <div class="logo" id="footerLogo">
+                        <span><i class="fab fa-quora"></i>uick</span><span class="credit">Credit</span>
+                    </div>
+                </a>
+                <div id="footerElements">
+                    <section class="footer">
+                        <h3 id="footerh5">Author</h3>
+                        <p>
+                                Gilbert Awaji-mitop N. &nbsp &nbsp
+                                @ 2018
+                        </p>
+                    </section>
+                    <section class="footer">
+                        <h3>Contact Us</h3>
+                        <p>
+                                Phone: 09057496803; &nbsp &nbsp
+                        </p> 
+                        <p>
+                                Email: Successgilli@gmail.com
+                        </p>
+                    </section>
+                    <section class="footer">
+                        <h3>Follow Us</h3>
+                        <p  class="footerpelem">
+                            <i class="fab fa-twitter"></i> &nbsp &nbsp
+                            <i class="fab fa-facebook-f"></i>&nbsp &nbsp
+                            <i class="fab fa-linkedin-in"></i>&nbsp &nbsp
+                            <i class="fab fa-google-plus-g"></i>&nbsp &nbsp
+                        </p>
+                    </section>
+                </div>
+            </footer>
+        </section>
+
+    </main>
+    <script src="./js/adminPostRepayment.js"></script>
+</body>
+</html>

@@ -1,0 +1,509 @@
+body, html{
+    padding: 0;
+    margin: 0;
+}
+main{
+    padding-top: 60px;
+}
+/* logo*/
+.logo{
+    color: indigo;
+}
+.logo >span{
+    letter-spacing: 3px;
+    font-size: 20px;
+}
+.fab{
+    font-size: 30px;
+    
+}
+.logoInit{
+    color: aqua;
+}
+.credit{
+    color: orange;
+}
+/* hover headers*/
+.calcInputs{
+    flex-basis: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.CalculatedValues{
+    flex-basis: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer{
+    z-index: 800;
+    box-sizing: border-box;
+    padding: 30px;
+    background-color: black;
+    color: #F9F8F9;
+
+}
+#footerLogo{
+    width: 100%;
+    margin-bottom: 20px;
+    color: white;
+    text-align: center;
+
+}
+#footerElements{
+    display: flex;
+    flex-basis: 30%;
+    justify-content: space-around;
+   
+}
+.footer>h3{
+    text-align: center;
+}
+.footerpelem{
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    cursor: pointer;
+}
+#aside a {
+    min-width: 200px;
+}
+.fa-facebook-f,.fa-google-plus-g,.fa-linkedin-in,.fa-twitter{
+    font-size: 20px;
+}
+.fa-twitter{
+    color: #00acee;
+}
+.fa-facebook-f{
+    color: rgb(25, 89, 207);
+}
+.fa-linkedin-in{
+    color: #F9F8F9;
+}
+.fa-google-plus-g{
+    color: #d44638;
+}
+
+@media (max-width:790px){
+    #userLoanApply{
+        padding-top: 80px;
+        flex-direction: column;
+    }
+    .calcInputs{
+        padding-top: 20px;
+    }
+    .CalculatedValues{
+        padding-top: 20px;
+        margin-bottom: 30px;
+    }
+    .calculated{
+        flex-direction: column;
+    }
+}
+@media (max-width:700px){
+    footer{
+        flex-direction: column;
+        text-align: center;
+    }
+    #footerElements{
+        flex-direction: column;
+       
+    }
+}
+/* userPage dashboard begins*/
+#userMain{
+    padding: 0;
+    margin: 0;
+    padding-top: 0px;
+    min-height: 600px;    
+}
+#aside{
+    background-color: #ECEEE8;
+    position: fixed;
+    width: 0px;
+    overflow: hidden;
+    transition: 0.2s ease;
+    height: 100%;
+    box-shadow: 2px 2px 8px 4px rgba(0, 0, 0, 0.59);
+}
+#userMainContainer{
+    box-sizing: border-box;
+    z-index: 500;
+    padding-left: 0px;
+    background-color: rgb(231, 224, 231);
+}
+
+#userHead{
+    justify-content: space-around;
+    box-sizing: border-box;
+    display: flex;
+    /*position: fixed;
+    top: 0;
+    z-index: 700; */
+    width: 100%;
+    height: 60px;
+    background-color: indigo;
+    color: #ECEEE8;
+}
+#navWide{
+    cursor: pointer;
+}
+#navHead {
+    flex-basis: 10%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+}
+#userDashbord{ 
+    min-height: 600px;
+    padding: 50px;
+    width: 100%;
+    box-sizing: border-box;
+}
+#logoSpace{
+    width: 80%;
+    margin: auto;
+    padding: 30px;
+    box-sizing: border-box;
+    text-align: center;
+    border-bottom: 1px solid grey;
+    margin-bottom: 30px;
+}
+#titleOfPage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    width: 300px;
+    height: 100%;
+}
+#navHead {
+    box-sizing: border-box;
+    flex-basis: 10%;
+    text-align: center;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 25px;
+}
+#firstHead>a{
+    height: 50%;
+}
+.headbtns {
+    background-color: transparent;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+    font-size: 14px;
+    width: 200px;
+    text-align: center;
+    font-weight: bold;
+    color: rgb(155, 151, 151);
+    height: 100%;
+    transition: 0.3s ease;
+}
+.headbtns:hover {
+    color: #ECEEE8;
+    box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.3);
+}
+#firstHead{
+    box-sizing: border-box;
+    display: flex;
+    padding-left: 20px;
+    align-items: center;
+    text-align: center;
+    justify-content: flex-end;
+    flex-basis: 75%;
+}
+#secondHead{
+    padding-right: 30px;
+    display: flex;
+    box-sizing: border-box;
+    justify-content: flex-end;
+    align-items: center;
+    flex-basis: 10%;
+}
+#userImage{
+    border: 2px solid white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+}
+#aside>a{
+    text-decoration: none;
+}
+.aside{
+    box-sizing: border-box;
+    padding:10px;
+}
+.aside>p{
+    box-sizing: border-box;
+    width: 80%;
+    margin: auto;
+    padding: 15px;
+    color: rgb(110, 109, 109);
+    border-radius: 5px;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+.aside>p:hover{
+    box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.1);
+}
+#dashboard{
+    background-color: indigo;
+    color: #ECEEE8;
+    box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.2);
+}
+
+#navUser{
+    display: none;
+}
+#userAsideBackground{
+    position: fixed;
+    display: none;
+    z-index: 600;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+#userAsideContent{
+    position: relative;
+    right: -500px;
+    top: 0;
+    background-color: #ECEEE8;
+    width: 40%;
+    transition: 1s ease;
+    overflow-y: scroll;
+    box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.2);
+}
+@media(max-width: 1050px){
+    #navHead {
+        padding-left: 20px;
+        flex-basis: 25%;
+    }
+}
+@media(max-width: 1000px){
+    #firstHead{
+        flex-basis: 90%;
+    }
+    #secondHead{
+        padding-right: 20px;
+        flex-basis: 10%;
+    }
+    #navUser{
+        display: block;
+        font-size: 23px;
+        cursor: pointer;
+    }
+    #navHead {
+        display: none;
+    }
+    #userHead{
+        position: fixed;
+        top: 0;
+        z-index: 700;
+        width: 100%;
+    }
+    #userDashbord{
+        padding: 20px;
+    }
+    #aside{
+        left: -700px;
+        width: 0;
+    }
+    #userMainContainer{
+        padding-left: 0px;
+    }
+    #userImage{
+        display: none;
+    }
+}
+@media(max-width: 676px){
+    .headbtns {
+        display: none;
+    }
+    #userAsideContent{
+        width: 60%;
+    }
+}
+@media(max-width:431px){
+    #userAsideContent{
+        width: 80%;
+    }
+    
+    
+}
+@media(max-width:425px){
+    #firstHead{
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        flex-basis: 80%;
+    }
+    #secondHead{
+        box-sizing: border-box;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        flex-basis: 20%;
+    }
+    #titleOfPage{
+        width: 250px;
+        height: 100%;
+    }
+    #logoSpace{
+        padding-left: 10px;
+        width: 90%;
+    }
+    
+    
+}
+/* Loan page*/
+#userAsideContent>a{
+    text-decoration: none;
+}
+#userLoanApply{ 
+    min-height: 600px;
+    margin: 0px;
+    padding: 0px;
+    padding-top: 0px;
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+}
+#apply{
+    background-color: indigo;
+    color: #ECEEE8;
+    box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.2);
+}
+#logoSpace > a {
+    text-decoration: none;
+}
+footer > a {
+    text-decoration: none;
+}
+#userPageCalc{
+    box-sizing: border-box;
+    padding: 5px;
+    width: 90%;
+    margin: auto;
+    color: black;
+    min-height: 200px;
+    border: 0;
+    border-radius: 6px;
+    box-shadow: 0 6px 6px 10px rgba(0, 0, 0, 0.3);
+}
+#userPageCalc>h3{
+    margin: auto;
+    color: #C0465D;
+    width: 80%;
+    text-align: center;
+    margin-top: 10px;
+}
+#userPageCalc>select{
+    width: 70%;
+    display: block;
+    margin: auto;
+    height: 30px;
+    cursor: pointer;
+    border: 0;
+    background-color: transparent;
+    border-bottom: 2px solid indigo;
+    color: black;
+    outline: 0;
+    margin-bottom: 30px;
+    font-size: 16px;
+
+}
+#userPageCalc>select>option{
+    background-color: white;
+    position: relative;
+
+}
+#userPageCalc>select>option:hover{
+    background-color: black;
+    left: 20px;
+}
+#userPageCalc>p{
+padding-left: 30px;
+}
+.calculatedFromFormUser{
+    box-sizing: border-box;
+    padding: 5px;
+    width: 90%;
+    margin: auto;
+    min-height: 200px;
+    border: 0;
+    border-radius: 6px;
+    box-shadow: 0 6px 6px 10px rgba(0, 0, 0, 0.3);
+}
+.calculatedFromFormUser>h3{
+    text-align: center;
+    margin: auto;
+    width: 100%;
+    color: #C0465D;
+    margin-top: 20px;
+}
+.calculatedUser{
+    display: flex;
+    color: black;
+    justify-content: space-around;
+    width: 100%;
+}
+.calculatedUser>div{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.calculatedUser>div>h4{
+    text-align: start;
+    padding: 10px;
+}
+.calculatedUser>div>span{
+    width: 80%;
+    margin: auto;
+    display: block;
+    border-bottom: 2px solid rgb(147, 46, 219);
+}
+
+#CalcApplyBtn{
+    border-radius: 5px;
+    outline: 0;
+    border: 0;
+    display: block;
+    width: 160px;
+    color: white;
+    padding: 10px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    background-color: #f57921;
+    cursor: pointer;
+    transition: 0.8s ease;
+}
+#CalcApplyBtn:hover{
+    box-shadow: 0 6px 6px 5px rgba(0, 0, 0, 0.19);
+}
+@media(max-width:1000px){
+    #userLoanApply{
+        margin-top: 60px;
+    }
+    #userDashbord{
+        margin-top: 87px;
+    }
+}
+@media (max-width:790px){   
+    #userLoanApply{
+        flex-direction: column;
+    }
+}
+

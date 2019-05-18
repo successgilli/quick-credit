@@ -1,0 +1,601 @@
+body, html{
+    padding: 0;
+    margin: 0;
+}
+main{
+    padding-top: 60px;
+}
+#userAsideContent a {
+    text-decoration: none;
+}
+.logo{
+    color: indigo;
+}
+.logo >span{
+    letter-spacing: 3px;
+    font-size: 20px;
+}
+.fab{
+    font-size: 30px;
+    
+}
+.logoInit{
+    color: aqua;
+}
+.credit{
+    color: orange;
+}
+.headLinks{
+    box-sizing: border-box;
+    padding: 0px;
+    background-color: inherit;
+    transition: 0.5s ease;
+    
+    
+}
+footer{
+    z-index: 800;
+    box-sizing: border-box;
+    padding: 30px;
+    background-color: black;
+    color: #F9F8F9;
+
+}
+#footerLogo{
+    width: 100%;
+    margin-bottom: 20px;
+    color: white;
+    text-align: center;
+
+}
+#footerElements{
+    display: flex;
+    flex-basis: 30%;
+    justify-content: space-around;
+   
+}
+.footer>h3{
+    text-align: center;
+}
+.footerpelem{
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    cursor: pointer;
+}
+
+@media (max-width:700px){
+    footer{
+        flex-direction: column;
+        text-align: center;
+    }
+    #footerElements{
+        flex-direction: column;
+       
+    }
+}
+
+/* userPage dashboard begins*/
+#userMain{
+    padding: 0;
+    margin: 0;
+    padding-top: 0px;
+    min-height: 600px;    
+}
+#aside a {
+    min-width: 200px;
+}
+#aside{
+    background-color: #ECEEE8;
+    position: fixed;
+    width: 0px;
+    height: 100%;
+    overflow: hidden;
+    transition: 0.2s ease;
+    box-shadow: 2px 2px 8px 4px rgba(0, 0, 0, 0.59);
+}
+#userMainContainer{
+    box-sizing: border-box;
+    z-index: 500;
+    padding-left: 0px;
+    background-color: rgb(231, 224, 231);
+}
+
+#userHead{
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-around;
+    /*position: fixed;
+    top: 0;
+    z-index: 700; */
+    width: 100%;
+    height: 60px;
+    background-color: indigo;
+    color: #ECEEE8;
+}
+#logoSpace > a {
+    text-decoration: none;
+}
+footer > a {
+    text-decoration: none;
+}
+#userDashbord{ 
+    min-height: 600px;
+    padding: 50px;
+    width: 100%;
+    box-sizing: border-box;
+}
+#adminContent{ 
+    text-align: center;
+    min-height: 600px;
+    padding: 50px;
+    box-sizing: border-box;
+}
+#navWide{
+    cursor: pointer;
+}
+#logoSpace{
+    width: 80%;
+    margin: auto;
+    padding: 30px;
+    box-sizing: border-box;
+    text-align: center;
+    border-bottom: 1px solid grey;
+    margin-bottom: 30px;
+}
+#titleOfPage{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    font-size: 20px;
+    width: 600px;
+    height: 90%;
+}
+#titleOfPage > p{
+   margin: 0px;
+}
+
+#navHead {
+    flex-basis: 10%;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 25px;
+}
+#firstHead>a{
+    height: 50%;
+}
+.headbtns {
+    background-color: transparent;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+    font-size: 14px;
+    width: 200px;
+    text-align: center;
+    font-weight: bold;
+    color: rgb(155, 151, 151);
+    height: 100%;
+    transition: 0.3s ease;
+}
+.headbtns:hover {
+    color: #ECEEE8;
+    box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.3);
+}
+#firstHead{
+    box-sizing: border-box;
+    display: flex;
+    padding-left: 20px;
+    padding: 5px;
+    text-align: center;
+    align-items: center;
+    justify-content: flex-end;
+    flex-basis: 80%;
+}
+#secondHead{
+    padding-right: 30px;
+    display: flex;
+    box-sizing: border-box;
+    justify-content: flex-end;
+    align-items: center;
+    flex-basis: 10%;
+}
+#userImage{
+    border: 2px solid white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+#repaymentTable{
+    width: 90%;
+    margin: auto;
+    min-height: 200px;
+    
+}
+#repaymentHead{
+    box-sizing: border-box;
+    padding: 10px;
+    color: white;
+    width: 90%;
+    text-align: center;
+    height: 60px;
+    position: relative;
+    top: 30px;
+    margin: auto;
+    border-radius: 3px;
+    background-color: indigo; 
+    box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.3);
+}
+#repaymentBody{
+    width: 100%;
+    padding: 20px;
+    padding-top: 60px;
+    box-sizing: border-box;
+    min-height: 200px;
+    background-color: white;
+    border-radius: 7px;
+    box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.3);
+}
+.repayment{
+    width: 100%;
+    border: 2px solid grey;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.repaymentTableHead{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+.tableHeads1{
+    color: orange;
+}
+.moreInfo{
+    width: 100%;
+    max-height: 0px;
+    border: 1px solid white;
+    border-top: transparent;
+    background-color: #ECEEE8;
+    /*transition: max-height 2s ease-in-out;*/
+    overflow: hidden;
+    border-radius: 0 0 5px 5px;
+    box-shadow:  0px 0px 8px rgba(0, 0, 0, 0.5) inset;
+}
+.moreInfo>p{
+    width: 50%;
+    text-align: center;
+    margin: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.repayDetails{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+.repayHeads1{
+    color: #d44638;
+}
+.repayDetails:nth-child(even){
+    background-color: rgb(216, 183, 240);
+    box-shadow:  0px 0px 8px rgba(0, 0, 0, 0.5) inset;
+}
+.viewRepayment{
+    width: 150px;
+    background-color: #d44638;
+    border-radius: 3px;
+    color: #ECEEE8;
+    display: block;
+    margin: auto;
+    outline: 0;
+    border: 0;
+    padding: 5px;
+    cursor: pointer;
+    transition: 0.5s ease;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+.viewRepayment:hover{
+    box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.3);
+}
+#loanInfo{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 5px;
+    padding: 6px;
+    box-sizing: border-box;
+}
+#loanInfo1{
+    flex-basis: 50%;
+    display: flex;
+    justify-content: space-around;
+}
+#loanInfo2{
+    flex-basis: 50%;
+    display: flex;
+    justify-content: space-around;
+
+}
+.loanInfo{
+    width: 150px;
+    min-height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #ECEEE8;
+    border-radius: 5px;
+    box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.2);
+}
+#aside>a{
+    text-decoration: none;
+}
+.loanInfo>p{
+    text-align: center;
+}
+#totalLoans{
+    background-color: rgb(110, 175, 240);
+}
+#approvedLoans{
+    background-color: rgb(96, 173, 96);
+}
+#pendingLoans{
+    background-color: rgb(196, 155, 81);
+}
+#rejectedLoans{
+    background-color: rgb(241, 105, 105);
+}
+.aside{
+    box-sizing: border-box;
+    padding:10px;
+}
+.aside>p{
+    box-sizing: border-box;
+    width: 80%;
+    margin: auto;
+    padding: 15px;
+    color: rgb(110, 109, 109);
+    border-radius: 5px;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+.aside>p:hover{
+    box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.1);
+}
+#dashboard{
+    background-color: indigo;
+    color: #ECEEE8;
+    box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.2);
+}
+
+#navUser{
+    display: none;
+}
+#userAsideBackground{
+    position: fixed;
+    display: none;
+    z-index: 600;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+#userAsideContent{
+    position: relative;
+    right: -500px;
+    top: 0;
+    background-color: #ECEEE8;
+    width: 40%;
+    transition: 1s ease;
+    overflow-y: scroll;
+    box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.2);
+}
+@media(max-width: 1050px){
+    #repaymentTable{
+        width: 100%;
+    }
+}
+@media(max-width: 1000px){
+    #firstHead{
+        flex-basis: 90%;
+    }
+    #secondHead{
+        padding-right: 20px;
+        flex-basis: 10%;
+    }
+    #navUser{
+        display: block;
+        font-size: 23px;
+        cursor: pointer;
+    }
+    #navHead {
+        display: none;
+    }
+    #userHead{
+        position: fixed;
+        top: 0;
+        z-index: 700;
+        width: 100%;
+    }
+    #loanInfo{
+        width: 100%;
+    }
+    #userDashbord{
+        padding: 20px;
+    }
+    #adminContent{
+        padding: 0px;
+    }
+    #aside{
+        width: 0px;
+        left: -700px;
+    }
+    #userMainContainer{
+        padding-left: 0px;
+    }
+    #userImage{
+        display: none;
+    }
+}
+@media(max-width: 676px){
+    .headbtns {
+        display: none;
+    }
+    #userAsideContent{
+        width: 60%;
+    }
+    #loanInfo{
+        flex-direction: column;
+    }
+    #loanInfo1{
+        margin-bottom: 10px;
+    }
+    .repaymentTableHead{
+        flex-direction: column;
+        text-align: left;
+    }
+    
+    .tableHeads{
+        width: 80%;
+        display: flex;
+        justify-content: space-around;
+        margin: auto;
+        
+    }
+    .tableHeads2{
+        margin: 6px;
+        flex-basis: 50%;
+         
+    }
+    .tableHeads1{
+        margin: 6px;
+        flex-basis: 50%;
+         
+    }
+    .repayDetails{
+        flex-direction: column;
+    }
+    .repayHeads{
+        display: flex;
+        width: 80%;
+        margin: auto;
+    }
+    .repayHeads1{
+        margin: 6px;
+        flex-basis: 50%;
+    }
+    .repayHeads2{
+        margin: 6px;
+        flex-basis: 50%;
+       
+    }
+    .repayDetails{
+        
+        text-align: left;
+    }
+}
+@media(max-width:431px){
+    #userAsideContent{
+        width: 80%;
+    }
+    
+    
+}
+@media(max-width:425px){
+    #firstHead{
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        flex-basis: 80%;
+    }
+    #secondHead{
+        box-sizing: border-box;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        flex-basis: 20%;
+    }
+    #titleOfPage{
+        width: 250px;
+        height: 100%;
+    }
+    #logoSpace{
+        padding-left: 10px;
+        width: 90%;
+    }
+    
+    
+}
+@media(max-width:479px){
+    .tableHeads2{
+        display: flex;align-items: center;
+    }
+    .tableHeads1{
+        display: flex;align-items: center;
+    }
+    .repayHeads2{
+        display: flex;align-items: center;
+    }
+    .repayHeads1{
+        display: flex;align-items: center;
+    }
+    #repaymentTable{
+        width: 100%;
+        margin: auto;
+        min-height: 200px;    
+    }
+    .repayHeads{
+        width: 100%;
+    }
+    .tableHeads{
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        margin: auto;
+        
+    }
+}
+@media(max-width:390px){
+    .loanInfo{
+        width: 120px;
+        min-height: 80px;
+        
+    }
+}
+
+@media(max-width:1000px){
+    #userLoanApply{
+        margin-top: 60px;
+    }
+    #userDashbord{
+        margin-top: 60px;
+    }
+    #adminContent{
+        margin-top: 60px;
+    }
+}
+.fa-facebook-f,.fa-google-plus-g,.fa-linkedin-in,.fa-twitter{
+    font-size: 20px;
+}
+.fa-twitter{
+    color: #00acee;
+}
+.fa-facebook-f{
+    color: rgb(25, 89, 207);
+}
+.fa-linkedin-in{
+    color: #F9F8F9;
+}
+.fa-google-plus-g{
+    color: #d44638;
+}

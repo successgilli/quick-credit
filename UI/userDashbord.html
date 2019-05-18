@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>userDashboard</title>
+    <link rel="stylesheet" href="./css/userDashbord.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+<body>
+    <div id="userAsideBackground">
+        <div id="userAsideContent">
+            <div id="logoSpace">
+                <a href="./index.html">
+                    <div class="logo">
+                        <span><i class="fab fa-quora"></i>uick</span><span class="credit">Credit</span>
+                    </div>
+                </a>
+            </div>
+            <a href="./userDashbord.html"><div class="aside"><p id="dashboard"><i class="fas fa-chart-line"></i> &nbsp; Dashboard</p></div></a>
+            <a href="./userLoan.html"><div class="aside"><p ><i class="fas fa-file-signature"></i> &nbsp; Apply for Loan</p></div></a>
+            <a href="./userProfile.html"><div class="aside"><p ><i class="fas fa-user"></i> &nbsp; Profile</p></div></a>
+            <div class="aside"><p ><i class="fas fa-sign-out-alt"></i> &nbsp; Log Out</p></div>
+        </div>
+    </div>
+    <main id="userMain">
+        <section id="aside">
+            <div id="logoSpace">
+                <a href="./index.html">
+                    <div class="logo">
+                        <span><i class="fab fa-quora"></i>uick</span><span class="credit">Credit</span>
+                    </div>
+                </a>
+            </div>
+            <a href="#"><div class="aside"><p id="dashboard"><i class="fas fa-chart-line"></i> &nbsp; Dashboard</p></div></a>
+            <a href="./userLoan.html"><div class="aside"><p ><i class="fas fa-file-signature"></i> &nbsp; Apply for Loan</p></div></a>
+            <a href="./userProfile.html"><div class="aside"><p ><i class="fas fa-user"></i> &nbsp; Profile</p></div></a>
+            <a href="./index.html"><div class="aside"><p><i class="fas fa-sign-out-alt"></i> &nbsp; Log Out</p></div></a>
+        </section>
+        <section id="userMainContainer">
+            <section id="userHead">
+                <div id="navHead">
+                    <i id="navWide" class="fas fa-bars"></i>
+                </div>
+                <div id = 'firstHead'>
+                    <a href="./userLoan.html">
+                        <button class="headbtns">
+                            <i class="fas fa-file-signature"></i> &nbsp; Apply for Loan
+                        </button>
+                    </a>
+                    <a href="./userProfile.html">
+                        <button class="headbtns">
+                            <i class="fas fa-user"></i> &nbsp; Update Profile
+                        </button>
+                    </a>
+                    <a href="./index.html">
+                        <button class="headbtns">
+                            <i class="fas fa-sign-out-alt"></i> &nbsp; Log Out
+                        </button>
+                    </a>
+                </div>
+                <div id="secondHead">
+                    <img src="./img/profile-placeholder.gif" alt="" id="userImage">
+                    <i class="fas fa-bars" id="navUser"></i>
+                </div>
+                
+
+            </section>
+            <section id="userDashbord">
+                <div id="loanInfo">
+                    <div id="loanInfo1">
+                        <div class="loanInfo" id="totalLoans"><p>TOTAL LOANS</p><p>10</p></div>
+                        <div class="loanInfo" id="approvedLoans"><p>APRROVED LOANS</p><p>6</p></div>
+                    </div>
+                    <div id="loanInfo2">
+                        <div class="loanInfo" id="pendingLoans"><p>PENDING LOANS</p><p>1</p></div>
+                        <div class="loanInfo" id="rejectedLoans"><p>REJECTED LOANS</p><p>3</p></div>
+                    </div>
+                </div>
+                <div id="repaymentTable">
+                    <div id="repaymentHead">
+                        <p>Repayment History</p>
+                    </div>
+                    <div id="repaymentBody">
+                        <div class="repayment">
+                            <div class="repaymentTableHead">
+                                <div class="tableHeads"><p class="tableHeads1">Date Applied</p><p class="tableHeads2">22nd May 2019</p></div>
+                                <div class="tableHeads"><p class="tableHeads1">Loan Amount</p><p class="tableHeads2">&#8358; 20,000.00</p></div>
+                                <div class="tableHeads"><p class="tableHeads1">Monthly installments</p><p class="tableHeads2">&#8358; 5,000.00</p></div>
+                                <div class="tableHeads"><p class="tableHeads1">Repayment Deadline</p><p class="tableHeads2">22nd june 2020</p></div>
+                                <div class="tableHeads"><p class="tableHeads1">Status</p><p class="tableHeads2">Pending</p></div>
+                            </div><button class="viewRepayment">view repayment</button>
+                            <div class="moreInfo">
+                                <p>Repayment History for This Loan</p>
+                                <div class="repayDetails">
+                                    <div class="repayHeads"><p class="repayHeads1">Date paid</p><p class="repayHeads2">22nd May 2019</p></div>
+                                    <div class="repayHeads"><p class="repayHeads1">Amount paid</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                    <div class="repayHeads"><p class="repayHeads1">Monthly installments</p><p class="repayHeads2">&#8358; 5,000.00</p></div>
+                                    <div class="repayHeads"><p class="repayHeads1">loan amount</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                    <div class="repayHeads"><p class="repayHeads1">balance</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                </div>
+                                <div class="repayDetails">
+                                    <div class="repayHeads"><p class="repayHeads1">Date paid</p><p class="repayHeads2">22nd May 2019</p></div>
+                                    <div class="repayHeads"><p class="repayHeads1">Amount paid</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                    <div class="repayHeads"><p class="repayHeads1">Monthly installments</p><p class="repayHeads2">&#8358; 5,000.00</p></div>
+                                    <div class="repayHeads"><p class="repayHeads1">loan amount</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                    <div class="repayHeads"><p class="repayHeads1">balance</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                </div>
+                                <div class="repayDetails">
+                                    <div class="repayHeads"><p class="repayHeads1">Date paid</p><p class="repayHeads2">22nd May 2019</p></div>
+                                    <div class="repayHeads"><p class="repayHeads1">Amount paid</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                    <div class="repayHeads"><p class="repayHeads1">Monthly installments</p><p class="repayHeads2">&#8358; 5,000.00</p></div>
+                                    <div class="repayHeads"><p class="repayHeads1">loan amount</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                    <div class="repayHeads"><p class="repayHeads1">balance</p><p class="repayHeads2">&#8358; 20,000.00</p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <footer>
+                <a href="./index.html">
+                    <div class="logo" id="footerLogo">
+                        <span><i class="fab fa-quora"></i>uick</span><span class="credit">Credit</span>
+                    </div>
+                </a>
+                <div id="footerElements">
+                    <section class="footer">
+                        <h3 id="footerh5">Author</h3>
+                        <p>
+                                Gilbert Awaji-mitop N. &nbsp &nbsp
+                                @ 2018
+                        </p>
+                    </section>
+                    <section class="footer">
+                        <h3>Contact Us</h3>
+                        <p>
+                                Phone: 09057496803; &nbsp &nbsp
+                        </p> 
+                        <p>
+                                Email: Successgilli@gmail.com
+                        </p>
+                    </section>
+                    <section class="footer">
+                        <h3>Follow Us</h3>
+                        <p  class="footerpelem">
+                            <i class="fab fa-twitter"></i> &nbsp &nbsp
+                            <i class="fab fa-facebook-f"></i>&nbsp &nbsp
+                            <i class="fab fa-linkedin-in"></i>&nbsp &nbsp
+                            <i class="fab fa-google-plus-g"></i>&nbsp &nbsp
+                        </p>
+                    </section>
+                </div>
+            </footer>
+        </section>
+
+    </main>
+    <script src="./js/userDashboard.js"></script>
+</body>
+</html>

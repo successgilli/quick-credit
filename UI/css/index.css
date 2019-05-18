@@ -1,0 +1,850 @@
+body, html{
+    padding: 0;
+    margin: 0;
+}
+main{
+    padding-top: 60px;
+}
+#secondHeader>a{
+    text-decoration: none;
+    color: #ECEEE8;
+}
+#homeSidebar>a{
+    text-decoration: none;
+    color: grey;
+}
+header{
+    display: flex;
+    width: 100%;
+    height: 60px;
+    color: #F9F8F9;
+    background-color: indigo;
+    position: fixed;
+    z-index: 900;
+}
+#firstHeader a {
+    text-decoration: none;
+}
+#firstHeader{
+    box-sizing: border-box;
+    flex-basis: 40%;
+    display: flex;
+    align-items: center;
+    padding-left: 40px;
+}
+#secondHeader{
+    display: flex;
+    justify-content: space-around;
+    box-sizing: border-box;
+    flex-basis: 60%;
+    padding-right: 100px;
+    align-items: center;
+}
+/* logo*/
+.logo{
+    color: white;
+}
+.logo >span{
+    letter-spacing: 3px;
+    font-size: 20px;
+}
+.fab{
+    font-size: 30px;
+    
+}
+.logoInit{
+    color: aqua;
+}
+.credit{
+    color: orange;
+}
+.headLinks{
+    box-sizing: border-box;
+    padding: 0px;
+    background-color: inherit;
+    transition: 0.5s ease;
+    
+    
+}
+/* hover headers*/
+.headLinks:hover{
+    cursor: pointer;
+    color: rgb(236, 194, 114);
+}
+.calculatorSection{
+    margin: 0;
+    width: 100%;
+    min-height: 100vh;
+    background-image: url('../img/pix2.jpg');
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    display: flex;
+}
+input {
+    background-color: transparent;
+    position: relative;
+    z-index: 100;
+}
+
+.calcInputs{
+    flex-basis: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.CalculatedValues{
+    flex-basis: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#homePageCalc{
+    box-sizing: border-box;
+    padding: 5px;
+    width: 70%;
+    margin: auto;
+    color: black;
+    background-color: rgba(238, 238, 238, 0.4);
+    min-height: 200px;
+    border: 0;
+    border-radius: 6px;
+    box-shadow: 0 6px 6px 10px rgba(0, 0, 0, 0.3);
+}
+#homePageCalc>select{
+    width: 70%;
+    display: block;
+    margin: auto;
+    height: 30px;
+    cursor: pointer;
+    border: 0;
+    background-color: transparent;
+    border-bottom: 2px solid indigo;
+    color: black;
+    outline: 0;
+    margin-bottom: 30px;
+    font-size: 16px;
+
+}
+#homePageCalc>select>option{
+    background: rgba(109, 106, 106, 0.4);
+    position: relative;
+
+}
+#homePageCalc>select>option:hover{
+    background: black;
+    left: 20px;
+}
+#homePageCalc>p{
+padding-left: 30px;
+}
+.calculatedFromForm{
+    box-sizing: border-box;
+    padding: 5px;
+    width: 80%;
+    margin: auto;
+    min-height: 200px;
+    background-color: rgba(238, 238, 238, 0.4);
+    border: 0;
+    border-radius: 6px;
+    box-shadow: 0 6px 6px 10px rgba(0, 0, 0, 0.3);
+}
+.calculated{
+    display: flex;
+    color: black;
+    justify-content: space-around;
+    width: 100%;
+}
+.calculated>div{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.calculated>div>h4{
+    text-align: start;
+    padding: 10px;
+}
+.calculated>div>span{
+    width: 80%;
+    margin: auto;
+    display: block;
+    border-bottom: 2px solid rgb(147, 46, 219);
+}
+
+#homeCalcApplyBtn{
+    border-radius: 5px;
+    outline: 0;
+    border: 0;
+    display: block;
+    width: 110px;
+    color: white;
+    padding: 10px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    background-color: #f57921;
+    cursor: pointer;
+    transition: 0.8s ease;
+}
+#homeCalcApplyBtn:hover{
+    box-shadow: 0 6px 6px 5px rgba(0, 0, 0, 0.19);
+}
+#about{
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-around;
+}
+#sectionAbout{
+    padding: 5px;
+    padding-bottom: 30px;
+    padding-top: 30px;
+   background-color: whitesmoke;
+   ;
+}
+#sectionAbout>h2{
+    margin-left: 100px;
+}
+#sectionAbout>p{
+    margin-left: 100px;
+    font-weight: bold;
+}
+.about{
+    box-sizing: border-box;
+    padding: 15px;
+    flex-basis: 23%;
+    text-align: center;
+    min-height: 200px;
+    transition: 0.8s ease;   
+}
+.fa-map-marked-alt{
+    font-size: 20px;
+    color: indigo;
+}
+.fa-door-open{
+    font-size: 20px;
+    color: indigo
+}
+#homeSign{
+    font-size: 20px;
+    color: indigo
+}
+.fa-money-bill-wave{
+    font-size: 20px;
+    color: indigo
+}
+.about>p{
+    text-align: justify;
+}
+
+.about:hover{
+    background-color: white;
+    box-shadow: 0 6px 6px 5px rgba(0, 0, 0, 0.19);
+    cursor: pointer;
+    border-radius: 10px;
+}
+footer{
+    z-index: 800;
+    box-sizing: border-box;
+    padding: 30px;
+    background-color: black;
+    color: #F9F8F9;
+
+}
+#footerLogo{
+    width: 100%;
+    margin-bottom: 20px;
+    color: white;
+    text-align: center;
+
+}
+#footerElements{
+    display: flex;
+    flex-basis: 30%;
+    justify-content: space-around;
+   
+}
+.footer>h3{
+    text-align: center;
+}
+.footerpelem{
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    cursor: pointer;
+}
+.homeBtns{
+    padding: 10px;
+    border-radius: 3px;
+    border: 0;
+    outline: 0;
+    width: 50%;
+    color: orange;
+    margin-bottom: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+.homeBtns:hover{
+    background-color: #C0465D;
+    color: #ECEEE8;
+    box-shadow: 0 6px 6px 5px rgba(0, 0, 0, 0.19);
+}
+#whoWeAre{
+    width: 100%;
+    box-sizing: border-box;
+}
+.epic{
+    box-sizing: border-box;
+    text-align: justify;
+    flex-basis: 50%;
+    padding: 25px;
+    
+}
+.epic:nth-child(1){
+    border-right: 1px solid rgb(201, 195, 195);
+    
+}
+#epic2{
+    border-right: 1px solid rgb(201, 195, 195);
+}
+
+.epic>h3{
+    text-align: center;
+}
+#whoText{
+    width: 70%;
+    margin: auto;
+    margin-bottom: 30px;
+    text-align: center;
+}
+#epicBucket{
+    margin: auto;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+#firstEpic{
+    border-radius: 10px 0 0 10px;
+    background-color: #ECEEE8;
+    flex-basis: 50%;
+    display: flex;
+    justify-content: space-between;
+    
+    
+}
+#secondEpic{
+    flex-basis: 50%;
+    background-color: #ECEEE8;
+    border-radius: 0 10px 10px 0;
+    display: flex;
+    justify-content: space-between;
+
+}
+#who{
+    margin: auto;
+    width: 50%;
+    text-align:center;
+    word-spacing: 3px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+#readMoreBtn{
+    display: block;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: 0;
+    border: 0;
+    padding: 10px;
+    margin: auto;
+    margin-top: 10px;
+    transition: 0.5s ease;
+}
+#readMoreBtn:hover{
+    box-shadow: 0 6px 6px 5px rgba(0, 0, 0, 0.19);
+}
+#nav{
+    display: none;
+}
+#backgroundSignUser{
+    width: 100%;
+    z-index: 950;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#signContent{
+    padding-top: 40px;
+    position: relative;
+    top: -500px;
+    width: 40%;
+    min-height: 300px;
+    background-color: white;
+    border-radius: 5px;
+    transition: 0.5s ease;
+}
+#loginForm{
+    position: relative;
+    box-sizing: border-box;
+    padding: 5px;
+    width: 90%;
+    margin: auto;
+    margin-top: 30px;
+}
+
+#loginForm>input{
+    display: block;
+    width: 80%;
+    margin: auto;
+    height: 40px;
+    margin-bottom: 20px;
+    padding: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+    border-radius: 3px;
+    outline: 0;
+    border: 0;
+    border: 2px solid grey;
+    transition: 1s ease;
+}
+#loginForm>input +label{
+    position: relative;
+    z-index: 50;
+    top: -45px;
+    left: 55px;
+    padding: 5px;
+    color: grey;
+}
+#loginForm>input:valid +label{
+    z-index: 110;
+    top:-70px;
+    background-color: white;
+}
+
+#loginForm>input:focus +label{
+    position: relative;
+    z-index: 110;
+    background-color: white;
+    padding: 5px;
+    top: -70px;
+}
+
+#signContent>p{
+    width: 50%;
+    text-align: center;
+    margin: auto;
+    margin-top: 10px;
+}
+#signContent>span{
+    font-weight: bold;
+    font-size: 25px;
+    position: absolute;
+    left: 97%;
+    background-color: white;
+    height: 20px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    border-radius: 50%;
+    top: -10px;
+    color: red;
+    cursor: pointer;
+    transform: rotate(45deg);
+    transition: 0.5s ease;
+}
+#signContent>span:hover{
+    border: 1px solid white;
+    font-size: 35px;
+    transform: rotate(135deg);
+}
+#signinBtn{
+    margin: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 150px;
+    display: block;
+    cursor: pointer;
+    background-color: #f57921;
+    color: white;
+    outline: 0;
+    border: 0;
+    border-radius: 5px;
+    transition: 0.8s ease;
+}
+#signinBtn:hover{
+    box-shadow: 0 6px 6px 5px rgba(0, 0, 0, 0.19);
+}
+#signHead{
+    position: relative;
+    top: -500px;
+    bottom: -20px;
+    background-color: indigo;
+    color: white;
+    width: 37%;
+    border-radius: 5px;
+    z-index: 600;
+    height: 40px;
+    display: flex;
+    justify-content: space-around;
+    transition: 0.5s ease;
+}
+.signToggle{
+    flex-basis: 50%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.signToggle:hover{
+    cursor: pointer;
+    color: white;
+}
+#loginHead{
+    border-right: 1px solid grey;
+
+}
+#signupForm{
+    display: none;
+    position: relative;
+    box-sizing: border-box;
+    padding: 5px;
+    width: 90%;
+    margin: auto;
+    margin-top: 10px;
+}
+#signupForm input{
+    display: block;
+    width: 80%;
+    margin: auto;
+    height: 40px;
+    margin-bottom: 20px;
+    padding: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+    border-radius: 3px;
+    outline: 0;
+    border: 0;
+    border: 2px solid grey;
+    transition: 1s ease;
+}
+#signupForm input +label{
+    z-index: 50;
+    position: relative;
+    top: -40px;
+    left: 55px;
+    padding: 5px;
+    color: grey;
+}
+#signupForm input:valid +label{
+    top:-70px;
+    background-color: white;
+    z-index: 100;
+}
+#signupForm input:focus +label{
+    z-index: 100;
+    position: relative;
+    background-color: white;
+    padding: 5px;
+    top: -70px;
+}
+.signupBtn{
+    margin: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 120px;
+    display: block;
+    cursor: pointer;
+    background-color:#f57921;
+    color: white;
+    outline: 0;
+    border: 0;
+    border-radius: 5px;
+    transition: 0.4s ease;
+}
+.signupBtn:hover{
+    box-shadow: 0 6px 6px 5px rgba(0, 0, 0, 0.19);
+}
+.signupBtn:nth-child(1){
+    display: none;
+}
+.signupBtn:nth-child(2){
+    display: none;
+}
+#btns{
+    display: flex;
+    justify-content: space-around;
+}
+#loginHead{
+    background-color: indigo;
+    color: white;
+    opacity: 0.7;
+    border-radius: 5px 0 0 5px;
+}
+#loginHead:hover{
+    opacity: 1;
+}
+#navigators{
+    cursor: pointer;
+    display: flex;
+    width: 30%;
+    margin: auto;
+    justify-content: space-around;
+    
+}
+.navigator{
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    background-color: rgb(0, 0, 0);
+    opacity: 0.5;
+    transition: 0.9s ease;
+}
+#firstNav{
+    opacity: 1;
+}
+.tab:nth-child(1){
+    left: 0px;
+    top: -20px;
+}
+.tab:nth-child(2){
+    left: 520px;
+    top: -20px;
+}
+.tab:nth-child(3){
+    left: 1040px;
+    top: -20px;
+}
+.tab:nth-child(4){
+    left: 1560px;
+    top: -20px;
+    
+}
+.tab{
+    box-sizing: border-box;
+    padding: 5px;
+    position: absolute;
+    transition: 0.8s ease;
+    width: 100%;
+}
+#tabContent{
+    box-sizing: border-box;
+    position: relative;
+    width: 100%; 
+    min-height: 300px;
+    padding:10px;
+    overflow: hidden;
+     
+}
+.fa-facebook-f,.fa-google-plus-g,.fa-linkedin-in,.fa-twitter{
+    font-size: 20px;
+}
+.fa-twitter{
+    color: #00acee;
+}
+.fa-facebook-f{
+    color: rgb(25, 89, 207);
+}
+.fa-linkedin-in{
+    color: #F9F8F9;
+}
+.fa-google-plus-g{
+    color: #d44638;
+}
+#backgroundAside{
+     display: none;
+     justify-content: flex-end;
+     align-items: flex-end;
+    background-color: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+#homeSidebar{
+    width: 40%;
+    position: relative;
+    box-sizing: border-box;
+    padding-top: 60px;
+    left: 500px;
+    color: grey;
+    background-color: black;
+    height: 100%;
+    box-shadow: 2px 2px 8px 4px rgba(0, 0, 0, 0.6);
+    transition: 0.9s ease-out;
+}
+.homeAsideLinks{
+    padding-left: 20px;
+    font-size: 20px;
+    box-sizing: border-box;
+    border-bottom: 1px solid grey;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.homeAsideLinks:hover{
+    border-color: whitesmoke;
+    color: whitesmoke;
+}
+footer a {
+    text-decoration: none;
+}
+@media (max-width:790px){
+    #secondHeader{
+        justify-content: flex-end;
+        padding-right: 50px;
+        display: flex;
+        flex-basis: 30%;
+    }
+    #firstHeader{
+        flex-basis: 70%;
+    }
+    .headLinks{
+        display: none;
+        
+    }
+    #nav{
+        display: block;
+        font-size: 23px;
+    }
+    #about{
+        flex-direction: column;
+    }
+    .about{
+        width: 80%;
+        margin: auto;
+    }
+    #firstEpic{
+        border-radius: 10px 10px 0 0;
+        border-bottom: 1px solid gray;
+        background-color: #8B6879;
+        
+    }
+    #secondEpic{
+        background-color: #8B6879;
+        border-radius: 0 0 10px 10px;
+    }
+    #epicBucket{
+        flex-direction: column;
+    }
+    #epic2{
+        border-right: none;
+    }
+    #homePageCalc {
+        width: 80%;
+    }
+    .calculatorSection{
+        flex-direction: column;
+        background-size: auto 100%;
+    }
+    #userLoanApply{
+        padding-top: 80px;
+        flex-direction: column;
+    }
+    .calcInputs{
+        padding-top: 20px;
+    }
+    .CalculatedValues{
+        padding-top: 20px;
+        margin-bottom: 30px;
+    }
+    .calculated{
+        flex-direction: column;
+    }
+}
+@media (max-width:700px){
+    footer{
+        flex-direction: column;
+        text-align: center;
+    }
+    #footerElements{
+        flex-direction: column;
+       
+    }
+    #firstEpic{
+        flex-direction: column;
+        border-bottom: 0;
+        
+    }
+    #secondEpic{
+        flex-direction: column;
+    }
+    .epic{
+        border-bottom: 1px solid gray;
+    }
+}
+@media (max-width:907px){
+    
+    #signHead{
+        width: 53%; 
+    }
+    #signContent{
+        width: 60%;
+    }
+}
+@media (max-width:566px){
+    
+    #signHead{
+        width: 73%; 
+    }
+    #signContent{
+        width: 80%;
+    }
+}
+@media (max-width:424px){
+    
+    #signHead{
+        width: 80%; 
+    }
+    #signContent{
+        width: 87%;
+    }
+    #navigators{
+        width: 50%;
+    }
+    .signupBtn{
+        width: 90px;
+    }
+    #signupForm input{
+        width: 100%;
+    }
+    #loginForm input{
+        width: 100%;
+    }
+    #homeSidebar{
+        width: 60%;
+    }
+}
+.valid{
+   color: green;
+   text-align: center;
+    margin-top: -30px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    display: none;
+}
+.invalid{
+    color: red;
+    text-align: center;
+    margin-top: -30px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    display: block;
+}
+.errorRes {
+    font-size: 15px;
+    text-align: center;
+    margin-top: -30px;
+    margin-bottom: 20px;
+    display: none;
+}
+#passwordMatchRes{
+    text-align: center;
+    margin-top: -30px;
+    display: none;
+}
