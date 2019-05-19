@@ -1,104 +1,85 @@
-import db from '../model/db'
+import 'babel-polyfill';
+import db from '../model/query'
 
 class LoanHelper {
 
   static async createLoan(email, amount, tenor) {
     const amountFloat = parseFloat(amount);
-    const loan = {
-      id: Math.floor(Math.random() * 100000),
-      user: email.trim(),
-      createdOn: Date.now(),
-      status: 'pending',
-      repaid: false,
-      tenor: `${tenor} Month(s)`,
-      amount: amountFloat,
-      paymentInstallment: (amountFloat + (0.05 * amountFloat)) / Number(tenor),
-      balance: amountFloat + (0.05 * amountFloat),
-      interest: 0.05 * amountFloat,
-      type: 'loan',
-    };
-    return loan;
+    const param = [
+      email.trim(),
+      tenor.trim(),
+      amount.trim(),
+      (amountFloat + (0.05 * amountFloat)) / Number(tenor),
+      (amountFloat + (0.05 * amountFloat)),
+      (0.05 * amountFloat),
+    ];
+    const text = `INSERT INTO loans (
+      userr,
+      tenor,
+      amount,
+      paymentinstallment,
+      balance,
+      interest
+      ) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *;`;
+    const { rows } = await db(text, param);
+    return rows[0];
   }
 
-  static getSpecificLoan(loanId) {
-    let specificLoan;
-    let loanIndex;
-    db.forEach((loan, index) => {
-      if (loan.type === 'loan') {
-        if (loan.id === Number(loanId)) {
-          specificLoan = loan;
-          loanIndex = index;
-        }
-      }
-    });
-    return [specificLoan, loanIndex];
+  static async getSpecificLoan(loanId) {
+    const text = 'SELECT * FROM loans WHERE id=$1;';
+    const { rows } = await db(text, [loanId.trim()]);
+    if (rows.length === 0) {
+      return 'not found';
+    }
+    return rows[0];
   }
 
-  static rejectLoan(loanIndex, loan) {
-    db[loanIndex].status = 'rejected';
+  static async rejectLoan(loan) {
+    const text = 'UPDATE loans SET status=$1 WHERE id=$2 RETURNING *;';
+    const { rows } = await db(text, ['rejected', loan.id]);
     const data = {
-      loanId: loan.id,
-      loanAmount: loan.amount,
-      tenor: loan.tenor,
-      status: db[loanIndex].status,
-      monthlyInstallment: loan.paymentInstallment,
-      interest: loan.interest,
+      loanId: rows[0].id,
+      loanAmount: rows[0].amount,
+      tenor: rows[0].tenor,
+      status: rows[0].status,
+      monthlyInstallment: rows[0].paymentinstallment,
+      interest: rows[0].interest,
     };
     return data;
   }
 
-  static acceptLoan(loanIndex, loan) {
-    db[loanIndex].status = 'approved';
+  static async acceptLoan(loan) {
+    const text = 'UPDATE loans SET status=$1 WHERE id=$2 RETURNING *;';
+    const { rows } = await db(text, ['approved', loan.id]);
     const data = {
-      loanId: loan.id,
-      loanAmount: loan.amount,
-      tenor: loan.tenor,
-      status: db[loanIndex].status,
-      monthlyInstallment: loan.paymentInstallment,
-      interest: loan.interest,
+      loanId: rows[0].id,
+      loanAmount: rows[0].amount,
+      tenor: rows[0].tenor,
+      status: rows[0].status,
+      monthlyInstallment: rows[0].paymentinstallment,
+      interest: rows[0].interest,
     };
     return data;
   }
 
-  static updateBalance(loanIndex, amount) {
-    db[loanIndex].balance -= Number(amount);
-    if (db[loanIndex].balance === 0) { // check if loan is fully paid.
-      db[loanIndex].repaid = true;
+  static async updateBalance(loan, amount) {
+    const balance = loan.balance - Number(amount);
+    const text = 'UPDATE loans SET balance=$1 WHERE id=$2 RETURNING *;';
+    const { rows } = await db(text, [balance, loan.id]);
+    if (rows[0].balance === 0) { // check if loan is fully paid.
+      const text2 = 'UPDATE loans SET repaid=$1 WHERE id=$2';
+      const { rows } = await db(text2, [true, loan.id]);
     } // put repayment in database.
     const repayment = {
-      id: Math.floor(Math.random() * 100000),
-      createdOn: Date.now(),
-      loanId: Number(db[loanIndex].id),
-      amount: Number(amount),
-      type: 'repayment',
+      loanId: rows[0].id,
+      createdOn: rows[0].createdon,
+      amount: rows[0].amount,
+      monthlyInstallment: rows[0].paymentinstallment,
+      paidAmount: amount,
+      balance: rows[0].balance,
     };
     return repayment;
   }
-
-  static colateRepayment(loan) {
-    const repayments = [];
-    let specificRepayment;
-    db.forEach((repayment) => {
-      if (repayment.type === 'repayment') {
-        if (repayment.loanId === Number(loan.id)) {
-          specificRepayment = repayment;
-          specificRepayment.monthlyInstallment = loan.paymentInstallment;
-          repayments.push(specificRepayment);
-        }
-      }
-    });
-    return repayments;
-  }
-
-  static colateLoan() {
-    const loans = []; // to colate loans.
-    db.forEach((loan) => {
-      if (loan.type === 'loan') {
-        loans.push(loan);
-      }
-    })
-    return loans;
-  }
-}
+} 
 
 export default LoanHelper;

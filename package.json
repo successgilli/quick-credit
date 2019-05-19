@@ -4,9 +4,11 @@
   "description": "A simple Loan App",
   "main": "app.js",
   "scripts": {
-    "test": "nyc mocha --exit --timeout 40000 --require babel-register",
+    "test": "nyc mocha --exit --timeout 60000 --require babel-register",
+    "testDev": "SET NODE_ENV=test&&nyc mocha --exit --timeout 40000 --require babel-register",
     "build": "babel server -d dist",
     "start": "npm run build && node ./dist/app",
+    "startDev": "SET NODE_ENV=development&& npm run build && node ./dist/app",
     "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls"
   },
@@ -42,6 +44,7 @@
     "multer": "1.4.1",
     "multer-storage-cloudinary": "2.2.1",
     "nodemailer": "6.1.1",
+    "pg": "7.11.0",
     "swagger-ui-express": "4.0.2",
     "typescript": "3.4.5",
     "yamljs": "0.3.0"

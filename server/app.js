@@ -4,6 +4,7 @@ import YAML from 'yamljs';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import router from './routes';
+import createTables from './model/migration';
 
 const swaggerDocument = YAML.load('./server/docs/docs.yaml');
 const app = express();
@@ -30,6 +31,7 @@ app.use((err, req, res, next) => {
   });
 });
 const port = 8080;
+createTables();
 const server = app.listen(process.env.PORT || port, () => {
   console.log(`listening on port ${port}`);
 });

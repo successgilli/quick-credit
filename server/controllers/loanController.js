@@ -1,5 +1,5 @@
 import 'babel-polyfill';
-import db from '../model/db';
+import db from '../model/query';
 import mailer from '../helpers/mailer';
 import UserHelper from '../helpers/userHelper';
 import LoanHelper from '../helpers/loanHelpers';
@@ -11,26 +11,23 @@ const {
   rejectLoan,
   acceptLoan,
   updateBalance,
-  colateRepayment,
-  colateLoan,
 } = LoanHelper;
 
 class Loans {
   static async apply(req, res) {
     const { email, tenor, amount } = req.body;
-    const applicant = findUser(email);
+    const applicant = await findUser(email);
     const loan = await createLoan(email, amount, tenor);
-    db.push(loan);
     res.status(201).json({
       status: 201,
       data: {
         loanId: loan.id,
-        firstName: applicant.firstName,
-        lastName: applicant.lastName,
+        firstName: applicant.firstname,
+        lastName: applicant.lastname,
         email: loan.user,
         tenor: loan.tenor,
         amount: loan.amount,
-        paymentInstallment: loan.paymentInstallment,
+        paymentinstallment: loan.paymentinstallment,
         status: loan.status,
         balance: loan.balance,
         interest: loan.interest,
@@ -38,88 +35,75 @@ class Loans {
     });  
   }
 
-  static getLoan(req, res) {
+  static async getLoan(req, res) {
     const { loanId } = req.params;// query loanId in db.
+    const loan = await getSpecificLoan(loanId.trim())
     res.status(200).json({
       status: 200,
-      data: getSpecificLoan(loanId)[0],
+      data: loan,
     });
   }
 
-  static changeStatus(req, res) {
+  static async changeStatus(req, res) {
     const { status } = req.body;
     const { loanId } = req.params;
-    const specificLoan = getSpecificLoan(loanId)[0];
-    const loanIndex = getSpecificLoan(loanId)[1];
+    const specificLoan = await getSpecificLoan(loanId);
     if (/^reject$/i.test(status.trim())) {
-      mailer(specificLoan.user, 'rejected', rejectLoan(loanIndex, specificLoan))
+      const loanRejectRes = await rejectLoan(specificLoan);
+      mailer(specificLoan.user, 'rejected', loanRejectRes)
       res.status(201).json({
         status: 201,
-        data: rejectLoan(loanIndex, specificLoan),
+        data: loanRejectRes,
       });
     } else {
-      mailer(specificLoan.user, 'approved', acceptLoan(loanIndex, specificLoan))
+      const loanAcceptRes = await acceptLoan(specificLoan);
+      mailer(specificLoan.user, 'approved', loanAcceptRes)
       res.status(201).json({
         status: 201,
-        data: acceptLoan(loanIndex, specificLoan),
+        data: loanAcceptRes,
       });
     }
   }
 
-  static postRepayment(req, res) {
+  static async postRepayment(req, res) {
     const { amount } = req.body;
     const { loanId } = req.params;
     // query loanId in db.
-    const loanIndex = getSpecificLoan(loanId)[1];
-    db.push(updateBalance(loanIndex, amount));
+    const specificLoan = await getSpecificLoan(loanId);
+    const text = 'INSERT INTO repayments (loanid, amount) VALUES ($1,$2) RETURNING *;';
+    const { rows } = await db(text, [specificLoan.id, Number(amount.trim())]);
+    const data = await updateBalance(specificLoan, amount);
+    data.id = rows[0].id;
     res.status(201).json({
       status: 201,
-      data: {
-        id: updateBalance(loanIndex, amount).id,
-        loanId: db[loanIndex].id,
-        createdOn: db[loanIndex].createdOn,
-        amount: db[loanIndex].amount,
-        monthlyInstallment: db[loanIndex].paymentInstallment,
-        paidAmount: amount,
-        balance: db[loanIndex].balance,
-      },
+      data,
     });      
   }
 
-  static getRepayHistory(req, res) {
+  static async getRepayHistory(req, res) {
     const { loanId } = req.params;
-    // query loanId in db.
-    const specificLoan = getSpecificLoan(loanId)[0];
+    const text = 'SELECT * FROM repayments WHERE loanid=$1;';
+    const { rows } = await db(text, [loanId.trim()]);
     res.status(200).json({
       status: 200,
-      data: colateRepayment(specificLoan),
+      data: rows,
     });
   }
-
-  static getLoans(req, res) {
+  
+  static async getLoans(req, res) {
     const { status, repaid } = req.query;
-    const loans = colateLoan();
     if ((typeof status === 'undefined') && (typeof repaid === 'undefined')) {
+      const { rows } = await db('SELECT * FROM loans');
       res.status(200).json({
         status: 200,
-        data: loans,
+        data: rows,
       })
     } else {
-      const queriedLoans = []; // store loans queried.
-      let repaidBoolean;
-      if (repaid === 'true') {
-        repaidBoolean = true;
-      } else {
-        repaidBoolean = false;
-      }
-      loans.forEach((loan) => { // search based on query strings.
-        if ((loan.status === status) && ((loan.repaid) === repaidBoolean)) {
-          queriedLoans.push(loan);
-        }
-      })
+      const text = 'SELECT * FROM loans WHERE status=$1 AND repaid=$2';
+      const { rows } = await db(text, [status, repaid]);
       res.status(200).json({
         status: 200,
-        data: queriedLoans,
+        data: rows,
       })
     }
   }

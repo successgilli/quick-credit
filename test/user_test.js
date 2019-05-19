@@ -1,11 +1,14 @@
+import 'babel-polyfill';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../server/app';
 import userData from '../server/model/mock';
+import db from '../server/model/query';
 
 const should = chai.should();
 chai.use(chaiHttp);
-let loanId; let loanId2;
+let loanId;
+let loanId2;
 // test welcome route
 describe('welcome route', () => {
   it('should welcome users to the route', (done) => {
@@ -151,6 +154,9 @@ describe('testing signin', () => {
 });
 // test verify user route.
 describe('test verify user route', () => {
+  after(async () => {
+    await db('TRUNCATE TABLE users CASCADE');
+  });
   it('should return error for bad email parameter', (done) => {
     chai.request(server).patch('/api/v1/users/*/verify').end((err, res) => {
       res.body.status.should.equal(400);
