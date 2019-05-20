@@ -12,6 +12,7 @@ helps solve problems of financial inclusion as a way to alleviate poverty and em
 
 ### IMPLEMENTED FEATURES
 
+ * Real Time email notification on approval or rejection of loan application.
  * User (client) can sign up.
  * User (client) can login.
  * User (client) can request for only one loan at a time.
@@ -33,6 +34,7 @@ responsibilities.
 
 User interface is hosted <a href= "https://successgilli.github.io/quick-credit/">here</a>.
 API is hosted <a href= "https://quickcreditgilli.herokuapp.com/api/v1">here</a>.
+Swagger documentation <a href= "https://quickcreditgilli.herokuapp.com/api-docs">here</a>.
 
 
 

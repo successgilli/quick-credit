@@ -2,7 +2,7 @@
 import 'babel-polyfill';
 import dotEnv from 'dotenv';
 import jwt from 'jsonwebtoken';
-import db from '../model/db';
+import db from '../model/query';
 import UserHelper from '../helpers/userHelper';
 
 const { successRes, findUser, createUser } = UserHelper;
@@ -11,7 +11,6 @@ dotEnv.config();
 class User {
   static async signup(req, res) {
     const user = await createUser(req);
-    db.push(user);// db insert user in database,
     const token = jwt.sign(user, process.env.jwt_secrete);
     res.status(200).json({
       status: 200,
@@ -19,9 +18,9 @@ class User {
     });
   }
 
-  static signin(req, res) {
+  static async signin(req, res) {
     const { email } = req.body;
-    const loginUser = findUser(email)[0];
+    const loginUser = await findUser(email);
     const token = jwt.sign(loginUser, process.env.jwt_secrete);
     res.status(200).json({
       status: 200,
@@ -29,34 +28,32 @@ class User {
     });
   }
 
-  static verify(req, res) {
+  static async verify(req, res) {
     const { userEmail } = req.params;
-    // query db if user is present.
-    const userToVerify = findUser(userEmail)[0];
-    userToVerify.status = 'verified';
+    const text = 'UPDATE users SET status=$1 WHERE userr=$2 RETURNING *;';
+    const param = ['verified', userEmail.trim()];
+    const { rows } = await db(text, param);
     res.status(200).json({
       status: 200,
       data: {
-        email: userToVerify.user,
-        firstName: userToVerify.firstName,
-        lastName: userToVerify.lastName,
-        password: userToVerify.password,
-        address: userToVerify.address,
-        status: userToVerify.status,
+        email: rows[0].userr,
+        firstName: rows[0].firstname,
+        lastName: rows[0].lastname,
+        password: rows[0].password,
+        address: rows[0].address,
+        status: rows[0].status,
       },
     });
   }
 
-  static uploadProfilePic(req, res) {
+  static async uploadProfilePic(req, res) {
     const email = req.params.userEmail;
-    // query db if user is present.
-    const userToVerify = findUser(email)[0];
-    const indexUser = findUser(email)[1];
     const secureUrl = req.file.secure_url;
-    db[indexUser].profilePic = secureUrl; // stor the picture to the user in db
+    const text = 'UPDATE users SET passporturl=$1 WHERE userr=$2 RETURNING *;'
+    const { rows } = await db(text, [secureUrl, email.trim()]);
     res.status(201).json({
       status: 201,
-      data: userToVerify,
+      data: rows[0],
     });
   }
 }

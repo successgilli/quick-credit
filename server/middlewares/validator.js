@@ -1,11 +1,14 @@
 /* eslint-disable linebreak-style */
+import 'babel-polyfill';
 import bcrypt from 'bcrypt';
 import sendValidationInfo from '../helpers/validatorHelper';
-import UserHelper from '../helpers/userHelper';
 import uploads from '../helpers/imageUpload';
-import db from '../model/db';
+import userHelper from '../helpers/userHelper';
+import LoanHelper from '../helpers/loanHelpers';
+import db from '../model/query';
 
-const { checkEmail } = UserHelper;
+const { findUser } = userHelper;
+const { getSpecificLoan } = LoanHelper;
 
 class ImproperValuesChecker {
   static improperSignupValues(req) {
@@ -195,31 +198,22 @@ class loanDataCheck {
     }
   }
 
-  static applicationCheck(req, res, Next) {
+  static async applicationCheck(req, res, Next) {
     const { email } = req.body;
     // check db if user is present.
-    let applicant = 'not found';
-    db.forEach((user) => {
-      if (user.type === 'user') {
-        if (user.user === email.trim()) {
-          applicant = user;
-        }
-      }
-    });
+    const applicant = await findUser(email.trim());
+    const text = 'SELECT * FROM loans WHERE userr=$1;';
+    const { rows } = await db(text, [email.trim()]);
     // check if user has an outstanding loan.
     let grantLoan = true;
-    db.forEach((loan) => {
-      if (loan.type === 'loan') {
-        if (loan.user === email.trim()) {
-          if (!(loan.repaid)) {
-            grantLoan = false;
-          }
-          if (loan.status === 'rejected') { // allow user to apply if existing loan was rejected;
-            grantLoan = true;
-          }
-        }
+    rows.forEach((loan) => {
+      if (!(loan.repaid)) {
+        grantLoan = false;
       }
-    });
+      if (loan.status === 'rejected') { // allow user to apply if existing loan was rejected;
+        grantLoan = true;
+      }
+    })
     // if user not found in db.
     if (applicant === 'not found') {
       const err = new Error('user not in database');
@@ -237,16 +231,9 @@ class loanDataCheck {
     // end
   }
 
-  static checkGetLoan(req, res, Next) {
+  static async checkGetLoan(req, res, Next) {
     const { loanId } = req.params;// query loanId in db.
-    let specificLoan = 'not found';
-    db.forEach((loan) => {
-      if (loan.type === 'loan') {
-        if (loan.id === Number(loanId)) {
-          specificLoan = loan;
-        }
-      }
-    });
+    const specificLoan = await getSpecificLoan(loanId);
     if (specificLoan === 'not found') { // if not found in db, say 'not found'.
       const err = new Error('loan not in database');
       err.statusCode = 400;
@@ -257,41 +244,21 @@ class loanDataCheck {
   }
   // test post man
 
-  static checkStatus(req, res, Next) {
+  static async checkStatus(req, res, Next) {
     const { status } = req.body;
     const { loanId } = req.params;
-    // query loanId in db.
-    let specificLoan = 'not found';
-    let loanIndex;
-    db.forEach((loan, index) => {
-      if (loan.type === 'loan') {
-        if (loan.id === Number(loanId)) {
-          specificLoan = loan;
-          loanIndex = index;
-        }
-      }
-    });
+    const specificLoan = await getSpecificLoan(loanId);
     if (specificLoan === 'not found') { // if not found in db, say 'not found'.
       const err = new Error('loan not in database');
       err.statusCode = 400;
       Next(err);
     } else if (specificLoan.status !== 'pending') {
-      const err = new Error(`loan is already ${db[loanIndex].status}`);
+      const err = new Error(`loan is already ${specificLoan.status}`);
       err.statusCode = 400;
       Next(err);
     } else if (!/^reject$/i.test(status.trim())) {
-      const applicant = specificLoan.user; // check the status of user if verified.
-      let verified = false;
-      db.forEach((user) => {
-        if (user.type === 'user') {
-          if (user.user === applicant) {
-            if (user.status === 'verified') {
-              verified = true;
-            }
-          }
-        }
-      });
-      if (!verified) {
+      const user = await findUser(specificLoan.userr);
+      if (user.status === 'unverified') {
         const err = new Error('user is not yet verifed');
         err.statusCode = 400;
         Next(err);
@@ -303,33 +270,23 @@ class loanDataCheck {
     }
   }
 
-  static postRepaymentCheck(req, res, Next) {
+  static async postRepaymentCheck(req, res, Next) {
     const { amount } = req.body;
     const { loanId } = req.params;
-    // query loanId in db.
-    let specificLoan = 'not found';
-    let loanIndex;
-    db.forEach((loan, index) => {
-      if (loan.type === 'loan') {
-        if (loan.id === Number(loanId)) {
-          specificLoan = loan;
-          loanIndex = index;
-        }
-      }
-    });
+    const specificLoan = await getSpecificLoan(loanId);
     if (specificLoan === 'not found') { // if loan not found.
       const err = new Error('loan not found');
       err.statusCode = 400;
       Next(err);
-    } else if (db[loanIndex].status !== 'approved') {
+    } else if (specificLoan.status !== 'approved') {
       const err = new Error(`you cant post repayment for the loan '${loanId}' not yet approved`);
       err.statusCode = 400;
       Next(err);
-    } else if ((db[loanIndex].repaid)) {
+    } else if ((specificLoan.repaid)) {
       const err = new Error('loan already fully paid');
       err.statusCode = 400;
       Next(err);
-    } else if (!(Number(amount) <= db[loanIndex].balance)) {
+    } else if (!(Number(amount) <= specificLoan.balance)) {
       const err = new Error('repayed amount cannot be greater than loan balance');
       err.statusCode = 400;
       Next(err);
@@ -338,17 +295,10 @@ class loanDataCheck {
     }
   }
 
-  static checkGetRepayment(req, res, Next) {
+  static async checkGetRepayment(req, res, Next) {
     const { loanId } = req.params;
     // query loanId in db.
-    let specificLoan = 'not found';
-    db.forEach((loan, index) => {
-      if (loan.type === 'loan') {
-        if (loan.id === Number(loanId)) {
-          specificLoan = loan;
-        }
-      }
-    });
+    const specificLoan = await getSpecificLoan(loanId);
     if (specificLoan === 'not found') {
       const err = new Error(`loan with id: ${loanId} not found`);
       err.statusCode = 400;
@@ -360,9 +310,11 @@ class loanDataCheck {
 }
 
 class UserDataCheck {
-  static checkSignupEmail(req, res, Next) {
+  static async checkSignupEmail(req, res, Next) {
     const { email } = req.body;
-    if (checkEmail(email.trim())) {
+    const text = 'SELECT * FROM users WHERE userr=$1;';
+    const result = await db(text, [email]);
+    if (result.rows.length !== 0) {
       const err = new Error('email already exists');
       err.statusCode = 403;
       Next(err);
@@ -382,21 +334,15 @@ class UserDataCheck {
     }
   }
 
-  static checkSigninData(req, res, Next) {
+  static async checkSigninData(req, res, Next) {
     const { email, password } = req.body;
-    let loginUser = 'not found';
-    db.forEach((user) => {
-      if (user.type === 'user') {
-        if (user.user === email.trim()) {
-          loginUser = user;// save the user.
-        }
-      }
-    });
-    if (loginUser === 'not found') {
+    const text = 'SELECT * FROM users WHERE userr=$1;';
+    const { rows } = await db(text, [email.trim()]);
+    if (rows.length === 0) {
       const err = new Error('user not in database');
       err.statusCode = 403;
       Next(err);
-    } else if (!(bcrypt.compareSync(password, loginUser.password))) {
+    } else if (!(bcrypt.compareSync(password, rows[0].password))) {
       const err = new Error('invalid email or password');
       err.statusCode = 400;
       Next(err);
@@ -405,18 +351,10 @@ class UserDataCheck {
     }
   }
 
-  static checkVerifyUser(req, res, Next) {
+  static async checkVerifyUser(req, res, Next) {
     const { userEmail } = req.params;
     // query db if user is present.
-    let userToVerify = 'not found';
-    db.forEach((user) => {
-      if (user.type === 'user') {
-        if (user.user === userEmail.trim()) {
-          userToVerify = user;
-        }
-      }
-    });
-    // if user not found in db.
+    const userToVerify = await findUser(userEmail.trim());
     if (userToVerify === 'not found') {
       const err = new Error('user not in database');
       err.statusCode = 400;
@@ -430,17 +368,10 @@ class UserDataCheck {
     }
   }
 
-  static checkUploadPix(req, res, Next) {
+  static async checkUploadPix(req, res, Next) {
     const email = req.params.userEmail;
     // query db if user is present.
-    let userToUpload = 'not found';
-    db.forEach((user) => {
-      if (user.type === 'user') {
-        if (user.user === email.trim()) {
-          userToUpload = user;
-        }
-      }
-    });
+    const userToUpload = await findUser(email);
     if (userToUpload === 'not found') {
       const err = new Error('user not found');
       err.statusCode = 400;

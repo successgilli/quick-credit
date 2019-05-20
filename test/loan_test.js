@@ -3,6 +3,7 @@ import chaiHttp from 'chai-http';
 import fs from 'fs';
 import server from '../server/app';
 import userData from '../server/model/mock';
+import db from '../server/model/query';
 
 const should = chai.should();
 chai.use(chaiHttp);
@@ -10,6 +11,21 @@ let loanId; let loanId2;
 
 // test create loan application.
 describe('loan application route', () => {
+  before('seed database1', async () => {
+    const res = await chai.request(server)
+      .post('/api/v1/auth/signup')
+      .send(userData.user);
+  });
+  before('seed database2', async () => {
+    const res = await chai.request(server)
+      .post('/api/v1/auth/signup')
+      .send(userData.anodaUser);
+  });
+  before('seed database2', async () => {
+    const res = await chai.request(server)
+      .patch('/api/v1/users/successgilli@gmail.com/verify');
+  });
+  
   it('it should return user not found if user not found', (done) => {
     chai.request(server).post('/api/v1/loans/').send(userData.loanAppNoUser).end((err, res) => {
       res.body.error.should.equal('user not in database');
@@ -18,7 +34,7 @@ describe('loan application route', () => {
   });
   it('it should post loan application to db', (done) => {
     chai.request(server).post('/api/v1/loans/').send(userData.loanAppGood).end((err, res) => {
-        console.log(res.body)
+      console.log(res.body)
       res.body.should.have.property('data');
       res.body.status.should.equal(201);
       // eslint-disable-next-line prefer-destructuring
@@ -75,7 +91,15 @@ describe('loan application route', () => {
 });
 // test get specific loan route.
 describe('get specific loan route', () => {
-  it('should respond with "not found" if loanId not found', (done) => {
+  it('should respond with loan not found if not found', (done) => {
+    chai.request(server).get('/api/v1/loans/10')
+      .end((err, res) => {
+        res.body.status.should.equal(400);
+        res.body.error.should.equal('loan not in database');
+        done();
+      })
+  })
+  it('should respond with "invalid id" if loanId not integer', (done) => {
     chai.request(server).get('/api/v1/loans/100000000000').end((err, res) => {
       res.body.status.should.equal(400);
       res.body.error.should.equal('invalid id format');
@@ -92,11 +116,26 @@ describe('get specific loan route', () => {
 });
 // test aprove/reject loan route. 
 describe('approve/reject loan route', () => {
-  it('should respond with "not found" if loanId not found', (done) => {
+  it('should respond with "invalid id" if loanId not integer', (done) => {
     let status = { status: 'approve' };
     chai.request(server).patch('/api/v1/loans/100000000000').send(status).end((err, res) => {
       res.body.status.should.equal(400);
       res.body.error.should.equal('invalid id format');
+      done();
+    });
+  });
+  it('should respond with "not found" if loanId not found', (done) => {
+    let status = { status: 'approve' };
+    chai.request(server).patch('/api/v1/loans/10').send(status).end((err, res) => {
+      res.body.status.should.equal(400);
+      res.body.error.should.equal('loan not in database');
+      done();
+    });
+  });
+  it('should respond with ensure status is either approve or reject', (done) => {
+    let status = { status: 'approveg' };
+    chai.request(server).patch('/api/v1/loans/10').send(status).end((err, res) => {
+      res.body.status.should.equal(400);
       done();
     });
   });
@@ -160,12 +199,21 @@ describe('post loan repayment route', () => {
         done();
       })
   })
-  it('should respond with loan not found if not found', (done) => {
+  it('should respond with ivalid id if id not of required type', (done) => {
     input = { amount: '2000' };
     chai.request(server).post('/api/v1/loans/12323000000/repayment')
       .send(input).end((err, res) => {
         res.body.status.should.equal(400);
         res.body.error.should.equal('invalid id format');
+        done();
+      })
+  })
+  it('should respond with loan not found if not found', (done) => {
+    input = { amount: '2000' };
+    chai.request(server).post('/api/v1/loans/10/repayment')
+      .send(input).end((err, res) => {
+        res.body.status.should.equal(400);
+        res.body.error.should.equal('loan not found');
         done();
       })
   })
@@ -232,6 +280,7 @@ describe('Get repayment history route', () => {
 })
 // test get loans route.
 describe('GET loans route', () => {
+  
   it('should return error if only one query string is given', (done) => {
     chai.request(server).get('/api/v1/loans?status').end((err, res) => {
       res.body.error.should.equal('both status and repaid query keys are required');
@@ -267,6 +316,11 @@ describe('GET loans route', () => {
 })
 
 describe('test the upload picture route', () => {
+  after(async () => {
+    await db('TRUNCATE TABLE users CASCADE');
+    await db('TRUNCATE TABLE repayments CASCADE');
+    await db('TRUNCATE TABLE loans CASCADE');
+  });
   it ('should return no user found if email not in db', (done) => {
     chai.request(server).patch('/api/v1/users/uploads/armpit@gmail.com').end((err, res) => {
       res.body.error.should.equal('user not found');
@@ -277,6 +331,13 @@ describe('test the upload picture route', () => {
     chai.request(server).patch('/api/v1/users/uploads/successgilli@gmail.com').attach('image', fs.readFileSync('./asset/avatar.PNG'), './asset/avatar.PNG').end((err, res) => {
       console.log(res.body)
       res.body.should.have.property('data');
+      done();
+    })
+  })
+  it ('should return error if image not provided', (done) => {
+    chai.request(server).patch('/api/v1/users/uploads/successgilli@gmail.com').attach('im', fs.readFileSync('./asset/avatar.PNG'), './asset/avatar.PNG').end((err, res) => {
+      console.log(res.body)
+      res.body.should.have.property('error');
       done();
     })
   })
