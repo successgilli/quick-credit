@@ -1,4 +1,6 @@
+import 'babel-polyfill'
 import db from './query';
+import seedAdmin from '../helpers/createAdmin';
 
 const userTable = `CREATE TABLE IF NOT EXISTS users ( id serial NOT NULL UNIQUE,
     userr VARCHAR(100) NOT NULL PRIMARY KEY,
@@ -33,9 +35,10 @@ const repaymentTable = `CREATE TABLE IF NOT EXISTS repayments (
   PRIMARY KEY (loanId, id)
 );`;
 
-const createTables = () => {
+const createTables = async () => {
   try {
     db(`${userTable} ${loanTable} ${repaymentTable}`);
+    await seedAdmin();
     console.log('tables created');
   }
   catch (err) {
