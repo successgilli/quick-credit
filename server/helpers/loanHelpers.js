@@ -14,7 +14,7 @@ class LoanHelper {
       (0.05 * amountFloat),
     ];
     const text = `INSERT INTO loans (
-      userr,
+      email,
       tenor,
       amount,
       paymentinstallment,

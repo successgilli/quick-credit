@@ -1,4 +1,3 @@
-/* eslint-disable no-lonely-if */
 import 'babel-polyfill';
 import dotEnv from 'dotenv';
 import jwt from 'jsonwebtoken';
@@ -30,13 +29,13 @@ class User {
 
   static async verify(req, res) {
     const { userEmail } = req.params;
-    const text = 'UPDATE users SET status=$1 WHERE userr=$2 RETURNING *;';
+    const text = 'UPDATE users SET status=$1 WHERE email=$2 RETURNING *;';
     const param = ['verified', userEmail.trim()];
     const { rows } = await db(text, param);
     res.status(200).json({
       status: 200,
       data: {
-        email: rows[0].userr,
+        email: rows[0].email,
         firstName: rows[0].firstname,
         lastName: rows[0].lastname,
         password: rows[0].password,
@@ -49,7 +48,7 @@ class User {
   static async uploadProfilePic(req, res) {
     const email = req.params.userEmail;
     const secureUrl = req.file.secure_url;
-    const text = 'UPDATE users SET passporturl=$1 WHERE userr=$2 RETURNING *;'
+    const text = 'UPDATE users SET passporturl=$1 WHERE email=$2 RETURNING *;'
     const { rows } = await db(text, [secureUrl, email.trim()]);
     res.status(201).json({
       status: 201,

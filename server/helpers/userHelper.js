@@ -11,7 +11,7 @@ class UserHelper {
       id: user.id,
       firstName: user.firstname.trim(),
       lastName: user.lastname.trim(),
-      email: user.userr.trim(),
+      email: user.email.trim(),
       address: user.address.trim(),
       isAdmin: user.isadmin,
       status: user.status,
@@ -20,7 +20,7 @@ class UserHelper {
   }
 
   static async findUser(email) {
-    const text = 'SELECT * FROM users WHERE userr=$1;';
+    const text = 'SELECT * FROM users WHERE email=$1;';
     const { rows } = await db(text, [email.trim()]);
     if (rows.length === 0) {
       return 'not found';
@@ -61,7 +61,7 @@ class UserHelper {
       firstname,
       lastname,
       address,
-      userr,
+      email,
       password,
       companyaddress,
       companyname,

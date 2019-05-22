@@ -9,7 +9,7 @@ const checkMissingKeys = (req, keys) => {
   return missing;
 };
 
-const sendValidationInfo = (res, req, keys, improperVals, Next) => {
+const sendValidationInfo = (res, req, keys, improperVals, next) => {
   if (!(checkMissingKeys(req, keys).length === 0)) {
     return res.status(400).json({
       status: 400,
@@ -22,7 +22,7 @@ const sendValidationInfo = (res, req, keys, improperVals, Next) => {
       error: improperVals(req).join('.'),
     })
   }
-  Next();
+  next();
 };
 
 export default sendValidationInfo;

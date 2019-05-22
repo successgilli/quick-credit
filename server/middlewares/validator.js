@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 import 'babel-polyfill';
 import bcrypt from 'bcrypt';
 import sendValidationInfo from '../helpers/validatorHelper';
@@ -112,54 +111,54 @@ class ImproperValuesChecker {
 }
 
 class DataCreationValidator {
-  static signupValidator(req, res, Next) {
+  static signupValidator(req, res, next) {
     const keys = ['firstName', 'lastName', 'address', 'email', 'password',
       'companyName', 'companyAddress', 'monthlyIncome',
       'bankName', 'bvn', 'accountNumber'];
     sendValidationInfo(
       res, req, keys, ImproperValuesChecker.improperSignupValues,
-      Next,
+      next,
     );
   }
 
-  static signinValidator(req, res, Next) {
+  static signinValidator(req, res, next) {
     const keys = ['email', 'password'];
     sendValidationInfo(
       res, req, keys, ImproperValuesChecker.improperSigninValues,
-      Next,
+      next,
     );
   }
 
-  static loanApplyValidator(req, res, Next) {
+  static loanApplyValidator(req, res, next) {
     const keys = ['email', 'amount', 'tenor'];
     sendValidationInfo(
       res, req, keys, ImproperValuesChecker.improperLaonAppValues,
-      Next,
+      next,
     );
   }
 
-  static laonStatusValidator(req, res, Next) {
+  static laonStatusValidator(req, res, next) {
     const keys = ['status'];
     sendValidationInfo(
       res, req, keys, ImproperValuesChecker.improperLaonStatusValues,
-      Next,
+      next,
     );
   }
 
-  static loanRepaymentValidator(req, res, Next) {
+  static loanRepaymentValidator(req, res, next) {
     const keys = ['amount'];
     sendValidationInfo(
       res, req, keys, ImproperValuesChecker.improperRepaymentValues,
-      Next,
+      next,
     );
   }
 }
 
 class DataQuery {
-  static checkQueryStrings(req, res, Next) {
+  static checkQueryStrings(req, res, next) {
     const { status, repaid } = req.query;
     if ((typeof status === 'undefined') && (typeof repaid === 'undefined')) {
-      Next();
+      next();
     } else if (((typeof status === 'undefined') && (typeof repaid !== 'undefined'))
     || ((typeof status !== 'undefined') && (typeof repaid === 'undefined'))) {
       res.status(400).json({
@@ -175,7 +174,7 @@ class DataQuery {
         improperVals.push('repaid value must be a string of either true or false');
       }
       if (improperVals.length === 0) {
-        Next();
+        next();
       } else {
         res.status(400).json({
           status: 400,
@@ -187,22 +186,22 @@ class DataQuery {
 }
 
 class loanDataCheck {
-  static checkIdFormat(req, res, Next) {
+  static checkIdFormat(req, res, next) {
     const { loanId } = req.params;
     if (!/^[0-9]{1,10}$/.test(loanId.trim())) {
       const err = new Error('invalid id format');
       err.statusCode = 400;
-      Next(err);
+      next(err);
     } else {
-      Next();
+      next();
     }
   }
 
-  static async applicationCheck(req, res, Next) {
+  static async applicationCheck(req, res, next) {
     const { email } = req.body;
     // check db if user is present.
     const applicant = await findUser(email.trim());
-    const text = 'SELECT * FROM loans WHERE userr=$1;';
+    const text = 'SELECT * FROM loans WHERE email=$1;';
     const { rows } = await db(text, [email.trim()]);
     // check if user has an outstanding loan.
     let grantLoan = true;
@@ -218,172 +217,172 @@ class loanDataCheck {
     if (applicant === 'not found') {
       const err = new Error('user not in database');
       err.statusCode = 400;
-      Next(err);
+      next(err);
     } else if (!grantLoan) {
     // if no outstanding loan.
       const err = new Error(`user '${email}' already has an outstanding loan.`);
       err.statusCode = 400;
-      Next(err);
+      next(err);
     }
     else {
-      Next();
+      next();
     }
     // end
   }
 
-  static async checkGetLoan(req, res, Next) {
+  static async checkGetLoan(req, res, next) {
     const { loanId } = req.params;// query loanId in db.
     const specificLoan = await getSpecificLoan(loanId);
     if (specificLoan === 'not found') { // if not found in db, say 'not found'.
       const err = new Error('loan not in database');
       err.statusCode = 400;
-      Next(err);
+      next(err);
     } else {
-      Next();
+      next();
     }
   }
   // test post man
 
-  static async checkStatus(req, res, Next) {
+  static async checkStatus(req, res, next) {
     const { status } = req.body;
     const { loanId } = req.params;
     const specificLoan = await getSpecificLoan(loanId);
     if (specificLoan === 'not found') { // if not found in db, say 'not found'.
       const err = new Error('loan not in database');
       err.statusCode = 400;
-      Next(err);
+      next(err);
     } else if (specificLoan.status !== 'pending') {
       const err = new Error(`loan is already ${specificLoan.status}`);
       err.statusCode = 400;
-      Next(err);
+      next(err);
     } else if (!/^reject$/i.test(status.trim())) {
-      const user = await findUser(specificLoan.userr);
+      const user = await findUser(specificLoan.email);
       if (user.status === 'unverified') {
         const err = new Error('user is not yet verifed');
         err.statusCode = 400;
-        Next(err);
+        next(err);
       } else {
-        Next();
+        next();
       }
     } else {
-      Next();
+      next();
     }
   }
 
-  static async postRepaymentCheck(req, res, Next) {
+  static async postRepaymentCheck(req, res, next) {
     const { amount } = req.body;
     const { loanId } = req.params;
     const specificLoan = await getSpecificLoan(loanId);
     if (specificLoan === 'not found') { // if loan not found.
       const err = new Error('loan not found');
       err.statusCode = 400;
-      Next(err);
+      next(err);
     } else if (specificLoan.status !== 'approved') {
       const err = new Error(`you cant post repayment for the loan '${loanId}' not yet approved`);
       err.statusCode = 400;
-      Next(err);
+      next(err);
     } else if ((specificLoan.repaid)) {
       const err = new Error('loan already fully paid');
       err.statusCode = 400;
-      Next(err);
+      next(err);
     } else if (!(Number(amount) <= specificLoan.balance)) {
       const err = new Error('repayed amount cannot be greater than loan balance');
       err.statusCode = 400;
-      Next(err);
+      next(err);
     } else {
-      Next();
+      next();
     }
   }
 
-  static async checkGetRepayment(req, res, Next) {
+  static async checkGetRepayment(req, res, next) {
     const { loanId } = req.params;
     // query loanId in db.
     const specificLoan = await getSpecificLoan(loanId);
     if (specificLoan === 'not found') {
       const err = new Error(`loan with id: ${loanId} not found`);
       err.statusCode = 400;
-      Next(err);
+      next(err);
     } else {
-      Next();
+      next();
     }
   }
 }
 
 class UserDataCheck {
-  static async checkSignupEmail(req, res, Next) {
+  static async checkSignupEmail(req, res, next) {
     const { email } = req.body;
-    const text = 'SELECT * FROM users WHERE userr=$1;';
+    const text = 'SELECT * FROM users WHERE email=$1;';
     const result = await db(text, [email]);
     if (result.rows.length !== 0) {
       const err = new Error('email already exists');
       err.statusCode = 403;
-      Next(err);
+      next(err);
     } else {
-      Next();
+      next();
     }
   }
 
-  static checkEmailFormat(req, res, Next) {
+  static checkEmailFormat(req, res, next) {
     const { userEmail } = req.params;
     if (!/^([a-z])([a-z0-9]+)@([a-z]{3,5})\.([a-z]{2,3})(\.[a-z]{2,3})?$/.test(userEmail.trim())) {
       const err = new Error('invalid email format');
       err.statusCode = 400;
-      Next(err);
+      next(err);
     } else {
-      Next();
+      next();
     }
   }
 
-  static async checkSigninData(req, res, Next) {
+  static async checkSigninData(req, res, next) {
     const { email, password } = req.body;
-    const text = 'SELECT * FROM users WHERE userr=$1;';
+    const text = 'SELECT * FROM users WHERE email=$1;';
     const { rows } = await db(text, [email.trim()]);
     if (rows.length === 0) {
       const err = new Error('user not in database');
       err.statusCode = 403;
-      Next(err);
+      next(err);
     } else if (!(bcrypt.compareSync(password, rows[0].password))) {
       const err = new Error('invalid email or password');
       err.statusCode = 400;
-      Next(err);
+      next(err);
     } else {
-      Next();
+      next();
     }
   }
 
-  static async checkVerifyUser(req, res, Next) {
+  static async checkVerifyUser(req, res, next) {
     const { userEmail } = req.params;
     // query db if user is present.
     const userToVerify = await findUser(userEmail.trim());
     if (userToVerify === 'not found') {
       const err = new Error('user not in database');
       err.statusCode = 400;
-      Next(err);
+      next(err);
     } else if (userToVerify.status === 'verified') {
       const err = new Error(`user '${userEmail}' already verified`);
       err.statusCode = 400;
-      Next(err);
+      next(err);
     } else {
-      Next();
+      next();
     }
   }
 
-  static async checkUploadPix(req, res, Next) {
+  static async checkUploadPix(req, res, next) {
     const email = req.params.userEmail;
     // query db if user is present.
     const userToUpload = await findUser(email);
     if (userToUpload === 'not found') {
       const err = new Error('user not found');
       err.statusCode = 400;
-      Next(err);
+      next(err);
     } else {
       uploads.single('image')(req, res, (error) => {
         if (typeof req.file === 'undefined') {
           const err = new Error('ensure image key is available and has an image value');
           err.statusCode = 400;
-          Next(err);
+          next(err);
         } else {
-          Next();
+          next();
         }
       });
     }

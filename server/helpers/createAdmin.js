@@ -19,15 +19,15 @@ const seedAdmin = async () => {
     'fidelity',
     6173035366,
     20000,
-    true
+    true,
   ];
-  const { rows } = await db('SELECT * FROM users WHERE userr=$1', ['successgilli22@gmail.com']);
+  const { rows } = await db('SELECT * FROM users WHERE email=$1', ['successgilli22@gmail.com']);
   if (rows.length === 0) {
     const text = `INSERT INTO users (
       firstname,
       lastname,
       address,
-      userr,
+      email,
       password,
       companyaddress,
       companyname,
@@ -41,9 +41,9 @@ const seedAdmin = async () => {
       await db(text, param);
       console.log('admin seeded');
     } catch (e) {
-      console.log(e.message)
+      console.log(e.message);
     }
   }
-}
+};
 
 export default seedAdmin;
