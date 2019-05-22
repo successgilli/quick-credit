@@ -1,6 +1,7 @@
 body, html{
     padding: 0;
     margin: 0;
+    color: rgb(46, 43, 43);
 }
 main{
     padding-top: 60px;
@@ -27,7 +28,7 @@ header{
 }
 #firstHeader{
     box-sizing: border-box;
-    flex-basis: 40%;
+    flex-basis: 60%;
     display: flex;
     align-items: center;
     padding-left: 40px;
@@ -36,7 +37,7 @@ header{
     display: flex;
     justify-content: space-around;
     box-sizing: border-box;
-    flex-basis: 60%;
+    flex-basis: 40%;
     padding-right: 100px;
     align-items: center;
 }
@@ -79,6 +80,8 @@ header{
     background-size: 100% 100%;
     background-attachment: fixed;
     display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 input {
     background-color: transparent;
@@ -94,25 +97,29 @@ input {
 
 }
 .CalculatedValues{
+    flex-direction: column;
     flex-basis: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 #homePageCalc{
-    box-sizing: border-box;
-    padding: 5px;
-    width: 70%;
+    width: 100%;
+    justify-content: space-between;
+    display: flex;
     margin: auto;
-    color: black;
-    background-color: rgba(238, 238, 238, 0.4);
-    min-height: 200px;
+    color: rgb(20, 20, 20);
+    min-height: 70px;
     border: 0;
     border-radius: 6px;
-    box-shadow: 0 6px 6px 10px rgba(0, 0, 0, 0.3);
 }
-#homePageCalc>select{
-    width: 70%;
+.calcInputs{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.calcinput>div>select{
+    width: 80%;
     display: block;
     margin: auto;
     height: 30px;
@@ -120,19 +127,39 @@ input {
     border: 0;
     background-color: transparent;
     border-bottom: 2px solid indigo;
-    color: black;
+    color: rgb(20, 20, 20);
     outline: 0;
-    margin-bottom: 30px;
     font-size: 16px;
 
 }
-#homePageCalc>select>option{
+.calcinput>div>select>option{
     background: rgba(109, 106, 106, 0.4);
     position: relative;
 
 }
+.calcinput{
+    display: flex;
+    color: rgb(20, 20, 20);
+    justify-content: space-around;
+    width: 100%;
+}
+.calcinput>div{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.calcinput>div>h4{
+    text-align: start;
+    
+}
+.calcinput>div>span{
+    width: 80%;
+    margin: auto;
+    display: block;
+    border-bottom: 2px solid rgb(147, 46, 219);
+}
 #homePageCalc>select>option:hover{
-    background: black;
+    background: rgb(20, 20, 20);
     left: 20px;
 }
 #homePageCalc>p{
@@ -140,8 +167,8 @@ padding-left: 30px;
 }
 .calculatedFromForm{
     box-sizing: border-box;
-    padding: 5px;
-    width: 80%;
+    padding: 15px;
+    width: 400px;
     margin: auto;
     min-height: 200px;
     background-color: rgba(238, 238, 238, 0.4);
@@ -151,24 +178,22 @@ padding-left: 30px;
 }
 .calculated{
     display: flex;
-    color: black;
+    color: rgb(20, 20, 20);
     justify-content: space-around;
     width: 100%;
 }
 .calculated>div{
     width: 100%;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 .calculated>div>h4{
-    text-align: start;
-    padding: 10px;
+    text-align: center;
 }
 .calculated>div>span{
     width: 80%;
-    margin: auto;
-    display: block;
-    border-bottom: 2px solid rgb(147, 46, 219);
+    color: rgb(152, 69, 211);
+    font-weight: bold;
 }
 
 #homeCalcApplyBtn{
@@ -181,7 +206,8 @@ padding-left: 30px;
     padding: 10px;
     margin: auto;
     margin-top: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
     background-color: #f57921;
     cursor: pointer;
     transition: 0.8s ease;
@@ -202,12 +228,16 @@ padding-left: 30px;
    background-color: whitesmoke;
    ;
 }
-#sectionAbout>h2{
-    margin-left: 100px;
+#sectionAbout>h1{
+    margin: auto;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
 #sectionAbout>p{
-    margin-left: 100px;
-    font-weight: bold;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 50px;
 }
 .about{
     box-sizing: border-box;
@@ -247,7 +277,7 @@ footer{
     z-index: 800;
     box-sizing: border-box;
     padding: 30px;
-    background-color: black;
+    background-color: rgb(20, 20, 20);
     color: #F9F8F9;
 
 }
@@ -315,7 +345,7 @@ footer{
 #whoText{
     width: 70%;
     margin: auto;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
     text-align: center;
 }
 #epicBucket{
@@ -349,7 +379,7 @@ footer{
     text-align:center;
     word-spacing: 3px;
     margin-top: 50px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 #readMoreBtn{
     display: block;
@@ -441,27 +471,49 @@ footer{
     margin: auto;
     margin-top: 10px;
 }
+#outerClose {
+    width: 100px;
+}
+
 #signContent>span{
+    
     font-weight: bold;
     font-size: 25px;
     position: absolute;
-    left: 97%;
-    background-color: white;
-    height: 20px;
-    border: 1px solid black;
+    left: 91%;
+    background-color: transparent;
+    height: 90px;
+    border: 1px solid rgb(20, 20, 20);
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 20px;
+    width: 90px;
     border-radius: 50%;
-    top: -10px;
-    color: red;
+    top: -40px;
     cursor: pointer;
+    border: 0;
+}
+#closeLogin{
+    
+    transform-origin: center center;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     transform: rotate(45deg);
     transition: 0.5s ease;
+    border: 1px solid grey;
+    z-index: 610;
+    outline: 0;
+    background-color: white;
 }
-#signContent>span:hover{
+#signContent>span:hover #closeLogin{
     border: 1px solid white;
+    height: 30px;
+    width: 30px;
     font-size: 35px;
     transform: rotate(135deg);
 }
@@ -674,7 +726,7 @@ footer{
     padding-top: 60px;
     left: 500px;
     color: grey;
-    background-color: black;
+    background-color: rgb(20, 20, 20);
     height: 100%;
     box-shadow: 2px 2px 8px 4px rgba(0, 0, 0, 0.6);
     transition: 0.9s ease-out;
@@ -738,8 +790,12 @@ footer a {
     #homePageCalc {
         width: 80%;
     }
+    .calculatedFromForm{
+        width: 400px;
+    }
     .calculatorSection{
-        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         background-size: auto 100%;
     }
     #userLoanApply{
@@ -754,7 +810,7 @@ footer a {
         margin-bottom: 30px;
     }
     .calculated{
-        flex-direction: column;
+        /*flex-direction: column;*/
     }
 }
 @media (max-width:700px){
@@ -795,6 +851,12 @@ footer a {
     #signContent{
         width: 80%;
     }
+}
+@media (max-width:474px){
+    .calculatedFromForm{
+        width: 300px;
+    }
+    
 }
 @media (max-width:424px){
     

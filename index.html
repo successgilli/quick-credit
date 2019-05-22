@@ -26,7 +26,9 @@
         </div>
         <div id="signContent">
             <p id="formPTag">LOG IN</p>
-            <span id="closeLogin">+</span>
+            <span id="outerClose">
+                <span id="closeLogin">+</span>
+            </span>
             <form action="" id="loginForm">       
                 <input type="text" class="inputFields" id="email" name="email" required>
                 <label for="email">Email</label>
@@ -112,10 +114,7 @@
             </a>
         </div>
         <div id="secondHeader">
-            <div class="headLinks">Home</div>
             <a href="./adminDashboard.html"><div class="headLinks">Admin</div></a>
-            <a href="#about"><div class="headLinks">About</div></a>
-            <a href="#footerElements"><div class="headLinks">Contact</div></a>
             <div class="headLinks">Login</div>
             <div class="headLinks">SignUp</div>
             <i class="fas fa-bars" id="nav"></i>
@@ -123,41 +122,51 @@
     </header>
     <main>
         <div class="calculatorSection">
-            <div id="" class="calcInputs">
-                <form action="" id="homePageCalc">
-                    <h3>Demo Loan Calculator</h3>
-                        <p>Loan Amount:</p>
-                        <select name="" id="homeAmountDropDown">
-                            <option value="10,000.00">&#8358;10,000.00</option>
-                            <option value="20,000.00">&#8358;20,000.00</option>
-                            <option value="30,000.00">&#8358;30,000.00</option>
-                            <option value="40,000.00">&#8358;40,000.00</option>
-                            <option value="50,000.00">&#8358;50,000.00</option>
-                            <option value="60,000.00">&#8358;60,000.00</option>
-                            <option value="70,000.00">&#8358;70,000.00</option>
-                            <option value="80,000.00">&#8358;80,000.00</option>
-                            <option value="90,000.00">&#8358;90,000.00</option>
-                            <option value="100,000.00">&#8358;100,000.00</option>
-                        </select>
-                        <p>Over How Many Months?</p>
-                        <select name="" id="homeTenorDropDown">
-                                <option value="1">1 Months</option>
-                                <option value="2">2 Months</option>
-                                <option value="3">3 Months</option>
-                                <option value="4">4 Months</option>
-                                <option value="5">5 Months</option>
-                                <option value="6">6 Months</option>
-                                <option value="7">7 Months</option>
-                                <option value="8">8 Months</option>
-                                <option value="9">9 Months</option>
-                                <option value="10">10 Months</option>
-                                <option value="11">11 Months</option>
-                                <option value="12">12 Months</option>
-                            </select>
-                    </form>
-            </div>
+            
             <div class="CalculatedValues">
+                    
                 <div class="calculatedFromForm">
+                    <h3> Loan Calculator</h3>
+                    <div class="calcinput">
+                            <div>
+                                    <h4>Loan Amount:</h4>
+                                    <select name="" id="homeAmountDropDown">
+                                        <option value="10,000.00">&#8358;10,000.00</option>
+                                        <option value="20,000.00">&#8358;20,000.00</option>
+                                        <option value="30,000.00">&#8358;30,000.00</option>
+                                        <option value="40,000.00">&#8358;40,000.00</option>
+                                        <option value="50,000.00">&#8358;50,000.00</option>
+                                        <option value="60,000.00">&#8358;60,000.00</option>
+                                        <option value="70,000.00">&#8358;70,000.00</option>
+                                        <option value="80,000.00">&#8358;80,000.00</option>
+                                        <option value="90,000.00">&#8358;90,000.00</option>
+                                        <option value="100,000.00">&#8358;100,000.00</option>
+                                    </select>
+                            </div>
+                  
+                    
+                            <div>
+                                    <h4>Over How Many Months?</h4>
+                                    <select name="" id="homeTenorDropDown">
+                                            <option value="1">1 Months</option>
+                                            <option value="2">2 Months</option>
+                                            <option value="3">3 Months</option>
+                                            <option value="4">4 Months</option>
+                                            <option value="5">5 Months</option>
+                                            <option value="6">6 Months</option>
+                                            <option value="7">7 Months</option>
+                                            <option value="8">8 Months</option>
+                                            <option value="9">9 Months</option>
+                                            <option value="10">10 Months</option>
+                                            <option value="11">11 Months</option>
+                                            <option value="12">12 Months</option>
+                                        </select>
+                            </div>
+                    </div>
+                                
+                                          
+                                    
+                               
                     <div class="calculated">
                         <div>
                             <h4>Loan Amount</h4>
@@ -198,14 +207,14 @@
              
         </div>
         <div id="sectionAbout">
-            <h2>How It Works?</h2>
+            <h1>How It Works?</h1>
             <p>Our loan platform is easy to use; Just follow the steps below..</p>
             <div id="about">
                 <div class="about">
                     <i class="fas fa-map-marked-alt"></i>
                     <h3>Register</h3>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum beatae officia nemo voluptatum ut autem aperiam assumenda voluptate hic illo. Aliquam, ipsa possimus distinctio doloremque quam pariatur beatae deleniti quaerat?
+                        Register with us to enjoy best loan rates coupled with use of standards and best practices to serve you better
                     </p>
                     <button id="homeRegBtn" class="homeBtns">REGISTER</button>
     
@@ -214,7 +223,8 @@
                     <i class="fas fa-door-open"></i>
                     <h3>Login</h3>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum beatae officia nemo voluptatum ut autem aperiam assumenda voluptate hic illo. Aliquam, ipsa possimus distinctio doloremque quam pariatur beatae deleniti quaerat?
+                        Click the buttons bellow to Login and access our best loan plans from anywhere in the world.
+                        24/7
                      </p>
                      <button id="homeLoginBtn" class="homeBtns">LOGIN</button>
                 </div>
@@ -222,7 +232,7 @@
                     <i class="fas fa-file-signature" id="homeSign"></i>
                     <h3>Apply</h3>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum beatae officia nemo voluptatum ut autem aperiam assumenda voluptate hic illo. Aliquam, ipsa possimus distinctio doloremque quam pariatur beatae deleniti quaerat?
+                        Loan Application is fast with just one click. Click the apply button to apply for loans
                     </p>
                     <button id="homeApplyBtn" class="homeBtns">APPLY</button>
                 </div>
@@ -230,7 +240,7 @@
                     <i class="fas fa-money-bill-wave"></i>
                     <h3>Get Loan</h3>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum beatae officia nemo voluptatum ut autem aperiam assumenda voluptate hic illo. Aliquam, ipsa possimus distinctio doloremque quam pariatur beatae deleniti quaerat?
+                        We credit our clients within 30 minutes of loan application as far as all terms and conditions are successfully met. Getting your loan is fast and simple
                     </p>
                     <button id="HomeloanBtn" class="homeBtns">GET LOAN</button>
                 </div>
@@ -239,7 +249,7 @@
 
         </div>
         <section id="whoWeAre">
-            <h3 id="who">Who We Are ?</h4>
+            <h1 id="who">Who We Are ?</h1>
             <p id="whoText">
                 Quick Credit is an online lending platform that provides short term soft loans to individuals. This
                 helps solve problems of financial inclusion as a way to alleviate poverty and empower low
@@ -250,14 +260,14 @@
                     <div class="epic">
                         <h3> we'er Excelent</h3>
                         <p>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur cum cumque quisquam dolores accusantium sit odio libero similique facilis. Eaque illum ea magni aliquid natus obcaecati dolorum optio doloremque dolore.
+                                We believe that with better access to loans, anyone can become anything. Having this quality in mind has helped many strive to become a better human, daily and aquire properties that would have taken years. 
         
                         </p>
                     </div>
                     <div class="epic" id="epic2">
                         <h3> we'er Passionate about you</h3>
                         <p>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur cum cumque quisquam dolores accusantium sit odio libero similique facilis. Eaque illum ea magni aliquid natus obcaecati dolorum optio doloremque dolore.      
+                            We want to serve you and strive to find better ways to serve ensuring quality service as well as comfort throug the process.     
                         </p>
                     </div>
                 </div>
@@ -265,14 +275,14 @@
                     <div class="epic">
                         <h3> we'er Transparent</h3>
                         <p>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur cum cumque quisquam dolores accusantium sit odio libero similique facilis. Eaque illum ea magni aliquid natus obcaecati dolorum optio doloremque dolore.
+                            Loan applications are authenticated and trusted with the best in the world following best practices and standards Irrespective of tribe, race and religion.
                                 
                         </p>
                     </div>
                     <div class="epic">
                         <h3> we are here 24/7 for you</h3>
                         <p>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur cum cumque quisquam dolores accusantium sit odio libero similique facilis. Eaque illum ea magni aliquid natus obcaecati dolorum optio doloremque dolore.
+                            We are here for you means more than beign online. We serve from start to finish and provide guadiance through our contacts.
                                 
                         </p>
                     </div>

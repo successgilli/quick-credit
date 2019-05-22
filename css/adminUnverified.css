@@ -139,6 +139,7 @@ footer{
     cursor: pointer;
 }
 #navHead {
+    cursor: pointer;
     box-sizing: border-box;
     flex-basis: 10%;
     text-align: center;
