@@ -6,7 +6,10 @@ import User from '../controllers/userController';
 
 const { isAdmin, isUser } = checkClient;
 const { signupValidator, signinValidator } = DataCreationValidator;
-const { signup, signin, verify, uploadProfilePic } = User;
+const {
+  signup, signin, verify,
+  uploadProfilePic,
+} = User;
 const {
   checkSignupEmail,
   checkEmailFormat,
@@ -20,5 +23,5 @@ const user = express.Router();
 auth.post('/signup', signupValidator, checkSignupEmail, signup);
 auth.post('/signin', signinValidator, checkSigninData, signin);
 user.patch('/:userEmail/verify', checkEmailFormat, checkVerifyUser, checkToken, isAdmin, verify);
-user.patch('/uploads/:userEmail', checkEmailFormat, checkUploadPix, checkToken, isUser, uploadProfilePic);
+user.patch('/uploads', checkToken, isUser, checkUploadPix, uploadProfilePic);
 export { auth, user };

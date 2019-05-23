@@ -9,7 +9,9 @@ import seedAdmin from '../server/model/createTestAdmin';
 const should = chai.should();
 chai.use(chaiHttp);
 let loanId; let loanId2;
-let userAuth;
+let userAuth1;
+let userAuth2;
+let userAuth3;
 let adminAuth;
 
 // test create loan application.
@@ -27,12 +29,19 @@ describe('loan application route', () => {
     const res = await chai.request(server)
       .post('/api/v1/auth/signup')
       .send(userData.user);
-    userAuth = res.body.data.token;
+    userAuth1 = res.body.data.token;
   });
   before('seed database1', async () => {
     const res = await chai.request(server)
       .post('/api/v1/auth/signup')
       .send(userData.user2);
+    userAuth2 = res.body.data.token;
+  });
+  before('seed database1', async () => {
+    const res = await chai.request(server)
+      .post('/api/v1/auth/signup')
+      .send(userData.user3);
+    userAuth3 = res.body.data.token;
   });
   before('seed database2', async () => {
     const res = await chai.request(server)
@@ -46,23 +55,11 @@ describe('loan application route', () => {
   });
   before('seed database2', async () => {
     const res = await chai.request(server)
-      .patch('/api/v1/users/successgilli44@gmail.com/verify');
-    console.log(res.body, 'auth')
-  });
-  before('seed database2', async () => {
-    const res = await chai.request(server)
-      .patch('/api/v1/users/successgilli@gmail.com/verify');
-  });
-  
-  it('it should return user not found if user not found', (done) => {
-    chai.request(server).post('/api/v1/loans/').send(userData.loanAppNoUser).set('Authorization', userAuth)
-      .end((err, res) => {
-        res.body.error.should.equal('user not in database');
-        done();
-      });
+      .patch('/api/v1/users/successgilli44@gmail.com/verify')
+      .set('Authorization', adminAuth);
   });
   it('it should post loan application to db', (done) => {
-    chai.request(server).post('/api/v1/loans/').send(userData.loanAppGood).set('Authorization', userAuth)
+    chai.request(server).post('/api/v1/loans/').send(userData.loanAppGood).set('Authorization', userAuth1)
       .end((err, res) => {
         console.log(res.body, 'loanthis')
         res.body.should.have.property('data');
@@ -74,7 +71,17 @@ describe('loan application route', () => {
   });
   it('it should post another loan application to db', (done) => {
     userData.loanAppGood.email = 'success@gmail.com';
-    chai.request(server).post('/api/v1/loans/').send(userData.loanAppGood).set('Authorization', userAuth)
+    chai.request(server).post('/api/v1/loans/').send(userData.loanAppGood).set('Authorization', userAuth2)
+      .end((err, res) => {
+        res.body.should.have.property('data');
+        res.body.status.should.equal(201);
+        // eslint-disable-next-line prefer-destructuring
+        done();
+      });
+  });
+  it('it should post another loan application to db', (done) => {
+    userData.loanAppGood.email = 'success@gmail.com';
+    chai.request(server).post('/api/v1/loans/').send(userData.loanAppGood).set('Authorization', userAuth3)
       .end((err, res) => {
         res.body.should.have.property('data');
         res.body.status.should.equal(201);
@@ -85,7 +92,7 @@ describe('loan application route', () => {
   });
   it('it should reject application if user has outstanding loan', (done) => {
     userData.loanAppGood.email = 'successgilli@gmail.com';
-    chai.request(server).post('/api/v1/loans/').send(userData.loanAppGood).set('Authorization', userAuth)
+    chai.request(server).post('/api/v1/loans/').send(userData.loanAppGood).set('Authorization', userAuth1)
       .end((err, res) => {
         console.log(res.body, 'this')
         res.body.should.have.property('error');
@@ -93,22 +100,13 @@ describe('loan application route', () => {
         done();
       });
   });
-  it('it should validate input email field', (done) => {
-    userData.loanAppGood.email = '';
-    chai.request(server).post('/api/v1/loans/').send(userData.loanAppGood).set('Authorization', userAuth)
-      .end((err, res) => {
-        res.body.should.have.property('error');
-        res.body.status.should.equal(400);
-        done();
-      });
-  });
   it('it should validate input tenor field', (done) => {
     userData.loanAppGood.email = 'successgilli@gmail.com';
     userData.loanAppGood.tenor = '';
-    chai.request(server).post('/api/v1/loans/').send(userData.loanAppGood).set('Authorization', userAuth)
+    chai.request(server).post('/api/v1/loans/').send(userData.loanAppGood).set('Authorization', userAuth1)
       .end((err, res) => {
+        console.log(res.body)
         res.body.should.have.property('error');
-        res.body.status.should.equal(500);
         done();
       });
   });
@@ -116,7 +114,7 @@ describe('loan application route', () => {
     userData.loanAppGood.email = 'successgilli@gmail.com';
     userData.loanAppGood.tenor = '8';
     userData.loanAppGood.amount = '20';
-    chai.request(server).post('/api/v1/loans/').send(userData.loanAppGood).set('Authorization', userAuth)
+    chai.request(server).post('/api/v1/loans/').send(userData.loanAppGood).set('Authorization', userAuth1)
       .end((err, res) => {
         res.body.should.have.property('error');
         res.body.status.should.equal(400);
@@ -129,6 +127,7 @@ describe('get specific loan route', () => {
   it('should respond with loan not found if not found', (done) => {
     chai.request(server).get('/api/v1/loans/10').set('Authorization', adminAuth)
       .end((err, res) => {
+        console.log(res.body, 'getspec')
         res.body.status.should.equal(404);
         res.body.error.should.equal('loan not in database');
         done();
@@ -218,6 +217,7 @@ describe('approve/reject loan route', () => {
     let status = { status: 'approve' };
     chai.request(server).patch(`/api/v1/loans/${loanId2}`).send(status).set('Authorization', adminAuth)
       .end((err, res) => {
+        console.log(res.body, 'verify');
         res.body.status.should.equal(400);
         res.body.error.should.equal('user is not yet verifed');
         done();
@@ -310,7 +310,7 @@ describe('post loan repayment route', () => {
 // test view repayment history route.
 describe('Get repayment history route', () => {
   it('should respond loan not found if loan id not in db', (done) => {
-    chai.request(server).get(`/api/v1/loans/1000000000/repayments`).set('Authorization', userAuth)
+    chai.request(server).get(`/api/v1/loans/1000000000/repayments`).set('Authorization', userAuth1)
       .end((err, res) => {
         res.body.should.have.status(404);
         res.body.error.should.equal('loan with id: 1000000000 not found');
@@ -318,7 +318,7 @@ describe('Get repayment history route', () => {
       })
   })
   it('should respond with no repayment message if loan has no repayment yet', (done) => {
-    chai.request(server).get(`/api/v1/loans/${loanId2}/repayments`).set('Authorization', userAuth)
+    chai.request(server).get(`/api/v1/loans/${loanId2}/repayments`).set('Authorization', userAuth3)
       .end((err, res) => {
         res.body.should.have.status(200);
         res.body.data.should.be.a('array');
@@ -326,7 +326,7 @@ describe('Get repayment history route', () => {
       })
   })
   it('should respond with loan repayment if loanId found in db', (done) => {
-    chai.request(server).get(`/api/v1/loans/${loanId}/repayments`).set('Authorization', userAuth)
+    chai.request(server).get(`/api/v1/loans/${loanId}/repayments`).set('Authorization', userAuth1)
       .end((err, res) => {
         res.body.should.have.status(200);
         res.body.data.should.be.a('array');
@@ -379,24 +379,18 @@ describe('test the upload picture route', () => {
     await db('TRUNCATE TABLE repayments CASCADE');
     await db('TRUNCATE TABLE loans CASCADE');
   });
-  it ('should return no user found if email not in db', (done) => {
-    chai.request(server).patch('/api/v1/users/uploads/armpit@gmail.com').set('Authorization', userAuth)
-      .end((err, res) => {
-        res.body.error.should.equal('user not found');
-        done();
-      })
-  })
   it ('should save profile pic in db if user is found', (done) => {
-    chai.request(server).patch('/api/v1/users/uploads/successgilli@gmail.com').attach('image', fs.readFileSync('./asset/avatar.PNG'), './asset/avatar.PNG')
-      .set('Authorization', userAuth).end((err, res) => {
+    chai.request(server).patch('/api/v1/users/uploads').attach('image', fs.readFileSync('./asset/avatar.PNG'), './asset/avatar.PNG').set('Authorization', userAuth1)
+      .end((err, res) => {
         console.log(res.body)
         res.body.should.have.property('data');
         done();
       })
   })
   it ('should return error if image not provided', (done) => {
-    chai.request(server).patch('/api/v1/users/uploads/successgilli@gmail.com').attach('im', fs.readFileSync('./asset/avatar.PNG'), './asset/avatar.PNG')
-      .set('Authorization', userAuth).end((err, res) => {
+    chai.request(server).patch('/api/v1/users/uploads').attach('im', fs.readFileSync('./asset/avatar.PNG'), './asset/avatar.PNG')
+      .set('Authorization', userAuth1)
+      .end((err, res) => {
         console.log(res.body)
         res.body.should.have.property('error');
         done();

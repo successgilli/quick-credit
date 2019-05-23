@@ -4,7 +4,7 @@ import mailer from '../helpers/mailer';
 import UserHelper from '../helpers/userHelper';
 import LoanHelper from '../helpers/loanHelpers';
 
-const { findUser } = UserHelper;
+const { findUser, getUser } = UserHelper;
 const {
   createLoan,
   getSpecificLoan,
@@ -16,7 +16,8 @@ const {
 class Loans {
   static async apply(req, res, next) {
     try {
-      const { email, tenor, amount } = req.body;
+      const { tenor, amount } = req.body;
+      const { email } = await getUser(req.user);
       const applicant = await findUser(email);
       const loan = await createLoan(email, amount, tenor);
       res.status(201).json({

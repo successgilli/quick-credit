@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import db from '../model/query';
 import UserHelper from '../helpers/userHelper';
 
-const { successRes, findUser, createUser } = UserHelper;
+const { successRes, findUser, getUser, createUser } = UserHelper;
 dotEnv.config();
 
 class User {
@@ -47,7 +47,6 @@ class User {
           email: rows[0].email,
           firstName: rows[0].firstname,
           lastName: rows[0].lastname,
-          password: rows[0].password,
           address: rows[0].address,
           status: rows[0].status,
         },
@@ -58,14 +57,16 @@ class User {
   }
 
   static async uploadProfilePic(req, res, next) {
-    const email = req.params.userEmail;
+    const { email } = await getUser(req.user);
     const secureUrl = req.file.secure_url;
     try {
       const text = 'UPDATE users SET passporturl=$1 WHERE email=$2 RETURNING *;';
       const { rows } = await db(text, [secureUrl, email.trim()]);
+      const data = rows[0];
+      delete data.password;
       res.status(201).json({
         status: 201,
-        data: rows[0],
+        data,
       });
     } catch (e) {
       next(e);

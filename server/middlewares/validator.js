@@ -6,7 +6,7 @@ import userHelper from '../helpers/userHelper';
 import LoanHelper from '../helpers/loanHelpers';
 import db from '../model/query';
 
-const { findUser } = userHelper;
+const { findUser, getUser } = userHelper;
 const { getSpecificLoan } = LoanHelper;
 
 class InvalidInputChecker {
@@ -16,22 +16,25 @@ class InvalidInputChecker {
       bankName, bvn, accountNumber,
     } = req.body;
     const impropervalues = {};
-    if (!/^[0-9]{4,}$/.test(monthlyIncome.trim())) {
+    if (!/^[0-9]{4,10}$/.test(monthlyIncome.trim())) {
       impropervalues.monthlyincome = 'monthly income must be a number and atleast 4 chracters long';
     }
     if ((password.trim().length <= 7)) {
       impropervalues.password = 'password must be atleast 7 characters long. ';
     }
-    if (!/^[a-zA-Z-]{4,}$/.test(firstName.trim())) {
+    if (!/^[a-zA-Z-!@#$%^&*()_+]{7,50}$/.test(password)) {
+      impropervalues.password = 'cannot be padded with white space';
+    }
+    if (!/^[a-zA-Z-]{4,50}$/.test(firstName.trim())) {
       impropervalues.firstName = 'name can only contain letters and hyphen (-) of atleast 4 letters. ';
     }
-    if (!/^[a-zA-Z-]{4,}$/.test(lastName.trim())) {
+    if (!/^[a-zA-Z-]{4,50}$/.test(lastName.trim())) {
       impropervalues.lastName = 'lastName can only contain letters and hyphen (-) of atleast 4 letters. ';
     }
-    if (!/^[a-zA-Z-]{4,}$/.test(bankName.trim())) {
+    if (!/^[a-zA-Z-]{4,50}$/.test(bankName.trim())) {
       impropervalues.bankName = 'bankName can only contain letters and hyphen (-) of atleast 4 letters. ';
     }
-    if (!/^[a-zA-Z-]{4,}$/.test(companyName.trim())) {
+    if (!/^[a-zA-Z-]{4,50}$/.test(companyName.trim())) {
       impropervalues.companyName = 'company name can only contain letters and hyphen (-) of atleast 4 letters. ';
     }
     if (!/^[0-9]{10}$/.test(accountNumber.trim())) {
@@ -41,15 +44,18 @@ class InvalidInputChecker {
       impropervalues.bvn = 'bvn number can only contain 11 digit numbers. ';
     }
     if (/^[0-9]+$/.test(address.trim())) {
-      impropervalues.address1 = 'address cannot contain all numbers';
+      impropervalues.address = 'address cannot contain all numbers';
     }
     if (/^[0-9]+$/.test(companyAddress.trim())) {
       impropervalues.companyAddress = 'company address cannot contain all numbers';
     }
     if (!/(?!^[\d]+$)^[a-zA-Z0-9 ]{7,}$/.test(address.trim())) {
-      impropervalues.address2 = 'address can only contain letters, numbers and space (-) not less than 7. ';
+      impropervalues.address = 'address can only contain letters, numbers and space (-) not less than 7. ';
     }
-    if (!/^([a-z])([a-z0-9]+)@([a-z]+)\.([a-z]{2,3})(\.[a-z]{2,3})?$/.test(email.trim())) {
+    if (!/(?!^[\d]+$)^[a-zA-Z0-9 ]{7,}$/.test(companyAddress.trim())) {
+      impropervalues.companyAddress = 'address can only contain letters, numbers and space (-) not less than 7. ';
+    }
+    if (!/^([a-zA-Z])([a-z0-9A-Z]+)@([a-zA-Z]+)\.([a-zA-Z]{2,3})(\.[a-zA-Z]{2,3})?$/.test(email.trim())) {
       impropervalues.email = 'invalid email format';
     }
     return impropervalues;
@@ -69,24 +75,18 @@ class InvalidInputChecker {
 
   static invalidLoanAppValues(req) {
     const impropervalues = {};
-    const { email, tenor, amount } = req.body;
-    if (email.trim().length === 0) {
-      impropervalues.email1 = ' email field cannot be empty. ';
-    }
-    if (!/^([a-z])([a-z0-9]+)@([a-z]+)\.([a-z]{2,3})(\.[a-z]{2,3})?$/.test(email.trim())) {
-      impropervalues.email2 = 'invalid email format';
-    }
+    const { tenor, amount } = req.body;
     if (!/(?!^[0]+$)^[0-9]{1,2}$/.test(tenor.trim())) {
-      impropervalues.push(' tenor must be an integer between 1 and 12. e.g 12,5.');
+      impropervalues.tenor = ' tenor must be an integer between 1 and 12. in terms of month e.g 12,5.';
     }
     if (((Number(tenor.trim())) > 12) || ((Number(tenor.trim())) < 1)) {
       impropervalues.tenor = ' tenor must be between 1 and 12';
     }
-    if (!/^[0-9]{5,6}$/.test(amount.trim())) {
-      impropervalues.amount1 = ' the least amount you can borrow is 10,000 and cannot contain "," and "."';
+    if (!/^[0-9]{4,7}$/.test(amount.trim())) {
+      impropervalues.amount = ' the least amount you can borrow is 1,000 and cannot contain "," and "."';
     }
-    if (((Number(amount.trim())) % 10000) !== 0 || (Number(amount.trim())) > 100000) {
-      impropervalues.amount2 = ' we only loan multiples of ten (10,000). and max. of 100,000';
+    if (((Number(amount.trim())) < 1000) || (Number(amount.trim())) > 1000000) {
+      impropervalues.amount = ' we only loan multiples of one thousand (1,000). and max. of 1,000000.00';
     }
     return impropervalues;
   }
@@ -130,7 +130,7 @@ class DataCreationValidator {
   }
 
   static loanApplyValidator(req, res, next) {
-    const keys = ['email', 'amount', 'tenor'];
+    const keys = ['amount', 'tenor'];
     sendValidationInfo(
       res, req, keys, InvalidInputChecker.invalidLoanAppValues,
       next,
@@ -197,12 +197,25 @@ class loanDataCheck {
     }
   }
 
+  static async isParticularUser(req, res, next) {
+    const { email } = await getUser(req.user);
+    const { loanId } = req.params;
+    const loan = await getSpecificLoan(loanId.trim());
+    if ((email === loan.email) || (req.isAdmin)) {
+      next();
+    } else {
+      const err = new Error('Unauthorised');
+      err.statusCode = 401;
+      next(err);
+    }
+  }
+
   static async applicationCheck(req, res, next) {
-    const { email } = req.body;
+    const { email } = await getUser(req.user);
     try {
-      const applicant = await findUser(email.trim());
+      const applicant = await findUser(email);
       const text = 'SELECT * FROM loans WHERE email=$1;';
-      const { rows } = await db(text, [email.trim()]);
+      const { rows } = await db(text, [email]);
       let grantLoan = true;
       rows.forEach((loan) => {
         if (!(loan.repaid)) {
@@ -355,8 +368,8 @@ class UserDataCheck {
       const text = 'SELECT * FROM users WHERE email=$1;';
       const { rows } = await db(text, [email.trim()]);
       if (rows.length === 0) {
-        const err = new Error('user not in database');
-        err.statusCode = 404;
+        const err = new Error('invalid email or password');
+        err.statusCode = 400;
         next(err);
       } else if (!(bcrypt.compareSync(password, rows[0].password))) {
         const err = new Error('invalid email or password');
@@ -391,10 +404,9 @@ class UserDataCheck {
   }
 
   static async checkUploadPix(req, res, next) {
-    const email = req.params.userEmail;
     try {
-      const userToUpload = await findUser(email);
-      if (userToUpload === 'not found') {
+      const user = await getUser(req.user);
+      if (user === 'not found') {
         const err = new Error('user not found');
         err.statusCode = 404;
         next(err);

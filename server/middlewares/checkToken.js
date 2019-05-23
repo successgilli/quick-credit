@@ -12,6 +12,10 @@ const checkToken = (req, res, next) => {
     try {
       const decoded = jwt.verify(req.headers.authorization, process.env.jwt_secrete);
       req.isAdmin = decoded.isadmin;
+      req.user = decoded.id;
+      req.email = decoded.email;
+      console.log(req.email, 'email')
+      console.log(req.user, 'token')
       next();
     } catch (e) {
       const err = new Error(e.message);
