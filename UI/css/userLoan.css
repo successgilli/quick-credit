@@ -5,6 +5,46 @@ body, html{
 main{
     padding-top: 60px;
 }
+.calcinput>div>select{
+    width: 80%;
+    display: block;
+    margin: auto;
+    height: 30px;
+    cursor: pointer;
+    border: 0;
+    background-color: transparent;
+    border-bottom: 2px solid indigo;
+    color: black;
+    outline: 0;
+    font-size: 16px;
+
+}
+.calcinput>div>select>option{
+    background: rgba(109, 106, 106, 0.4);
+    position: relative;
+
+}
+.calcinput{
+    display: flex;
+    color: black;
+    justify-content: space-around;
+    width: 100%;
+}
+.calcinput>div{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.calcinput>div>h4{
+    text-align: start;
+    
+}
+.calcinput>div>span{
+    width: 80%;
+    margin: auto;
+    display: block;
+    border-bottom: 2px solid rgb(147, 46, 219);
+}
 /* logo*/
 .logo{
     color: indigo;
@@ -152,6 +192,7 @@ footer{
     cursor: pointer;
 }
 #navHead {
+    cursor: pointer;
     flex-basis: 10%;
     text-align: center;
     display: flex;
@@ -378,6 +419,8 @@ footer{
     padding-top: 0px;
     width: 100%;
     display: flex;
+    justify-content: center;
+    align-items: center;
     box-sizing: border-box;
 }
 #apply{
@@ -438,13 +481,13 @@ padding-left: 30px;
 }
 .calculatedFromFormUser{
     box-sizing: border-box;
-    padding: 5px;
-    width: 90%;
+    padding: 15px;
+    width: 414px;
     margin: auto;
     min-height: 200px;
     border: 0;
     border-radius: 6px;
-    box-shadow: 0 6px 6px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 6px 10px rgba(0, 0, 0, 0.1);
 }
 .calculatedFromFormUser>h3{
     text-align: center;
@@ -462,17 +505,15 @@ padding-left: 30px;
 .calculatedUser>div{
     width: 100%;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 .calculatedUser>div>h4{
-    text-align: start;
-    padding: 10px;
+    text-align: center;
 }
 .calculatedUser>div>span{
     width: 80%;
-    margin: auto;
-    display: block;
-    border-bottom: 2px solid rgb(147, 46, 219);
+    color: rgb(152, 69, 211);
+    font-weight: bold;
 }
 
 #CalcApplyBtn{
@@ -484,8 +525,8 @@ padding-left: 30px;
     color: white;
     padding: 10px;
     margin: auto;
-    margin-top: 20px;
-    margin-bottom: 10px;
+    margin-top: 25px;
+    margin-bottom: 30px;
     background-color: #f57921;
     cursor: pointer;
     transition: 0.8s ease;
@@ -504,6 +545,11 @@ padding-left: 30px;
 @media (max-width:790px){   
     #userLoanApply{
         flex-direction: column;
+    }
+}
+@media (max-width:450px){   
+    .calculatedFromFormUser{
+        width: 300px;
     }
 }
 

@@ -6,7 +6,7 @@ const navUser = document.getElementById('navUser');
 const userAsideBackground = document.getElementById('userAsideBackground');
 const userAsideContent = document.getElementById('userAsideContent');
 
-const navWide = document.getElementById('navWide');
+const navWide = document.getElementById('navHead');
 const aside = document.getElementById('aside');
 const userMainContainer = document.getElementById('userMainContainer');
 

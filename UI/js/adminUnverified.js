@@ -12,7 +12,7 @@ const verifyClientForm = document.getElementById('verifyClient');
 const verifyBackground = document.getElementById('verifyBackground');
 const vetYesBtn = document.getElementById('vetYes');
 const vetNoBtn = document.getElementById('vetNo');
-const navWide = document.getElementById('navWide');
+const navWide = document.getElementById('navHead');
 const aside = document.getElementById('aside');
 const userMainContainer = document.getElementById('userMainContainer');
 

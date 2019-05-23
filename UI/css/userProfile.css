@@ -107,6 +107,7 @@ footer > a {
     cursor: pointer;
 }
 #navHead {
+    cursor: pointer;
     flex-basis: 10%;
     text-align: center;
     display: flex;
@@ -335,6 +336,13 @@ footer > a {
     #userAsideContent{
         width: 60%;
     }
+    #updateDetails1{
+        flex-direction: column;
+    }
+    #profileInfo{
+        border-left: none !important;
+        margin-bottom: 30px;
+    }
 }
 @media(max-width:431px){
     #userAsideContent{
@@ -412,6 +420,7 @@ footer > a {
     border: 0;
     padding: 10px;
     margin-top: 20px;
+    margin-bottom: 30px;
     width: 100px;
     cursor: pointer;
     color: #ECEEE8;
@@ -475,7 +484,11 @@ footer > a {
     margin-bottom: 10px;
     box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.3);
 }
+#pictureCont {
+    flex-basis: 50%;
+}
 #updateDetails1{
+    display: flex;
     width: 100%;   
 }
 #updatePix{
@@ -511,7 +524,8 @@ footer > a {
     z-index: 20;
 }
 #profileInfo{
-    width: 60%;
+    border-left: 2px solid grey;
+    flex-basis: 50%;
     min-height: 100px;
     margin: auto;
    
