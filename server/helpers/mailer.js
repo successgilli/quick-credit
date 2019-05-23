@@ -6,7 +6,7 @@ function mailUser(email, status, loanDetails) {
     secure: false,
     service: 'gmail',
     auth: {
-      user: 'successgilli4@gmail.com',
+      user: 'successgilli@gmail.com',
       pass: 'quininmotion2',
     },
     tls: {
@@ -14,7 +14,7 @@ function mailUser(email, status, loanDetails) {
     },
   });
   const mailOptions = {
-    from: 'successgilli4@gmail.com',
+    from: 'successgilli@gmail.com',
     to: email,
     subject: "Gtech's Quick credit loan confirmation",
     text: `Dear ${email}, your loan with details loan Amount: ${loanDetails.loanAmount}, tenor: ${loanDetails.loanAmount},
