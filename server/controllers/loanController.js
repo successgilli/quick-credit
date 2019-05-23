@@ -14,97 +14,125 @@ const {
 } = LoanHelper;
 
 class Loans {
-  static async apply(req, res) {
-    const { email, tenor, amount } = req.body;
-    const applicant = await findUser(email);
-    const loan = await createLoan(email, amount, tenor);
-    res.status(201).json({
-      status: 201,
-      data: {
-        loanId: loan.id,
-        firstName: applicant.firstname,
-        lastName: applicant.lastname,
-        email: loan.user,
-        tenor: loan.tenor,
-        amount: loan.amount,
-        paymentinstallment: loan.paymentinstallment,
-        status: loan.status,
-        balance: loan.balance,
-        interest: loan.interest,
-      },
-    });  
-  }
-
-  static async getLoan(req, res) {
-    const { loanId } = req.params;// query loanId in db.
-    const loan = await getSpecificLoan(loanId.trim())
-    res.status(200).json({
-      status: 200,
-      data: loan,
-    });
-  }
-
-  static async changeStatus(req, res) {
-    const { status } = req.body;
-    const { loanId } = req.params;
-    const specificLoan = await getSpecificLoan(loanId);
-    if (/^reject$/i.test(status.trim())) {
-      const loanRejectRes = await rejectLoan(specificLoan);
-      mailer(specificLoan.user, 'rejected', loanRejectRes)
+  static async apply(req, res, next) {
+    try {
+      const { email, tenor, amount } = req.body;
+      const applicant = await findUser(email);
+      const loan = await createLoan(email, amount, tenor);
       res.status(201).json({
         status: 201,
-        data: loanRejectRes,
+        data: {
+          loanId: loan.id,
+          firstName: applicant.firstname,
+          lastName: applicant.lastname,
+          email: loan.user,
+          tenor: loan.tenor,
+          amount: loan.amount,
+          paymentinstallment: loan.paymentinstallment,
+          status: loan.status,
+          balance: loan.balance,
+          interest: loan.interest,
+        },
       });
-    } else {
-      const loanAcceptRes = await acceptLoan(specificLoan);
-      mailer(specificLoan.user, 'approved', loanAcceptRes)
-      res.status(201).json({
-        status: 201,
-        data: loanAcceptRes,
-      });
+    } catch (e) {
+      next(e);
     }
   }
 
-  static async postRepayment(req, res) {
-    const { amount } = req.body;
-    const { loanId } = req.params;
-    // query loanId in db.
-    const specificLoan = await getSpecificLoan(loanId);
-    const text = 'INSERT INTO repayments (loanid, amount) VALUES ($1,$2) RETURNING *;';
-    const { rows } = await db(text, [specificLoan.id, Number(amount.trim())]);
-    const data = await updateBalance(specificLoan, amount);
-    data.id = rows[0].id;
-    res.status(201).json({
-      status: 201,
-      data,
-    });      
+  static async getLoan(req, res, next) {
+    const { loanId } = req.params;// query loanId in db.
+    try {
+      const loan = await getSpecificLoan(loanId.trim())
+      res.status(200).json({
+        status: 200,
+        data: loan,
+      });
+    } catch (e) {
+      next(e);
+    }
   }
 
-  static async getRepayHistory(req, res) {
+  static async changeStatus(req, res, next) {
+    const { status } = req.body;
     const { loanId } = req.params;
-    const text = 'SELECT * FROM repayments WHERE loanid=$1;';
-    const { rows } = await db(text, [loanId.trim()]);
-    res.status(200).json({
-      status: 200,
-      data: rows,
-    });
+    try {
+      const specificLoan = await getSpecificLoan(loanId);
+      if (/^reject$/i.test(status.trim())) {
+        const loanRejectRes = await rejectLoan(specificLoan);
+        mailer(specificLoan.user, 'rejected', loanRejectRes);
+        res.status(201).json({
+          status: 201,
+          data: loanRejectRes,
+        });
+      } else {
+        const loanAcceptRes = await acceptLoan(specificLoan);
+        mailer(specificLoan.user, 'approved', loanAcceptRes);
+        res.status(201).json({
+          status: 201,
+          data: loanAcceptRes,
+        });
+      }
+    } catch (e) {
+      next(e);
+    }
   }
-  
-  static async getLoans(req, res) {
+
+  static async postRepayment(req, res, next) {
+    try {
+      const { amount } = req.body;
+      const { loanId } = req.params;
+      // query loanId in db.
+      const specificLoan = await getSpecificLoan(loanId);
+      const text = 'INSERT INTO repayments (loanid, amount) VALUES ($1,$2) RETURNING *;';
+      const { rows } = await db(text, [specificLoan.id, Number(amount.trim())]);
+      const data = await updateBalance(specificLoan, amount);
+      data.id = rows[0].id;
+      res.status(201).json({
+        status: 201,
+        data,
+      });
+    } catch (e) {
+      const err = new Error(e.message);
+      err.statusCode = 500;
+      next(err);
+    }
+  }
+
+  static async getRepayHistory(req, res, next) {
+    const { loanId } = req.params;
+    try {
+      const text = 'SELECT * FROM repayments WHERE loanid=$1;';
+      const { rows } = await db(text, [loanId.trim()]);
+      res.status(200).json({
+        status: 200,
+        data: rows,
+      });
+    } catch (e) {
+      const err = new Error(e.message);
+      err.statusCode = 500;
+      next(err);
+    }
+  }
+
+  static async getLoans(req, res, next) {
     const { status, repaid } = req.query;
-    if ((typeof status === 'undefined') && (typeof repaid === 'undefined')) {
-      const { rows } = await db('SELECT * FROM loans');
-      res.status(200).json({
-        status: 200,
-        data: rows,
-      })
-    } else {
-      const text = 'SELECT * FROM loans WHERE status=$1 AND repaid=$2';
-      const { rows } = await db(text, [status, repaid]);
-      res.status(200).json({
-        status: 200,
-        data: rows,
-      })
+    try {
+      if ((typeof status === 'undefined') && (typeof repaid === 'undefined')) {
+        const { rows } = await db('SELECT * FROM loans');
+        res.status(200).json({
+          status: 200,
+          data: rows,
+        });
+      } else {
+        const text = 'SELECT * FROM loans WHERE status=$1 AND repaid=$2';
+        const { rows } = await db(text, [status, repaid]);
+        res.status(200).json({
+          status: 200,
+          data: rows,
+        });
+      }
+    } catch (e) {
+      next(e);
     }
   }
 }

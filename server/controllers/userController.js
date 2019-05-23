@@ -1,4 +1,3 @@
-/* eslint-disable no-lonely-if */
 import 'babel-polyfill';
 import dotEnv from 'dotenv';
 import jwt from 'jsonwebtoken';
@@ -9,52 +8,68 @@ const { successRes, findUser, createUser } = UserHelper;
 dotEnv.config();
 
 class User {
-  static async signup(req, res) {
-    const user = await createUser(req);
-    const token = jwt.sign(user, process.env.jwt_secrete);
-    res.status(200).json({
-      status: 200,
-      data: successRes(token, user),
-    });
+  static async signup(req, res, next) {
+    try {
+      const user = await createUser(req);
+      const token = jwt.sign(user, process.env.jwt_secrete);
+      res.status(201).json({
+        status: 201,
+        data: successRes(token, user),
+      });
+    } catch (e) {
+      next(e);
+    }
   }
 
-  static async signin(req, res) {
+  static async signin(req, res, next) {
     const { email } = req.body;
-    const loginUser = await findUser(email);
-    const token = jwt.sign(loginUser, process.env.jwt_secrete);
-    res.status(200).json({
-      status: 200,
-      data: successRes(token, loginUser),
-    });
+    try {
+      const loginUser = await findUser(email);
+      const token = jwt.sign(loginUser, process.env.jwt_secrete);
+      res.status(200).json({
+        status: 200,
+        data: successRes(token, loginUser),
+      });
+    } catch (e) {
+      next(e);
+    }
   }
 
-  static async verify(req, res) {
+  static async verify(req, res, next) {
     const { userEmail } = req.params;
-    const text = 'UPDATE users SET status=$1 WHERE userr=$2 RETURNING *;';
-    const param = ['verified', userEmail.trim()];
-    const { rows } = await db(text, param);
-    res.status(200).json({
-      status: 200,
-      data: {
-        email: rows[0].userr,
-        firstName: rows[0].firstname,
-        lastName: rows[0].lastname,
-        password: rows[0].password,
-        address: rows[0].address,
-        status: rows[0].status,
-      },
-    });
+    try {
+      const text = 'UPDATE users SET status=$1 WHERE email=$2 RETURNING *;';
+      const param = ['verified', userEmail.trim()];
+      const { rows } = await db(text, param);
+      res.status(200).json({
+        status: 200,
+        data: {
+          email: rows[0].email,
+          firstName: rows[0].firstname,
+          lastName: rows[0].lastname,
+          password: rows[0].password,
+          address: rows[0].address,
+          status: rows[0].status,
+        },
+      });
+    } catch (e) {
+      next(e);
+    }
   }
 
-  static async uploadProfilePic(req, res) {
+  static async uploadProfilePic(req, res, next) {
     const email = req.params.userEmail;
     const secureUrl = req.file.secure_url;
-    const text = 'UPDATE users SET passporturl=$1 WHERE userr=$2 RETURNING *;'
-    const { rows } = await db(text, [secureUrl, email.trim()]);
-    res.status(201).json({
-      status: 201,
-      data: rows[0],
-    });
+    try {
+      const text = 'UPDATE users SET passporturl=$1 WHERE email=$2 RETURNING *;';
+      const { rows } = await db(text, [secureUrl, email.trim()]);
+      res.status(201).json({
+        status: 201,
+        data: rows[0],
+      });
+    } catch (e) {
+      next(e);
+    }
   }
 }
 

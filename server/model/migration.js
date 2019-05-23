@@ -1,7 +1,9 @@
+import 'babel-polyfill'
 import db from './query';
+import seedAdmin from '../helpers/createAdmin';
 
 const userTable = `CREATE TABLE IF NOT EXISTS users ( id serial NOT NULL UNIQUE,
-    userr VARCHAR(100) NOT NULL PRIMARY KEY,
+    email VARCHAR(100) NOT NULL PRIMARY KEY,
     firstname VARCHAR(100) NOT NULL,
     lastname VARCHAR(100) NOT NULL,
     address VARCHAR(100) NOT NULL,
@@ -16,7 +18,7 @@ const userTable = `CREATE TABLE IF NOT EXISTS users ( id serial NOT NULL UNIQUE,
     passporturl VARCHAR(300),
     isAdmin BOOLEAN DEFAULT false);`;
 const loanTable = `CREATE TABLE IF NOT EXISTS loans ( id serial NOT NULL PRIMARY KEY,
-    userr VARCHAR(100) NOT NULL REFERENCES users(userr),
+    email VARCHAR(100) NOT NULL REFERENCES users(email),
     createdOn DATE DEFAULT CURRENT_DATE,
     status VARCHAR(50) DEFAULT 'pending',
     repaid BOOLEAN DEFAULT false,
@@ -33,9 +35,10 @@ const repaymentTable = `CREATE TABLE IF NOT EXISTS repayments (
   PRIMARY KEY (loanId, id)
 );`;
 
-const createTables = () => {
+const createTables = async () => {
   try {
     db(`${userTable} ${loanTable} ${repaymentTable}`);
+    await seedAdmin();
     console.log('tables created');
   }
   catch (err) {

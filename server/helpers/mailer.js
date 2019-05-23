@@ -9,7 +9,7 @@ function mailUser(email, status, loanDetails) {
     },
   });
   const mailOptions = {
-    from: 'successgilli@gmail.com',
+    from: 'successgilli4@gmail.com',
     to: email,
     subject: "Gtech's Quick credit loan confirmation",
     text: `Dear ${email}, your loan with details loan Amount: ${loanDetails.loanAmount}, tenor: ${loanDetails.loanAmount},
