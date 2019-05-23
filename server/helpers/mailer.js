@@ -2,10 +2,15 @@ import nodemailer from 'nodemailer';
 
 function mailUser(email, status, loanDetails) {
   const transporter = nodemailer.createTransport({
-    service: 'Gmail',
+    host: 'smtp.gmail.com',
+    secure: false,
+    service: 'gmail',
     auth: {
       user: 'successgilli@gmail.com',
       pass: 'quininmotion2',
+    },
+    tls: {
+      rejectUnauthorized: false,
     },
   });
   const mailOptions = {
@@ -16,6 +21,7 @@ function mailUser(email, status, loanDetails) {
     monthly payment: ${loanDetails.monthlyInstallment} has been ${status}`,
   };
   transporter.sendMail(mailOptions, (error, info) => {
+    console.log(info, 'message sent')
   });
 }
 

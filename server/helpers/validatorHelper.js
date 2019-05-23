@@ -1,28 +1,26 @@
-/* eslint-disable linebreak-style */
-
 const checkMissingKeys = (req, keys) => {
-  const missing = [];
+  const missing = {};
 
   keys.forEach((keyVal) => {
-    if (!(keyVal in req.body)) missing.push(` ${keyVal} key is required `);
+    if (!(keyVal in req.body)) missing[keyVal] = ` ${keyVal} key is required `;
   });
   return missing;
 };
 
-const sendValidationInfo = (res, req, keys, improperVals, Next) => {
-  if (!(checkMissingKeys(req, keys).length === 0)) {
+const sendValidationInfo = (res, req, keys, improperVals, next) => {
+  if (!(Object.keys(checkMissingKeys(req, keys)).length === 0)) {
     return res.status(400).json({
       status: 400,
-      error: checkMissingKeys(req, keys).join('.'),
-    })
+      error: checkMissingKeys(req, keys),
+    });
   }
-  if (!(improperVals(req).length === 0)) {
+  if (!(Object.keys(improperVals(req)).length === 0)) {
     return res.status(400).json({
       status: 400,
-      error: improperVals(req).join('.'),
-    })
+      error: improperVals(req),
+    });
   }
-  Next();
+  next();
 };
 
 export default sendValidationInfo;

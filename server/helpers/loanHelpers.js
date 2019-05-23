@@ -1,8 +1,7 @@
 import 'babel-polyfill';
-import db from '../model/query'
+import db from '../model/query';
 
 class LoanHelper {
-
   static async createLoan(email, amount, tenor) {
     const amountFloat = parseFloat(amount);
     const param = [
@@ -14,7 +13,7 @@ class LoanHelper {
       (0.05 * amountFloat),
     ];
     const text = `INSERT INTO loans (
-      userr,
+      email,
       tenor,
       amount,
       paymentinstallment,
@@ -80,6 +79,6 @@ class LoanHelper {
     };
     return repayment;
   }
-} 
+}
 
 export default LoanHelper;
