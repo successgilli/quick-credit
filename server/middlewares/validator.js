@@ -137,7 +137,7 @@ class DataCreationValidator {
     );
   }
 
-  static laonStatusValidator(req, res, next) {
+  static loanStatusValidator(req, res, next) {
     const keys = ['status'];
     sendValidationInfo(
       res, req, keys, InvalidInputChecker.invalidLoanStatusValues,
