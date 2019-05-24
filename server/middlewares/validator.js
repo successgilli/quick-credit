@@ -22,7 +22,7 @@ class InvalidInputChecker {
     if ((password.trim().length <= 7)) {
       impropervalues.password = 'password must be atleast 7 characters long. ';
     }
-    if (!/^[a-zA-Z-!@#$%^&*()_+]{7,50}$/.test(password)) {
+    if (!/^[a-zA-Z-!@#$%^&*()_+0-9]{7,50}$/.test(password)) {
       impropervalues.password = 'cannot be padded with white space';
     }
     if (!/^[a-zA-Z-]{4,50}$/.test(firstName.trim())) {

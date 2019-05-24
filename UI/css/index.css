@@ -477,7 +477,18 @@ footer{
     width: 100px;
     background-color: red;
 }
-
+#logResponse{
+    text-align: center;
+    padding-top: 10px;
+    color: red;
+    display: none;
+}
+#successDiv {
+    color: green;
+    padding-bottom: 10px;
+    text-align: center;
+    display: none;
+}
 #signContent>span{
     
     font-weight: bold;
