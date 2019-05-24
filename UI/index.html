@@ -29,7 +29,8 @@
             <span id="outerClose">
                 <span id="closeLogin">+</span>
             </span>
-            <form action="" id="loginForm">       
+            <form action="" id="loginForm"> 
+                <div id="successDiv">Signin successful !</div>     
                 <input type="text" class="inputFields" id="email" name="email" required>
                 <label for="email">Email</label>
                 <div id="emailRes" class="errorRes">Email must be a valid address e.g success@gmail.com</div>
@@ -37,6 +38,7 @@
                 <label for="password">Password</label>
                 <div id="passwordRes" class="errorRes">password must be atleast 7 characters long</div>
                 <button id="signinBtn"> LOG IN</button>
+                <div id="logResponse">WRONG</div>
             </form>
             <form action="" id="signupForm">       
                 <div id="tabContent">
@@ -84,7 +86,7 @@
                             <input class="inputFields" name="bvn" type="text" id="bvn" required>
                             <label for="bvn">BVN</label>
                             <div class="errorRes">bvn must be an 11 digit number</div>
-                            <input class="inputFields" type="text" name="accountNumber" required>
+                            <input class="inputFields" type="text" name="accountNumber" id="accountNumber" required>
                             <label for="accountNumber">Account Number</label>
                             <div class="errorRes">account number must be a 10 digit number</div>
                         </div>

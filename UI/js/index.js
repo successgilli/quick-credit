@@ -47,9 +47,7 @@ const patterns = {
   accountNumber:/^[0-9]{10}$/,
 }
 // add event to log in btn
-signinBtn.addEventListener('click', ()=> {
-  location = './userDashbord.html';
-})
+
 // add event to aside login div
 homeAsideLinks[4].addEventListener('click', ()=>{
   backgroundSignUser.style.display = 'flex';
@@ -520,5 +518,120 @@ const validateTabs = () => {
       }
     }
   }
-}
+};
 
+
+{
+  const form = document.getElementById('loginForm');
+  const email = document.getElementById('email');
+  const logResponse = document.getElementById('logResponse');
+  const password = document.getElementById('password');
+  const successDiv = document.getElementById('successDiv');
+
+  const url = 'https://quickcreditgilli.herokuapp.com/api/v1/auth/signin';
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (email.style.borderColor === 'red' || password.style.borderColor === 'red') {
+      logResponse.style.display = 'block';
+      logResponse.textContent = 'ensure inputs are correct';
+    } else {
+      logResponse.style.display = 'block';
+      logResponse.textContent = 'loading';
+      const data = {
+        email: email.value,
+        password: password.value,
+      };
+      const req = new Request(url, {
+        method: 'POST',
+        headers: new Headers({ 'Content-type': 'application/json' }),
+        body: JSON.stringify(data),
+      });
+      fetch(req)
+        .then(res => res.json())
+        .then((obj) => {
+          if (obj.status === 200) {
+            successDiv.style.display = 'block';
+            setTimeout(() => {
+              logResponse.style.display = 'none';
+              console.log(typeof obj.data.isAdmin)
+              if (obj.data.isAdmin === true) {
+                location = './adminDashboard.html'
+              } else {
+                location = './userDashbord.html'
+              }
+            }, 300);
+          } else {
+            logResponse.style.display = 'block';
+            logResponse.textContent = 'wrong input';
+          }
+        });
+    }
+  });
+}
+{
+  const form = document.getElementById('signupForm');
+  const firstname = document.getElementById('firstname');
+  const Lastname = document.getElementById('LastName');
+  const address = document.getElementById('address');
+  const passwordSig = document.getElementById('passwordSign');
+  const userEmail = document.getElementById('userEmail');
+  const userCompany = document.getElementById('userCompany');
+  const monthlyIncome = document.getElementById('monthlyIncome');
+  const companyAddress = document.getElementById('companyAddress');
+  const bankName = document.getElementById('bankName');
+  const bvn = document.getElementById('bvn');
+  const accountNumber = document.getElementById('accountNumber');
+  const logResponse = document.getElementById('logResponse');
+  const successDiv = document.getElementById('successDiv');
+
+  const url = 'https://quickcreditgilli.herokuapp.com/api/v1/auth/signup';
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('yes!');
+    logResponse.style.display = 'block';
+    logResponse.textContent = 'ensure inputs are correct';
+    logResponse.style.display = 'block';
+    logResponse.textContent = 'loading';
+    const data = {
+      firstName: firstname.value,
+      lastName: Lastname.value,
+      address: address.value,
+      email: userEmail.value,
+      password: passwordSig.value.trim(),
+      companyName: userCompany.value,
+      companyAddress: companyAddress.value,
+      monthlyIncome: monthlyIncome.value,
+      bankName: bankName.value,
+      bvn: bvn.value,
+      accountNumber: accountNumber.value,
+    };
+    console.log(data);
+    const req = new Request(url, {
+      method: 'POST',
+      headers: new Headers({ 'Content-type': 'application/json' }),
+      body: JSON.stringify(data),
+    });
+    fetch(req)
+      .then(res => res.json())
+      .then((obj) => {
+        console.log(obj);
+        if (obj.status === 200) {
+          successDiv.style.display = 'block';
+          setTimeout(() => {
+            logResponse.style.display = 'none';
+            console.log(typeof obj.data.isAdmin)
+            if (obj.data.isAdmin === true) {
+              location = './adminDashboard.html'
+            } else {
+              location = './userDashbord.html'
+            }
+          }, 300);
+        } else {
+          logResponse.style.display = 'block';
+          logResponse.textContent = 'wrong input';
+        }
+      });
+  });
+}
