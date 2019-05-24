@@ -140,7 +140,7 @@ footer{
 }
 #navHead {
     cursor: pointer;
-    flex-basis: 10%;
+    flex-basis: 5%;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -173,7 +173,7 @@ footer{
 }
 #navHead {
     box-sizing: border-box;
-    flex-basis: 10%;
+    flex-basis: 5%;
     text-align: center;
     display: flex;
     justify-content: flex-start;
