@@ -8,13 +8,12 @@ main{
 .calcinput>div>select{
     width: 80%;
     display: block;
-    margin: auto;
     height: 30px;
     cursor: pointer;
     border: 0;
     background-color: transparent;
     border-bottom: 2px solid indigo;
-    color: black;
+    color: rgb(44, 43, 43);
     outline: 0;
     font-size: 16px;
 
@@ -26,7 +25,7 @@ main{
 }
 .calcinput{
     display: flex;
-    color: black;
+    color: rgb(44, 43, 43);
     justify-content: space-around;
     width: 100%;
 }
@@ -193,7 +192,7 @@ footer{
 }
 #navHead {
     cursor: pointer;
-    flex-basis: 10%;
+    flex-basis: 5%;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -225,7 +224,7 @@ footer{
 }
 #navHead {
     box-sizing: border-box;
-    flex-basis: 10%;
+    flex-basis: 5%;
     text-align: center;
     display: flex;
     justify-content: flex-start;
@@ -492,23 +491,24 @@ padding-left: 30px;
 .calculatedFromFormUser>h3{
     text-align: center;
     margin: auto;
+    font-size: 23px;
     width: 100%;
     color: #C0465D;
     margin-top: 20px;
 }
 .calculatedUser{
     display: flex;
-    color: black;
+    color: rgb(44, 43, 43);
     justify-content: space-around;
     width: 100%;
 }
 .calculatedUser>div{
     width: 100%;
-    text-align: center;
+    text-align: left;
     margin-bottom: 5px;
 }
 .calculatedUser>div>h4{
-    text-align: center;
+    text-align: left;
 }
 .calculatedUser>div>span{
     width: 80%;
@@ -547,7 +547,22 @@ padding-left: 30px;
         flex-direction: column;
     }
 }
-@media (max-width:450px){   
+@media (max-width:450px){  
+    .calcinput{
+        flex-direction: column;
+    } 
+    .calculatedUser{
+        flex-direction: column;
+    }
+    .calcinput>div>select {
+margin: auto;
+    }
+    .calculatedUser>div > h4{
+        text-align: center;
+    }
+    .calculatedUser>div{
+        text-align: center;
+    }
     .calculatedFromFormUser{
         width: 300px;
     }

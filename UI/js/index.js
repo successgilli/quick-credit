@@ -38,7 +38,7 @@ const homeBtns = document.getElementsByClassName('homeBtns');
 
 
 const patterns = {
-  email: /^([a-z])([a-z0-9]+)@([a-z]{3,5})\.([a-z]{2,3})(\.[a-z]{2,3})?$/,
+  email: /^([a-zA-Z])([a-z0-9A-Z]+)@([a-zA-Z]+)\.([a-zA-Z]{2,3})(\.[a-zA-Z]{2,3})?$/,
   password: /^[\w@-]{7,20}$/,
   name: /^[a-zA-Z]{5,12}$/,
   address: /(?!^[\d]+$)^[a-zA-Z0-9 ]{7,20}$/,
@@ -400,9 +400,9 @@ amount.addEventListener('change', (e)=>{
   let newDate = new Date();
   newDate.setMonth(currentDate.getMonth()+Number(tenor.options[tenor.options.selectedIndex].value));
   repaymentDate.textContent = newDate.toDateString();
-  interest.innerHTML = '&#8358; ' + toMoneyString(interestAmount);
-    
+  interest.innerHTML = '&#8358; ' + toMoneyString(interestAmount);   
 })
+
 tenor.addEventListener('change', (e)=>{
   console.log(new Date)
   let amountVal = getMoneyValue(amount.options[amount.options.selectedIndex].value);
@@ -410,7 +410,7 @@ tenor.addEventListener('change', (e)=>{
   let tenorVal = Number(tenor.options[tenor.options.selectedIndex].value);
   let totalMoney = amountVal + interestAmount;
   let monthlyMoney = totalMoney/tenorVal;
-  totalRepayment.innerHTML = '&#8358; ' +toMoneyString(totalMoney);
+  totalRepayment.innerHTML = '&#8358; ' + toMoneyString(totalMoney);
   monthlyRepayment.innerHTML = '&#8358; ' +toMoneyString(monthlyMoney);
   const target = e.target;
   loanTenorDisplay.textContent = target.options[target.options.selectedIndex].value + ' Month(s)';
