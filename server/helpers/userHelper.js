@@ -15,7 +15,6 @@ class UserHelper {
       address: user.address.trim(),
       isAdmin: user.isadmin,
       status: user.status,
-      password: user.password,
     };
   }
 
@@ -25,6 +24,16 @@ class UserHelper {
     if (rows.length === 0) {
       return 'not found';
     }
+    return rows[0];
+  }
+
+  static async getUser(userId) {
+    const text = 'SELECT * FROM users WHERE id=$1;';
+    const { rows } = await db(text, [userId]);
+    if (rows.length === 0) {
+      return 'not found';
+    }
+
     return rows[0];
   }
 

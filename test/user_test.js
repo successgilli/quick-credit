@@ -25,8 +25,8 @@ describe('welcome route', () => {
   })
   it('should welcome users to the route', (done) => {
     chai.request(server).get('/api/v1').end((err, res) => {
-      console.log(res.body)
-      res.body.data.should.equal('welcome to Gilberts API..for docs, add "quickcreditgilli.herokuapp.com/api-docs" to navigate other routes');
+      console.log(res.body);
+      res.status.should.equal(200);
       done();
     })
   })
@@ -132,8 +132,8 @@ describe('test sign up inputs', () => {
 describe('testing signin', () => {
   it('should respond with user not in db if user not in db', (done) => {
     chai.request(server).post('/api/v1/auth/signin').send(userData.signinnotInDb).end((err, res) => {
-      res.body.status.should.equal(404);
-      res.body.error.should.equal('user not in database');
+      res.body.status.should.equal(400);
+      res.body.error.should.equal('invalid email or password');
       done();
     });
   });

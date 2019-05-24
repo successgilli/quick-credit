@@ -22,6 +22,7 @@ const {
 } = Loan;
 const { checkQueryStrings } = DataQuery;
 const {
+  isParticularUser,
   applicationCheck,
   checkGetLoan,
   checkStatus,
@@ -29,11 +30,11 @@ const {
   checkGetRepayment,
   checkIdFormat,
 } = loanDataCheck;
-loan.post('/', loanApplyValidator, applicationCheck, checkToken, isUser, apply);
-loan.get('/:loanId', checkIdFormat, checkGetLoan, checkToken, isAdmin, getLoan);
+loan.post('/', loanApplyValidator, checkToken, isUser, applicationCheck, apply);
+loan.get('/:loanId', checkIdFormat, checkGetLoan, checkToken, isParticularUser, getLoan);
 loan.patch('/:loanId', checkIdFormat, loanStatusValidator, checkStatus, checkToken, isAdmin, changeStatus);
 loan.post('/:loanId/repayment', checkIdFormat, loanRepaymentValidator, postRepaymentCheck, checkToken, isAdmin, postRepayment);
-loan.get('/:loanId/repayments', checkIdFormat, checkGetRepayment, checkToken, isUser, getRepayHistory);
+loan.get('/:loanId/repayments', checkIdFormat, checkGetRepayment, checkToken, isParticularUser, getRepayHistory);
 loan.get('/', checkQueryStrings, checkToken, isAdmin, getLoans);
 
 export default loan;
