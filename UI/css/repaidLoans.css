@@ -121,7 +121,7 @@ footer>a {
 }
 #navHead {
     cursor: pointer;
-    flex-basis: 10%;
+    flex-basis: 5%;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -173,7 +173,7 @@ footer>a {
 }
 #navHead {
     box-sizing: border-box;
-    flex-basis: 10%;
+    flex-basis: 5%;
     text-align: center;
     display: flex;
     justify-content: flex-start;
@@ -280,6 +280,20 @@ footer>a {
     padding-top: 20px;
     padding-bottom: 20px;
 }
+.moreInfo>p{
+    font-weight: bold;
+    color: rgb(70, 70, 70);
+}
+.repaywidehead {
+    display: flex;
+    justify-content: space-around;
+}
+.repayHeads3{
+    color: #d44638;
+}
+.repayHeads1 {
+    display: none;
+}
 .repayDetails{
     width: 100%;
     display: flex;
@@ -288,10 +302,6 @@ footer>a {
 }
 .repayHeads1{
     color: #d44638;
-}
-.repayDetails:nth-child(even){
-    background-color: rgb(216, 183, 240);
-    box-shadow:  0px 0px 8px rgba(0, 0, 0, 0.5) inset;
 }
 .viewRepayment{
     width: 150px;
@@ -440,6 +450,18 @@ footer>a {
     }
 }
 @media(max-width: 676px){
+    .repayHeads1{
+        display: block;
+    }
+    .repayHeads3{
+        display: none;
+    }
+    .repayDetails{
+        margin-bottom: 20px;
+    }
+    .repayDetails:nth-child(even){
+        background-color: rgb(175, 171, 171);
+    }
     .headbtns {
         display: none;
     }

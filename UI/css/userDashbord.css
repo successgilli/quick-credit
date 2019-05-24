@@ -158,7 +158,7 @@ footer > a {
 
 #navHead {
     cursor: pointer;
-    flex-basis: 10%;
+    flex-basis: 5%;
     text-align: center;
     display: flex;
     justify-content: space-around;
@@ -288,6 +288,16 @@ footer > a {
     padding-top: 20px;
     padding-bottom: 20px;
 }
+.repaywidehead {
+    display: flex;
+    justify-content: space-around;
+}
+.repayHeads3{
+    color: #d44638;
+}
+.repayHeads1 {
+    display: none;
+}
 .repayDetails{
     width: 100%;
     display: flex;
@@ -298,7 +308,7 @@ footer > a {
     color: #d44638;
 }
 .repayDetails:nth-child(even){
-    box-shadow:  0px 0px 8px rgba(0, 0, 0, 0.5) inset;
+    
 }
 .viewRepayment{
     width: 150px;
@@ -403,6 +413,10 @@ footer > a {
 .tableHeads1 {
     display: none;
 }
+.moreInfo>p{
+    font-weight: bold;
+    color: rgb(70, 70, 70);
+}
 .statusContainer{
     display: flex;
     justify-content: center;
@@ -417,7 +431,7 @@ footer > a {
 .statusDiv.done{
     width: 20px;
     height: 20px;
-    background-color: brown;
+    background-color: grey;
     border-radius: 50%;
 }
 #navUser{
@@ -493,6 +507,12 @@ footer > a {
     .headbtns {
         display: none;
     }
+    .repayHeads1{
+        display: block;
+    }
+    .repayHeads3{
+        display: none;
+    }
     #userAsideContent{
         width: 60%;
     }
@@ -500,9 +520,10 @@ footer > a {
         margin-top: 20px;
         flex-direction: column;
         text-align: left;
+        padding-bottom: 20px;
+        border-bottom: 2px solid grey;
         
     }
-    
     .tableHeads{
         width: 80%;
         display: flex;
@@ -525,7 +546,11 @@ footer > a {
          
     }
     .repayDetails{
+        margin-bottom: 30px;
         flex-direction: column;
+    }
+    .repayDetails:nth-child(even){
+background-color: rgb(175, 171, 171);
     }
     .repayHeads{
         display: flex;
