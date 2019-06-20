@@ -552,6 +552,7 @@ const validateTabs = () => {
         .then((obj) => {
           if (obj.status === 200) {
             successDiv.style.display = 'block';
+            localStorage.setItem('auth', obj.data.token)
             setTimeout(() => {
               logResponse.style.display = 'none';
               console.log(typeof obj.data.isAdmin)
@@ -621,11 +622,11 @@ const validateTabs = () => {
           successDiv.style.display = 'block';
           setTimeout(() => {
             logResponse.style.display = 'none';
-            console.log(typeof obj.data.isAdmin)
+            console.log(typeof obj.data.isAdmin);
             if (obj.data.isAdmin === true) {
-              location = './adminDashboard.html'
+              location = './adminDashboard.html';
             } else {
-              location = './userDashbord.html'
+              location = './userDashbord.html';
             }
           }, 300);
         } else {
