@@ -2,9 +2,28 @@ const navUser = document.getElementById('navUser');
 const userAsideBackground = document.getElementById('userAsideBackground');
 const userAsideContent = document.getElementById('userAsideContent');
 const navWide = document.getElementById('navHead');
+const updatePix = document.getElementById('updatePix');
 const aside = document.getElementById('aside');
 const userMainContainer = document.getElementById('userMainContainer');
+const profilePicture = document.getElementById('profilePicture');
 
+updatePix.addEventListener('change', () => {
+  const url = 'https://quickcreditgilli.herokuapp.com/api/v1/users/uploads';
+  console.log('entered');
+  const formData = new FormData();
+  formData.append('image', updatePix.files[0]);
+  console.log(formData);
+  const request = new Request(url, {
+    method: 'PATCH',
+    headers: new Headers({ Authorization: localStorage.getItem('auth') }),
+    body: formData,
+  });
+  fetch(request).then(res => res.json())
+    .then((obj) => {
+      console.log(obj);
+      profilePicture.setAttribute('src', obj.data.passporturl)
+    });
+});
 // add event to navbar on large screen
 navWide.addEventListener('click', () => {
   if (window.getComputedStyle(aside).getPropertyValue('width') === '0px') {
@@ -14,7 +33,6 @@ navWide.addEventListener('click', () => {
     aside.style.width = '0px';
     userMainContainer.style.paddingLeft = '0px';
   }
-
 });
 // add event to window
 window.addEventListener('resize', () => {
@@ -37,7 +55,6 @@ navUser.addEventListener('click', () => {
     setTimeout(() => {
       userAsideContent.style.right = '0px';
     });
-
   } else {
     userAsideContent.style.right = '-500px';
     setTimeout(() => {
