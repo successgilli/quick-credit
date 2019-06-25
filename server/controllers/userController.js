@@ -72,6 +72,21 @@ class User {
       next(e);
     }
   }
+
+  static async getUser(req, res, next) {
+    try {
+      const user = req.email;
+      const text = 'SELECT * FROM users WHERE email=$1';
+      const param = [user];
+      const result = await db(text, param);
+      res.status(200).json({
+        status: 200,
+        data: result.rows[0],
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 export default User;

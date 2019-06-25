@@ -8,7 +8,7 @@ const { isAdmin, isUser } = checkClient;
 const { signupValidator, signinValidator } = DataCreationValidator;
 const {
   signup, signin, verify,
-  uploadProfilePic,
+  uploadProfilePic, getUser,
 } = User;
 const {
   checkSignupEmail,
@@ -24,4 +24,5 @@ auth.post('/signup', signupValidator, checkSignupEmail, signup);
 auth.post('/signin', signinValidator, checkSigninData, signin);
 user.patch('/:userEmail/verify', checkEmailFormat, checkVerifyUser, checkToken, isAdmin, verify);
 user.patch('/uploads', checkToken, isUser, checkUploadPix, uploadProfilePic);
+user.get('/', checkToken, isUser, getUser);
 export { auth, user };
