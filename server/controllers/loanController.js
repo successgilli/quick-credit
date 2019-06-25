@@ -136,6 +136,28 @@ class Loans {
       next(e);
     }
   }
+
+  static async getUserLoan(req, res, next) {
+    try {
+      const user = req.email;
+      const text = 'SELECT * FROM loans WHERE email=$1';
+      const param = [user];
+      const result = await db(text, param);
+      if (result.rowCount === 0) {
+        res.status(200).json({
+          status: 200,
+          error: 'no loans yet',
+        });
+      } else {
+        res.status(200).json({
+          status: 200,
+          data: result.rows,
+        });
+      }
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 export default Loans;

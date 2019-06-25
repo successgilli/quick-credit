@@ -373,6 +373,19 @@ describe('GET loans route', () => {
   })
 })
 
+// get user loan
+describe('get user loan', () => {
+  it('it should get .all user loans from db', (done) => {
+    chai.request(server).get('/api/v1/loans/user').set('Authorization', userAuth2)
+      .end((err, res) => {
+        res.body.should.have.property('data');
+        res.body.status.should.equal(200);
+        // eslint-disable-next-line prefer-destructuring
+        done();
+      });
+  });
+});
+
 describe('test the upload picture route', () => {
   after(async () => {
     await db('TRUNCATE TABLE users CASCADE');  

@@ -19,6 +19,7 @@ const {
   postRepayment,
   getRepayHistory,
   getLoans,
+  getUserLoan,
 } = Loan;
 const { checkQueryStrings } = DataQuery;
 const {
@@ -30,6 +31,7 @@ const {
   checkGetRepayment,
   checkIdFormat,
 } = loanDataCheck;
+loan.get('/user', checkToken, isUser, getUserLoan);
 loan.post('/', loanApplyValidator, checkToken, isUser, applicationCheck, apply);
 loan.get('/:loanId', checkIdFormat, checkGetLoan, checkToken, isParticularUser, getLoan);
 loan.patch('/:loanId', checkIdFormat, loanStatusValidator, checkStatus, checkToken, isAdmin, changeStatus);
