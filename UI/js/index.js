@@ -552,7 +552,7 @@ const validateTabs = () => {
         .then((obj) => {
           if (obj.status === 200) {
             successDiv.style.display = 'block';
-            localStorage.setItem('auth', obj.data.token)
+            localStorage.setItem('auth', obj.data.token);
             setTimeout(() => {
               logResponse.style.display = 'none';
               console.log(typeof obj.data.isAdmin)
@@ -583,18 +583,16 @@ const validateTabs = () => {
   const bankName = document.getElementById('bankName');
   const bvn = document.getElementById('bvn');
   const accountNumber = document.getElementById('accountNumber');
-  const logResponse = document.getElementById('logResponse');
-  const successDiv = document.getElementById('successDiv');
+  const logUpResponse = document.getElementById('logUpResponse');
+  const successInDiv = document.getElementById('successInDiv');
 
   const url = 'https://quickcreditgilli.herokuapp.com/api/v1/auth/signup';
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     alert('yes!');
-    logResponse.style.display = 'block';
-    logResponse.textContent = 'ensure inputs are correct';
-    logResponse.style.display = 'block';
-    logResponse.textContent = 'loading';
+    logUpResponse.style.display = 'block';
+    logUpResponse.textContent = 'loading...';
     const data = {
       firstName: firstname.value,
       lastName: Lastname.value,
@@ -618,10 +616,12 @@ const validateTabs = () => {
       .then(res => res.json())
       .then((obj) => {
         console.log(obj);
-        if (obj.status === 200) {
-          successDiv.style.display = 'block';
+        if (obj.status === 201) {
+          successInDiv.style.display = 'block';
+          localStorage.setItem('auth', obj.data.token);
+          logUpResponse.style.display = 'none';
+          logUpResponse.textContent = '';
           setTimeout(() => {
-            logResponse.style.display = 'none';
             console.log(typeof obj.data.isAdmin);
             if (obj.data.isAdmin === true) {
               location = './adminDashboard.html';
@@ -630,8 +630,8 @@ const validateTabs = () => {
             }
           }, 300);
         } else {
-          logResponse.style.display = 'block';
-          logResponse.textContent = 'wrong input';
+          console.log(obj.error);
+          logUpResponse.textContent = obj.error;
         }
       });
   });

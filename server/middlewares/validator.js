@@ -34,7 +34,7 @@ class InvalidInputChecker {
     if (!/^[a-zA-Z-]{4,50}$/.test(bankName.trim())) {
       impropervalues.bankName = 'bankName can only contain letters and hyphen (-) of atleast 4 letters. ';
     }
-    if (!/^[a-zA-Z-]{4,50}$/.test(companyName.trim())) {
+    if (!/^[a-zA-Z- ]{4,50}$/.test(companyName.trim())) {
       impropervalues.companyName = 'company name can only contain letters and hyphen (-) of atleast 4 letters. ';
     }
     if (!/^[0-9]{10}$/.test(accountNumber.trim())) {
