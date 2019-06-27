@@ -483,7 +483,19 @@ footer{
     color: red;
     display: none;
 }
+#logUpResponse{
+    text-align: center;
+    padding-top: 10px;
+    color: red;
+    display: none;
+}
 #successDiv {
+    color: green;
+    padding-bottom: 10px;
+    text-align: center;
+    display: none;
+}
+#successInDiv {
     color: green;
     padding-bottom: 10px;
     text-align: center;
