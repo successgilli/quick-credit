@@ -284,5 +284,31 @@ const windowLoad = () => {
     }).catch(err => console.log(err));
   });
 };
-
+// add event to load user pix
+window.addEventListener('load', () => {
+  const userImage = document.getElementById('userImage');
+  const url = 'https://quickcreditgilli.herokuapp.com/api/v1/users';
+  const request = new Request(url, {
+    method: 'GET',
+    headers: new Headers({
+      'Content-type': 'application/json',
+      Authorization: localStorage.getItem('auth'),
+      Accept: 'application/json,text/plain,*/*',
+    }),
+  });
+  fetch(request).then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    throw Error(res.statusText);
+  }).then((obj) => {
+    if (obj.data.passporturl === null) {
+      userImage.setAttribute('src', './img/profile-placeholder.gif');
+    } else {
+      userImage.setAttribute('src', obj.data.passporturl);
+    }
+  }).catch((err) => {
+    console.log(err);
+  });
+});
 windowLoad();
