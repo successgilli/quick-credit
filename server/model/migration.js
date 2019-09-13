@@ -1,4 +1,4 @@
-import 'babel-polyfill'
+import '@babel/polyfill';
 import db from './query';
 import seedAdmin from '../helpers/createAdmin';
 
@@ -42,6 +42,7 @@ const createTables = async () => {
     console.log('tables created');
   }
   catch (err) {
+    console.log('yesnvfsjkvkfgjv');
     console.log(err);
   }
 }

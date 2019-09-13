@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+import '@babel/polyfill';
 import db from '../model/query';
 import mailer from '../helpers/mailer';
 import UserHelper from '../helpers/userHelper';

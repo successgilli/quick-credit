@@ -8,7 +8,7 @@ const { isAdmin, isUser } = checkClient;
 const { signupValidator, signinValidator } = DataCreationValidator;
 const {
   signup, signin, verify,
-  uploadProfilePic, getUser,
+  uploadProfilePic, getUser, getUsers,
 } = User;
 const {
   checkSignupEmail,
@@ -22,6 +22,7 @@ const user = express.Router();
 
 auth.post('/signup', signupValidator, checkSignupEmail, signup);
 auth.post('/signin', signinValidator, checkSigninData, signin);
+user.get('/:status/status', checkToken, isAdmin, getUsers);
 user.patch('/:userEmail/verify', checkEmailFormat, checkVerifyUser, checkToken, isAdmin, verify);
 user.patch('/uploads', checkToken, isUser, checkUploadPix, uploadProfilePic);
 user.get('/', checkToken, isUser, getUser);

@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+import '@babel/polyfill';
 import bcrypt from 'bcrypt';
 import sendValidationInfo from '../helpers/validatorHelper';
 import uploads from '../helpers/imageUpload';

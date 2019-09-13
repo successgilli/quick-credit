@@ -2,6 +2,7 @@ import { Pool } from 'pg';
 import dotenv from 'dotenv';
 
 dotenv.config();
+console.log(process.env.NODE_ENV, ' cnnect');
 let connect = process.env.DATABASE_URL;
 if (process.env.NODE_ENV === 'test') {
   connect = process.env.DATABASE_TEST;

@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+import '@babel/polyfill';
 import bcrypt from 'bcrypt';
 import db from '../model/query';
 
@@ -6,6 +6,7 @@ const saltRounds = 10;
 
 class UserHelper {
   static successRes(token, user) {
+    console.log(user);
     return {
       token,
       id: user.id,
@@ -53,6 +54,8 @@ class UserHelper {
     } = req.body;
     const salt = await bcrypt.genSalt(saltRounds);
     const hash = await bcrypt.hash(password.trim(), salt);
+    const isAdmin = (req.body.isAdmin) ? !false : false;
+    console.log(isAdmin);
     const param = [
       firstName.trim(),
       lastName.trim(),
@@ -65,6 +68,7 @@ class UserHelper {
       bankName.trim(),
       accountNumber.trim(),
       monthlyIncome.trim(),
+      isAdmin,
     ];
     const text = `INSERT INTO users (
       firstname,
@@ -77,8 +81,9 @@ class UserHelper {
       bvn,
       bankname,
       accountnumber,
-      monthlyincome
-      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) RETURNING *;`;
+      monthlyincome,
+      isadmin
+      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING *;`;
     const { rows } = await db(text, param);
     const user = rows[0];
     return user;

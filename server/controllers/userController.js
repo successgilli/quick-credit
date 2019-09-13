@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+import '@babel/polyfill';
 import dotEnv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import db from '../model/query';
@@ -82,6 +82,21 @@ class User {
       res.status(200).json({
         status: 200,
         data: result.rows[0],
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async getUsers(req, res, next) {
+    try {
+      const { status } = req.params;
+      const text = 'SELECT * FROM users WHERE status=$1';
+      const param = [status];
+      const result = await db(text, param);
+      res.status(200).json({
+        status: 200,
+        data: result.rows,
       });
     } catch (err) {
       next(err);
