@@ -42,7 +42,7 @@
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "jsonwebtoken": "*",
-    "mocha": "^6.2.0",
+    "mocha": "^10.2.0",
     "multer": "^1.4.2",
     "multer-storage-cloudinary": "*",
     "nodemailer": "^6.3.0",
